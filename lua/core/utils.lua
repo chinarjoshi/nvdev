@@ -15,8 +15,11 @@ M.map = function(key, command)
 end
 
 M.loadall = function()
-  local scan = require('plenary.scandir').scan_dir
-  for _, file in ipairs(scan '/home/c/dotfiles/nvim/lua/plugins/configs') do
+  local ok, scan = pcall(require, 'plenary.scandir')
+  if not ok then
+    return
+  end
+  for _, file in ipairs(scan.scan_dir '/home/c/dotfiles/nvim/lua/plugins/configs') do
     local ok, err = pcall(dofile, file)
     if not ok then
       error('Error loading ' .. file .. '\n\n' .. err)
