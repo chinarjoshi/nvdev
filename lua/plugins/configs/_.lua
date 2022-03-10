@@ -8,7 +8,6 @@ local configs = {
     hint_scheme = 'String',
     hi_parameter = 'Search',
   },
-
   gitsigns = {
     signs = {
       add = { hl = 'DiffAdd', text = '│', numhl = 'GitSignsAddNr' },
@@ -18,7 +17,6 @@ local configs = {
       changedelete = { hl = 'DiffChangeDelete', text = '~', numhl = 'GitSignsChangeNr' },
     },
   },
-
   orgmode = {
     org_agenda_files = { '~/my-orgs/**/*' },
     org_default_notes_file = '~/org/notes.org',
@@ -58,5 +56,5 @@ end
 
 local ok, luasnip = pcall(require, 'luasnip')
 if ok then
-  require('luasnip').config.set_config { history = true, updateevents = 'TextChanged,TextChangedI' }
+  luasnip.config.set_config { history = true, updateevents = 'TextChanged,TextChangedI' }
 end
