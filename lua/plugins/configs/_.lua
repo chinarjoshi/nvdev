@@ -47,13 +47,16 @@ for _, module in
     'neogit',
     'project_nvim',
     'sniprun',
-    'luasnip',
     'luatab',
   }
 do
   local ok, plugin = pcall(require, module)
-  if not ok then
-    return
+  if ok then
+    plugin.setup(configs[module] or {})
   end
-  plugin.setup(configs[module] or {})
+end
+
+local ok, luasnip = pcall(require, 'luasnip')
+if ok then
+  require('luasnip').config.set_config { history = true, updateevents = 'TextChanged,TextChangedI' }
 end
