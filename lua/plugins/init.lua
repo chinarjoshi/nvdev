@@ -25,8 +25,8 @@ require('plugins.packer').startup(function(use)
       { 'hrsh7th/nvim-cmp', after = 'friendly-snippets' },
       { 'hrsh7th/cmp-nvim-lua', after = 'cmp_luasnip' },
       { 'hrsh7th/cmp-nvim-lsp', after = 'cmp-nvim-lua' },
-      { 'hrsh7th/cmp-buffer', after = 'cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-path', after = 'cmp-buffer' },
+      { 'hrsh7th/cmp-cmdline', after = 'cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-path', after = 'cmp-cmdline' },
       { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
 
       --------------------------------- Snippets,

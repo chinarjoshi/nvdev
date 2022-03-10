@@ -56,7 +56,7 @@ cmp.setup {
     { name = 'nvim_lsp', max_item_count = 15 },
     { name = 'path' },
     { name = 'nvim_lua' },
-    { name = 'buffer' },
+    { name = 'cmdline'},
   },
   experimental = {
     ghost_text = true,
