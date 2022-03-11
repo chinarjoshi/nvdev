@@ -22,7 +22,7 @@
 ## Quick Pitch
 
  1. **Leader Mappings**
-  - Cleverly thought out with hotkeys for common functions (e.g. <SPC><SPC> to search project files) and two letters for less common functions (e.g. <SPC>tn to make new tab)
+  - Cleverly thought out with hotkeys for common functions (e.g. \<SPC>\<SPC> to search project files) and two letters for less common functions (e.g. <SPC>tn to make new tab)
   - Phonetic behavior since first letter of function is always the mapping (Search TODO-list becomes <SPC>st)
   - Covers all common usage for both vim features and plugin features
 
@@ -92,33 +92,88 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 ### Files
 `/nvim`
  * [init.lua](nvim/init.lua): Loads settings, mappings, and sets up plugins
- * [lua](nvim/lua): Folder of all lua modules
+ * [lua](nvim/lua): Folder containing lua modules
+
 `/nvim/lua/core`
  * [highlights.lua](nvim/lua/highlights.lua): Highlights for nvim and plugin ui's
  * [init.lua](nvim/lua/init.lua): Initial setup file that calls all plugins for lazy loading purposes
- * [settings.lua](nvim/lua/settings.lua):
- * [utils.lua](nvim/lua/utils.lua):
+ * [settings.lua](nvim/lua/settings.lua): Sets editor options, defines autocommands, and disables builtin plugins
+ * [utils.lua](nvim/lua/utils.lua): A few utility functions and quick variables to change
+
 `/nvim/lua/plugins`
- * [init.lua](nvim/lua/init.lua):
- * [packer.lua](nvim/lua/packer.lua):
- * [configs](nvim/lua/configs):
+ * [init.lua](nvim/lua/init.lua): (**IMPORTANT**) List of managed plugins and lazy loaders
+ * [packer.lua](nvim/lua/packer.lua): Packer.nvim initialization and requires all config files
+ * [configs](nvim/lua/configs): Folder containing plugin-specific config
+
 `/nvim/lua/configs`
- * [cmp.lua](nvim/lua/configs/cmp.lua):
- * [colors.lua](nvim/lua/configs/colors.lua):
- * [icons.lua](nvim/lua/configs/icons.lua):
- * [indent-blankline.lua](nvim/lua/configs/indent-blankline.lua):
- * [lspconfig.lua](nvim/lua/configs/lspconfig.lua):
- * [null-ls.lua](nvim/lua/configs/null-ls.lua):
- * [nvim-tree](nvim/lua/configs/nvim-tree.lua):
- * [others.lua](nvim/lua/configs/others.lua):
- * [feline.lua](nvim/lua/configs/feline.lua):
- * [telescope.lua](nvim/lua/configs/telescope.lua):
- * [treesitter.lua](nvim/lua/configs/treesitter.lua):
- * [which-key.lua](nvim/lua/configs/which-key.lua):
- * [windows.lua](nvim/lua/configs/windows.lua):
+ * [cmp.lua](nvim/lua/configs/cmp.lua): Autocompletion
+ * [colors.lua](nvim/lua/configs/colors.lua): Theme and RGB colorizer
+ * [icons.lua](nvim/lua/configs/icons.lua): Custom devicons
+ * [indent-blankline.lua](nvim/lua/configs/indent-blankline.lua): Indent line
+ * [lspconfig.lua](nvim/lua/configs/lspconfig.lua): LSP and installer configuration
+ * [null-ls.lua](nvim/lua/configs/null-ls.lua): Adapter for command line formatters/linters
+ * [nvim-tree](nvim/lua/configs/nvim-tree.lua): File tree
+ * [others.lua](nvim/lua/configs/others.lua): All other plugin setup
+ * [feline.lua](nvim/lua/configs/feline.lua): Statusline
+ * [telescope.lua](nvim/lua/configs/telescope.lua): Fuzzy finder
+ * [treesitter.lua](nvim/lua/configs/treesitter.lua): Treesitter interface
+ * [which-key.lua](nvim/lua/configs/which-key.lua): Help for leader key mappings
+ * [windows.lua](nvim/lua/configs/windows.lua): Window and split based plugins
 
 ## Plugin List
 
+### Base
+ * packer.nvim
+ * nvim-treesitter
+ * nvim-tree
+ * telescope.nvim
+ * nvim-cmp (+ Sources)
+ * LuaSnip
+ * project.nvim
+ * which-key.nvim
+ * impatient.nvim
+ * plenary.nvim
+ * filetype.nvim
+
+### LSP
+ * nvim-lspconfig
+ * null-ls.nvim
+ * lsp\_signature.nvim
+ * lsp-colors.nvim
+ * trouble.nvim
+ * lspkind-nvim
+
+### Editing
+ * lightspeed.nvim
+ * vim-surround
+ * vim-commentary
+ * vim-repeat
+ * todo-comments.nvim
+
+### Windows and splits
+ * nvim-window
+ * focus.nvim
+ * winshift.nvim
+ * luatab.nvim
+
+### Aesthetic
+ * nvim-base16.lua
+ * feline.nvim
+ * nvim-web-devicons
+ * nvim-colorizer
+
+### Etc.
+ * neogit
+ * gitsigns.nvim
+ * nvim-autopairs
+ * toggleterm.nvim
+ * indent-blankline.nvim
+ * orgmode
+ * vista.vim
+ * glow.nvim
+ * iswap.nvim
+ * vim-matchup
+ * sniprun
 
 
 ## Gallery
@@ -128,6 +183,8 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
     <img src="Visual/Front.PNG" alt="example-image" width=875 height=500>
   </a>
 </p>
+
+## Inspirations
 
 ## TODO
 
