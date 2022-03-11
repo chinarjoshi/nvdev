@@ -46,7 +46,6 @@ require('plugins.packer').startup(function(use)
       { 'folke/todo-comments.nvim', module = 'todo-comments' },
 
       --------------------------------- Windows and Splits,
-      { 'luukvbaal/stabilize.nvim', event = 'BufRead' },
       { 'https://gitlab.com/yorickpeterse/nvim-window.git', module = 'nvim-window' },
       { 'beauwilliams/focus.nvim', module = 'focus' },
       { 'sindrets/winshift.nvim', cmd = 'WinShift' },

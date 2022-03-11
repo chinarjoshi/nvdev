@@ -12,7 +12,6 @@ local args = {
 }
 for _, name in
   ipairs {
-    'stabilize',
     'focus',
     'winshift',
     'nvim-window',
