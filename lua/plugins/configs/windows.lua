@@ -12,7 +12,7 @@ local args = {
 }
 for _, name in
   ipairs {
-    'focus',
+    'focus', -- FIX: Behavior
     'winshift',
     'nvim-window',
   }

@@ -1,12 +1,4 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
-<!-- PROJECT LOGO -->
 <br />
-
 <p align="center">
   <h1 align="center">nvdev</h1>
   <p align="center">
@@ -22,8 +14,8 @@
 ## Quick Pitch
 
  1. **Leader Mappings**
-  - Cleverly thought out with hotkeys for common functions (e.g. \<SPC>\<SPC> to search project files) and two letters for less common functions (e.g. <SPC>tn to make new tab)
-  - Phonetic behavior since first letter of function is always the mapping (Search TODO-list becomes <SPC>st)
+  - Cleverly thought out hotkeys for common functions (e.g. \<SPC>\<SPC> to search project files) and two letters for less common functions (e.g. \<SPC\>tn to make new tab)
+  - Phonetic behavior always using first letter of function as the mapping ("search TODO-list" becomes \<SPC\>st)
   - Covers all common usage for both vim features and plugin features
 
  2. **Completeness**: Contains *all* the functionality you need from an IDE with 43 plugins that are fully configured and performant
@@ -91,34 +83,34 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 ### Files
 `/nvim`
- * [init.lua](nvim/init.lua): Loads settings, mappings, and sets up plugins
- * [lua](nvim/lua): Folder containing lua modules
+ * [init.lua](init.lua): Loads settings, mappings, and sets up plugins
+ * [lua](lua): Folder containing lua modules
 
 `/nvim/lua/core`
- * [highlights.lua](nvim/lua/highlights.lua): Highlights for nvim and plugin ui's
- * [init.lua](nvim/lua/init.lua): Initial setup file that calls all plugins for lazy loading purposes
- * [settings.lua](nvim/lua/settings.lua): Sets editor options, defines autocommands, and disables builtin plugins
- * [utils.lua](nvim/lua/utils.lua): A few utility functions and quick variables to change
+ * [highlights.lua](lua/highlights.lua): Highlights for nvim and plugin ui's
+ * [init.lua](lua/init.lua): Initial setup file that calls all plugins for lazy loading purposes
+ * [settings.lua](lua/settings.lua): Sets editor options, defines autocommands, and disables builtin plugins
+ * [utils.lua](lua/utils.lua): A few utility functions and quick variables to change
 
 `/nvim/lua/plugins`
- * [init.lua](nvim/lua/init.lua): (**IMPORTANT**) List of managed plugins and lazy loaders
- * [packer.lua](nvim/lua/packer.lua): Packer.nvim initialization and requires all config files
- * [configs](nvim/lua/configs): Folder containing plugin-specific config
+ * [init.lua](lua/init.lua): (**IMPORTANT**) List of managed plugins and lazy loaders
+ * [packer.lua](lua/packer.lua): Packer.nvim initialization and requires all config files
+ * [configs](lua/configs): Folder containing plugin-specific config
 
 `/nvim/lua/configs`
- * [cmp.lua](nvim/lua/configs/cmp.lua): Autocompletion
- * [colors.lua](nvim/lua/configs/colors.lua): Theme and RGB colorizer
- * [icons.lua](nvim/lua/configs/icons.lua): Custom devicons
- * [indent-blankline.lua](nvim/lua/configs/indent-blankline.lua): Indent line
- * [lspconfig.lua](nvim/lua/configs/lspconfig.lua): LSP and installer configuration
- * [null-ls.lua](nvim/lua/configs/null-ls.lua): Adapter for command line formatters/linters
- * [nvim-tree](nvim/lua/configs/nvim-tree.lua): File tree
- * [others.lua](nvim/lua/configs/others.lua): All other plugin setup
- * [feline.lua](nvim/lua/configs/feline.lua): Statusline
- * [telescope.lua](nvim/lua/configs/telescope.lua): Fuzzy finder
- * [treesitter.lua](nvim/lua/configs/treesitter.lua): Treesitter interface
- * [which-key.lua](nvim/lua/configs/which-key.lua): Help for leader key mappings
- * [windows.lua](nvim/lua/configs/windows.lua): Window and split based plugins
+ * [cmp.lua](lua/configs/cmp.lua): Autocompletion
+ * [colors.lua](lua/configs/colors.lua): Theme and RGB colorizer
+ * [icons.lua](lua/configs/icons.lua): Custom devicons
+ * [indent-blankline.lua](lua/configs/indent-blankline.lua): Indent line
+ * [lspconfig.lua](lua/configs/lspconfig.lua): LSP and installer configuration
+ * [null-ls.lua](lua/configs/null-ls.lua): Adapter for command line formatters/linters
+ * [nvim-tree](lua/configs/nvim-tree.lua): File tree
+ * [others.lua](lua/configs/others.lua): All other plugin setup
+ * [feline.lua](lua/configs/feline.lua): Statusline
+ * [telescope.lua](lua/configs/telescope.lua): Fuzzy finder
+ * [treesitter.lua](lua/configs/treesitter.lua): Treesitter interface
+ * [which-key.lua](lua/configs/which-key.lua): Help for leader key mappings
+ * [windows.lua](lua/configs/windows.lua): Window and split based plugins
 
 ## Plugin List
 
@@ -177,26 +169,46 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 
 ## Gallery
-<p align="center">Front view:</p>
+<p align="center">General editing:</p>
 <p align="center">
-  <a href="https://github.com/chinarjoshi/visual-aid-transducer">
-    <img src="Visual/Front.PNG" alt="example-image" width=875 height=500>
-  </a>
+  <img src="gallery/one.png" alt="example-image" width=875 height=500>
+</p>
+
+<p align="center">Fuzzy finder:</p>
+<p align="center">
+  <img src="gallery/two.png" alt="example-image" width=875 height=500>
+</p>
+
+<p align="center">LSP diagnostics and multiple tabs:</p>
+<p align="center">
+  <img src="gallery/three.png" alt="example-image" width=875 height=500>
+</p>
+
+<p align="center">Autocompletion in python:</p>
+<p align="center">
+  <img src="gallery/four.png" alt="example-image" width=875 height=500>
+</p>
+
+<p align="center">Git client:</p>
+<p align="center">
+  <img src="gallery/five.png" alt="example-image" width=875 height=500>
+</p>
+
+<p align="center">Trouble diagnostics:</p>
+<p align="center">
+  <img src="gallery/six.png" alt="example-image" width=875 height=500>
+</p>
+
+<p align="center">Terminal w/ syntax highlighting:</p>
+<p align="center">
+  <img src="gallery/seven.png" alt="example-image" width=875 height=500>
 </p>
 
 ## Inspirations
+ * [NvChad](https://github.com/NvChad/NvChad) for most of the ricing and organization I built upon
+ * [neovim-lua](https://github.com/brainfucksec/neovim-lua) for autocommands and understanding lua
 
 ## TODO
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/chinarjoshi/visual-aid-transducer?style=for-the-badge
-[contributors-url]: https://github.com/chinarjoshi/visual-aid-transducer/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/chinarjoshi/visual-aid-transducer?style=for-the-badge
-[forks-url]: https://github.com/chinarjoshi/visual-aid-transducer/network/members
-[stars-shield]: https://img.shields.io/github/stars/chinarjoshi/visual-aid-transducer?style=for-the-badge
-[stars-url]: https://github.com/chinarjoshi/visual-aid-transducer/stargazers
-[issues-shield]: https://img.shields.io/github/issues/chinarjoshi/visual-aid-transducer?style=for-the-badge
-[issues-url]: https://github.com/chinarjoshi/visual-aid-transducer/issues
-[license-shield]: https://img.shields.io/github/license/chinarjoshi/visual-aid-transducer?style=for-the-badge
-[license-url]: https://github.com/chinarjoshi/visual-aid-transducer/blob/master/LICENSE
+ * Add documentation to all files
+ * Fix window auto-focusing behavior [windows.lua](lua/plugins/configs/windows.lua)
+ * Fix snippets not showing in python files
