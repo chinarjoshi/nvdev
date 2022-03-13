@@ -199,7 +199,7 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
   <img src="gallery/six.png" alt="example-image" width=875 height=500>
 </p>
 
-<p align="center">Terminal w/ syntax highlighting:</p>
+<p align="center">Terminal with syntax highlighting:</p>
 <p align="center">
   <img src="gallery/seven.png" alt="example-image" width=875 height=500>
 </p>
@@ -210,5 +210,5 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 ## TODO
  * Add documentation to all files
- * Fix window auto-focusing behavior [windows.lua](lua/plugins/configs/windows.lua)
+ * Fix window auto-focusing behavior ([windows.lua](lua/plugins/configs/windows.lua))
  * Fix snippets not showing in python files
