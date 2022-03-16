@@ -27,6 +27,7 @@ for key, option in
     numberwidth = 2,
     synmaxcol = 240,
     shiftwidth = 4,
+    pumheight = 20,
     hidden = true,
     number = true,
     history = 100,

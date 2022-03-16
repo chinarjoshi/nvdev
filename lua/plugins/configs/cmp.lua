@@ -53,7 +53,7 @@ cmp.setup {
   },
   sources = {
     { name = 'luasnip' },
-    { name = 'nvim_lsp', max_item_count = 15 },
+    { name = 'nvim_lsp' },
     { name = 'path' },
     { name = 'nvim_lua' },
     { name = 'cmdline'},
