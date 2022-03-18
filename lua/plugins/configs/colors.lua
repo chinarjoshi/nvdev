@@ -1,21 +1,11 @@
 local ok, colorizer = pcall(require, 'colorizer')
-local present, base16 = pcall(require, 'base16')
+local present, material = pcall(require, 'material')
 if not (ok and present) then
   return
 end
 
-colorizer.setup({ '*' }, {
-  RGB = true,
-  RRGGBB = true,
-  names = false,
-  RRGGBBAA = false,
-  rgb_fn = false,
-  hsl_fn = false,
-  css = false,
-  css_fn = false,
-  mode = 'background',
-})
+colorizer.setup()
 
-base16(base16.themes(require('core.utils').vars.theme), true)
-package.loaded['core.highlights' or false] = nil
-require 'core.highlights'
+material.setup()
+vim.g.material_style = 'deep ocean'
+vim.cmd 'colorscheme material'

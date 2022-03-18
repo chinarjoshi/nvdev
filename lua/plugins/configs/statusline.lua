@@ -1,9 +1,42 @@
 local ok, feline = pcall(require, 'feline')
+local present, colors = pcall(require, 'material.colors')
 if not ok then
   return
 end
+colors = {
+   white = "#abb2bf",
+   darker_black = "#0e0f1a",
+   black = "#11121D", --  nvim bg
+   black2 = "#171823",
+   one_bg = "#191a25",
+   one_bg2 = "#21222d",
+   one_bg3 = "#2c2d38",
+   grey = "#383944",
+   grey_fg = "#3e3f4a",
+   grey_fg2 = "#454651",
+   light_grey = "#4b4c57",
+   red = "#ee6d85",
+   baby_pink = "#fd7c94",
+   pink = "#fe6D85",
+   line = "#191a25",
+   green = "#98c379",
+   vibrant_green = "#95c561",
+   nord_blue = "#648ce1",
+   blue = "#7199ee",
+   yellow = "#d7a65f",
+   sun = "#dfae67",
+   purple = "#a485dd",
+   dark_purple = "#9071c9",
+   teal = "#519aba",
+   orange = "#f6955b",
+   cyan = "#38a89d",
+   statusline_bg = "#151621",
+   lightbg = "#262732",
+   lightbg2 = "#1c1d28",
+   pmenu_bg = "#98C379",
+   folder_bg = "#8094B4",
+}
 
-local colors = require 'hl_themes.onedark'
 local lsp = require 'feline.providers.lsp'
 local lsp_severity = vim.diagnostic.severity
 local api = vim.api
@@ -62,12 +95,12 @@ local inactive_main_icon = {
   provider = vim.bo.readonly and statusline_style.locked_icon or statusline_style.main_icon,
   hl = {
     fg = colors.white,
-    bg = colors.one_bg2,
+    bg = colors.bg,
   },
   right_sep = {
     str = statusline_style.right,
     hl = {
-      fg = colors.one_bg2,
+      fg = colors.bg,
       bg = colors.lightbg,
     },
   },
@@ -91,10 +124,6 @@ local file_name = {
     }
   end,
 
-  right_sep = {
-    str = statusline_style.right,
-    hl = { fg = colors.lightbg, bg = colors.lightbg2 },
-  },
 }
 local inactive_file_name = {
   provider = function()
@@ -113,7 +142,7 @@ local inactive_file_name = {
   },
   right_sep = {
     str = statusline_style.right,
-    hl = { fg = colors.lightbg, bg = colors.lightbg2 },
+    hl = { fg = colors.lightbg, bg = colors.lightbg },
   },
 }
 
@@ -122,7 +151,7 @@ local diff = {
     provider = 'git_diff_added',
     hl = {
       fg = colors.grey_fg2,
-      bg = colors.lightbg2,
+      bg = colors.lightbg,
     },
     icon = ' ',
   },
@@ -131,7 +160,7 @@ local diff = {
     provider = 'git_diff_changed',
     hl = {
       fg = colors.grey_fg2,
-      bg = colors.lightbg2,
+      bg = colors.lightbg,
     },
     icon = ' 柳',
   },
@@ -139,14 +168,14 @@ local diff = {
     provider = 'git_diff_removed',
     hl = {
       fg = colors.grey_fg2,
-      bg = colors.lightbg2,
+      bg = colors.lightbg,
     },
     icon = '  ',
   },
   separator = {
     provider = statusline_style.right,
     hl = {
-      fg = colors.lightbg2,
+      fg = colors.lightbg,
       bg = colors.statusline_bg,
     },
   },
@@ -264,7 +293,7 @@ local empty_space = {
   {
     provider = ' ' .. statusline_style.left,
     hl = {
-      fg = colors.one_bg2,
+      fg = colors.bg,
       bg = colors.statusline_bg,
     },
   },
@@ -273,7 +302,7 @@ local empty_space = {
     hl = function()
       return {
         fg = mode_colors[vim.fn.mode()][2],
-        bg = colors.one_bg2,
+        bg = colors.bg,
       }
     end,
   },
@@ -284,20 +313,10 @@ local empty_space = {
     hl = function()
       return {
         fg = mode_colors[vim.fn.mode()][2],
-        bg = colors.one_bg,
+        bg = colors.bg,
       }
     end,
   },
-}
-
-local mode_icon = {
-  provider = statusline_style.vi_mode_icon,
-  hl = function()
-    return {
-      fg = colors.statusline_bg,
-      bg = mode_colors[vim.fn.mode()][2],
-    }
-  end,
 }
 
 local separator = {
@@ -307,7 +326,7 @@ local separator = {
   end,
   hl = {
     fg = colors.grey,
-    bg = colors.one_bg,
+    bg = colors.bg,
   },
   {
     provider = statusline_style.left,
@@ -357,7 +376,7 @@ local current_line = {
 
   hl = {
     fg = colors.green,
-    bg = colors.one_bg,
+    bg = colors.bg,
   },
 }
 
@@ -375,7 +394,7 @@ local inactive_empty_space = {
   {
     provider = ' ' .. statusline_style.left,
     hl = {
-      fg = colors.one_bg,
+      fg = colors.bg,
       bg = colors.statusline_bg,
     },
   },
@@ -384,7 +403,7 @@ local inactive_empty_space = {
     hl = function()
       return {
         fg = colors.grey,
-        bg = colors.one_bg,
+        bg = colors.bg,
       }
     end,
   },
@@ -394,7 +413,7 @@ local inactive_empty_space = {
     end,
     hl = {
       fg = colors.grey_fg2,
-      bg = colors.one_bg,
+      bg = colors.bg,
     },
   },
 }
@@ -406,8 +425,8 @@ local inactive_separator = {
       return api.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
     hl = {
-      fg = colors.one_bg,
-      bg = colors.one_bg,
+      fg = colors.bg,
+      bg = colors.bg,
     },
   },
   {
@@ -417,7 +436,7 @@ local inactive_separator = {
     end,
     hl = {
       fg = colors.black,
-      bg = colors.one_bg,
+      bg = colors.bg,
     },
   },
 }
@@ -458,7 +477,7 @@ local inactive_current_line = {
 
   hl = {
     fg = colors.grey_fg2,
-    bg = colors.one_bg,
+    bg = colors.bg,
   },
 }
 
@@ -472,7 +491,6 @@ local components = {
       diff.add,
       diff.change,
       diff.remove,
-      diff.separator,
       diagnostic.error,
       diagnostic.warning,
       diagnostic.hint,
@@ -484,11 +502,7 @@ local components = {
     {
       lsp_icon,
       git_branch,
-      empty_space[1],
-      empty_space[2],
-      mode_icon,
       empty_space[3],
-      separator[1],
       separator[2],
     },
   },

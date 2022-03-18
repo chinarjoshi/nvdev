@@ -52,10 +52,10 @@ require('plugins.packer').startup(function(use)
       { 'alvarosevilla95/luatab.nvim' },
 
       --------------------------------- Aesthetic,
-      { 'NvChad/nvim-base16.lua' },
+      { 'marko-cerovac/material.nvim' },
       { 'feline-nvim/feline.nvim' },
       { 'kyazdani42/nvim-web-devicons' },
-      { 'NvChad/nvim-colorizer.lua', event = 'BufRead' },
+      { 'norcalli/nvim-colorizer.lua', event = 'BufRead' },
 
       --------------------------------- Etc.
       { 'windwp/nvim-autopairs', after = 'nvim-cmp' },

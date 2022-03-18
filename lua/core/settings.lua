@@ -54,6 +54,7 @@ for _, auto in
     'hi StatusLineNC gui=underline',
     'au TermOpen * startinsert',
     'hi Comment gui=italic',
+    'hi RedOnBlack guifg=#F07178 guibg=#090B10'
   }
 do
   cmd(auto)
