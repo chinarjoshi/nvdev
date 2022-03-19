@@ -1,9 +1,9 @@
 local ok, feline = pcall(require, 'feline')
-if not ok then
+local present, colors = pcall(require, 'hl_themes.' .. require('core.utils').vars.theme)
+if not (ok and present) then
   return
 end
 
-local colors = require 'hl_themes.onedark'
 local lsp = require 'feline.providers.lsp'
 local lsp_severity = vim.diagnostic.severity
 local api = vim.api

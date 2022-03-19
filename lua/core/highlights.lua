@@ -1,5 +1,5 @@
 local cmd = vim.cmd
-local colors = require 'hl_themes.onedark'
+local ok, colors = pcall(require, 'hl_themes.' .. require('core.utils').vars.theme)
 
 -- Foreground colors
 for foreground, color in

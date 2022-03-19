@@ -1,9 +1,8 @@
 local ok, devicons = pcall(require, 'nvim-web-devicons')
-if not ok then
+local present, colors = pcall(require, 'hl_themes.' .. require('core.utils').vars.theme)
+if not (ok and present) then
   return
 end
-
-local colors = require 'hl_themes.onedark'
 
 devicons.setup {
   override = {
