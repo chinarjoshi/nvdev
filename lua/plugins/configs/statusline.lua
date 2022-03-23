@@ -1,9 +1,12 @@
 local ok, feline = pcall(require, 'feline')
-local present, colors = pcall(require, 'material.colors')
 if not ok then
-  return
+    return
 end
-colors = {
+
+local lsp = require 'feline.providers.lsp'
+local lsp_severity = vim.diagnostic.severity
+local api = vim.api
+local colors = {
    white = "#abb2bf",
    darker_black = "#0e0f1a",
    black = "#11121D", --  nvim bg
@@ -11,7 +14,7 @@ colors = {
    one_bg = "#191a25",
    one_bg2 = "#21222d",
    one_bg3 = "#2c2d38",
-   grey = "#383944",
+   grey = "#222126",
    grey_fg = "#3e3f4a",
    grey_fg2 = "#454651",
    light_grey = "#4b4c57",
@@ -36,10 +39,6 @@ colors = {
    pmenu_bg = "#98C379",
    folder_bg = "#8094B4",
 }
-
-local lsp = require 'feline.providers.lsp'
-local lsp_severity = vim.diagnostic.severity
-local api = vim.api
 
 local statusline_style = {
   left = '',
@@ -95,12 +94,12 @@ local inactive_main_icon = {
   provider = vim.bo.readonly and statusline_style.locked_icon or statusline_style.main_icon,
   hl = {
     fg = colors.white,
-    bg = colors.bg,
+    bg = colors.one_bg2,
   },
   right_sep = {
     str = statusline_style.right,
     hl = {
-      fg = colors.bg,
+      fg = colors.one_bg2,
       bg = colors.lightbg,
     },
   },
@@ -124,6 +123,10 @@ local file_name = {
     }
   end,
 
+  right_sep = {
+    str = statusline_style.right,
+    hl = { fg = colors.lightbg, bg = colors.lightbg2 },
+  },
 }
 local inactive_file_name = {
   provider = function()
@@ -142,7 +145,7 @@ local inactive_file_name = {
   },
   right_sep = {
     str = statusline_style.right,
-    hl = { fg = colors.lightbg, bg = colors.lightbg },
+    hl = { fg = colors.lightbg, bg = colors.lightbg2 },
   },
 }
 
@@ -151,7 +154,7 @@ local diff = {
     provider = 'git_diff_added',
     hl = {
       fg = colors.grey_fg2,
-      bg = colors.lightbg,
+      bg = colors.lightbg2,
     },
     icon = ' ',
   },
@@ -160,7 +163,7 @@ local diff = {
     provider = 'git_diff_changed',
     hl = {
       fg = colors.grey_fg2,
-      bg = colors.lightbg,
+      bg = colors.lightbg2,
     },
     icon = ' 柳',
   },
@@ -168,14 +171,14 @@ local diff = {
     provider = 'git_diff_removed',
     hl = {
       fg = colors.grey_fg2,
-      bg = colors.lightbg,
+      bg = colors.lightbg2,
     },
     icon = '  ',
   },
   separator = {
     provider = statusline_style.right,
     hl = {
-      fg = colors.lightbg,
+      fg = colors.lightbg2,
       bg = colors.statusline_bg,
     },
   },
@@ -293,7 +296,7 @@ local empty_space = {
   {
     provider = ' ' .. statusline_style.left,
     hl = {
-      fg = colors.bg,
+      fg = colors.one_bg2,
       bg = colors.statusline_bg,
     },
   },
@@ -302,7 +305,7 @@ local empty_space = {
     hl = function()
       return {
         fg = mode_colors[vim.fn.mode()][2],
-        bg = colors.bg,
+        bg = colors.one_bg2,
       }
     end,
   },
@@ -313,10 +316,20 @@ local empty_space = {
     hl = function()
       return {
         fg = mode_colors[vim.fn.mode()][2],
-        bg = colors.bg,
+        bg = colors.one_bg,
       }
     end,
   },
+}
+
+local mode_icon = {
+  provider = statusline_style.vi_mode_icon,
+  hl = function()
+    return {
+      fg = colors.statusline_bg,
+      bg = mode_colors[vim.fn.mode()][2],
+    }
+  end,
 }
 
 local separator = {
@@ -326,7 +339,7 @@ local separator = {
   end,
   hl = {
     fg = colors.grey,
-    bg = colors.bg,
+    bg = colors.one_bg,
   },
   {
     provider = statusline_style.left,
@@ -376,7 +389,7 @@ local current_line = {
 
   hl = {
     fg = colors.green,
-    bg = colors.bg,
+    bg = colors.one_bg,
   },
 }
 
@@ -394,7 +407,7 @@ local inactive_empty_space = {
   {
     provider = ' ' .. statusline_style.left,
     hl = {
-      fg = colors.bg,
+      fg = colors.one_bg,
       bg = colors.statusline_bg,
     },
   },
@@ -403,7 +416,7 @@ local inactive_empty_space = {
     hl = function()
       return {
         fg = colors.grey,
-        bg = colors.bg,
+        bg = colors.one_bg,
       }
     end,
   },
@@ -413,8 +426,47 @@ local inactive_empty_space = {
     end,
     hl = {
       fg = colors.grey_fg2,
-      bg = colors.bg,
+      bg = colors.one_bg,
     },
+  },
+}
+
+local inactive_diagnostic = {
+  error = {
+    provider = 'diagnostic_errors',
+    enabled = function()
+      return lsp.diagnostics_exist(lsp_severity.ERROR)
+    end,
+
+    hl = { fg = colors.grey_fg2 },
+    icon = '  ',
+  },
+
+  warning = {
+    provider = 'diagnostic_warnings',
+    enabled = function()
+      return lsp.diagnostics_exist(lsp_severity.WARN)
+    end,
+    hl = { fg = colors.grey_fg2 },
+    icon = '  ',
+  },
+
+  hint = {
+    provider = 'diagnostic_hints',
+    enabled = function()
+      return lsp.diagnostics_exist(lsp_severity.HINT)
+    end,
+    hl = { fg = colors.grey_fg2 },
+    icon = '  ',
+  },
+
+  info = {
+    provider = 'diagnostic_info',
+    enabled = function()
+      return lsp.diagnostics_exist(lsp_severity.INFO)
+    end,
+    hl = { fg = colors.grey_fg2 },
+    icon = '  ',
   },
 }
 
@@ -425,8 +477,8 @@ local inactive_separator = {
       return api.nvim_win_get_width(tonumber(winid) or 0) > 90
     end,
     hl = {
-      fg = colors.bg,
-      bg = colors.bg,
+      fg = colors.one_bg,
+      bg = colors.one_bg,
     },
   },
   {
@@ -436,7 +488,7 @@ local inactive_separator = {
     end,
     hl = {
       fg = colors.black,
-      bg = colors.bg,
+      bg = colors.one_bg,
     },
   },
 }
@@ -477,7 +529,7 @@ local inactive_current_line = {
 
   hl = {
     fg = colors.grey_fg2,
-    bg = colors.bg,
+    bg = colors.one_bg,
   },
 }
 
@@ -491,6 +543,7 @@ local components = {
       diff.add,
       diff.change,
       diff.remove,
+      diff.separator,
       diagnostic.error,
       diagnostic.warning,
       diagnostic.hint,
@@ -502,7 +555,11 @@ local components = {
     {
       lsp_icon,
       git_branch,
+      empty_space[1],
+      empty_space[2],
+      mode_icon,
       empty_space[3],
+      separator[1],
       separator[2],
     },
   },
@@ -514,10 +571,10 @@ local components = {
       diff.change,
       diff.remove,
       diff.separator,
-      diagnostic.error,
-      diagnostic.warning,
-      diagnostic.hint,
-      diagnostic.info,
+      inactive_diagnostic.error,
+      inactive_diagnostic.warning,
+      inactive_diagnostic.hint,
+      inactive_diagnostic.info,
     },
     {
       tabpages,
@@ -546,3 +603,4 @@ feline.setup {
   },
   components = components,
 }
+
