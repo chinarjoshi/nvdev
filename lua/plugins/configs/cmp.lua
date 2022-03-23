@@ -16,7 +16,7 @@ cmp.setup {
   formatting = {
     fields = { 'kind', 'abbr' },
     format = function(entry, vim_item)
-      local icons = require 'plugins.configs.lspkind_icons'
+      local icons = require 'plugins.configs.lspkind-icons'
       vim_item.kind = string.format('%s', icons[vim_item.kind])
       return vim_item
     end,
