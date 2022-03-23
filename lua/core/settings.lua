@@ -86,6 +86,7 @@ do
   g['loaded_' .. plugin] = 1
 end
 
+g.material_style = require('core.utils').vars.theme
 g.python3_host_prog = '/usr/bin/python3'
 g.mapleader = ' '
 g.vista_icon_indent = '["╰─▸ ", "├─▸ "]'
@@ -94,3 +95,4 @@ opt.shortmess:append 'sI'
 opt.whichwrap:append '<>[]hl'
 opt.listchars:append 'space:⋅'
 opt.listchars:append 'eol:↴'
+cmd 'colorscheme material'

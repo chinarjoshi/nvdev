@@ -28,7 +28,7 @@ M.loadall = function()
 end
 
 M.vars = {
-  theme = 'onedark',
+  theme = 'deep ocean', -- deep ocean, oceanic, palenight, lighter, darker
   transparent = false,
   file_ignore_patterns = {
     'theme/*',

@@ -46,6 +46,8 @@ for _, module in
     'project_nvim',
     'sniprun',
     'luatab',
+    'colorizer',
+    'material',
   }
 do
   local ok, plugin = pcall(require, module)
