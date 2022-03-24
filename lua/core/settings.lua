@@ -51,10 +51,7 @@ for _, auto in
     'let g:vista#renderer#enable_icon = 1',
     'au BufEnter * set fo-=c fo-=r fo-=o',
     'au BufLeave term://* stopinsert',
-    'hi StatusLineNC gui=underline',
     'au TermOpen * startinsert',
-    'hi Comment gui=italic',
-    'hi RedOnBlack guifg=#F07178 guibg=#090B10'
   }
 do
   cmd(auto)
