@@ -31,6 +31,13 @@ local configs = {
     },
   },
   toggleterm = { size = 15 },
+  bufferline = {
+        options = {
+            mode = 'tabs',
+            always_show_bufferline = false,
+            show_close_icon = false,
+        }
+    }
 }
 
 for _, module in
@@ -45,7 +52,7 @@ for _, module in
     'neogit',
     'project_nvim',
     'sniprun',
-    'luatab',
+    'bufferline',
     'colorizer',
     'material',
   }
