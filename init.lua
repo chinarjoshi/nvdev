@@ -10,7 +10,6 @@ for _, module in
   ipairs {
     'core.settings',
     'core.mappings',
-    'core.highlights',
     'plugins',
   }
 do
