@@ -1,3 +1,5 @@
+local c = require 'material.colors'
+
 local configs = {
   ['nvim-autopairs'] = { fast_wrap = {} },
   lsp_signature = {
@@ -37,7 +39,27 @@ local configs = {
             always_show_bufferline = false,
             show_close_icon = false,
         }
+    },
+  material = {
+    contrast = {
+      sidebars = true,
+      floating_windows = true,
+      popup_menu = true,
+    },
+    italics = {
+      comments = true,
+    },
+    custom_highlights = {
+      CursorLine = { bg = '#0f1018'},
+      PmenuSel = { fg = c.cyan, bg = c.selection },
+      DiagnosticHint = { fg = c.purple },
+      DiagnosticError = { fg = c.red },
+      DiagnosticWarn = { fg = c.yellow },
+      DiagnosticInformation = { fg = c.green },
+      DiagnosticInfo = { fg = c.blue },
+      RedOnBlack = { fg = c.red },
     }
+  },
 }
 
 for _, module in
@@ -67,3 +89,5 @@ local ok, luasnip = pcall(require, 'luasnip')
 if ok then
   luasnip.config.set_config { history = true, updateevents = 'TextChanged,TextChangedI' }
 end
+
+vim.cmd 'colorscheme material'
