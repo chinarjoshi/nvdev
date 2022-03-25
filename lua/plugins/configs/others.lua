@@ -34,16 +34,17 @@ local configs = {
   },
   toggleterm = { size = 15 },
   bufferline = {
-        options = {
-            mode = 'tabs',
-            always_show_bufferline = false,
-            show_close_icon = false,
-        }
-    },
+    options = {
+      mode = 'tabs',
+      always_show_bufferline = false,
+      show_close_icon = false,
+      show_buffer_close_icons = false,
+      modified_icon = '',
+    }
+  },
   material = {
     contrast = {
       sidebars = true,
-      floating_windows = true,
       popup_menu = true,
     },
     italics = {
