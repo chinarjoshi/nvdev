@@ -29,7 +29,7 @@ local mappings = {
     c = { '%y+', 'Copy file' },
     o = { 'Telescope oldfiles theme=ivy layout_config={height=15}', 'Opened files' },
   },
-  n = { name = 'notes' },
+  o = { name = 'orgmode', a = { 'Agenda' }, c = { 'Capture' } },
   -- Search
   s = {
     name = 'search',

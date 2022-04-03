@@ -61,7 +61,7 @@ require('plugins.packer').startup(function(use)
       { 'windwp/nvim-autopairs', after = 'nvim-cmp' },
       { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm' },
       { 'lukas-reineke/indent-blankline.nvim', event = 'BufRead' },
-      { 'nvim-orgmode/orgmode', ft = 'org', require = 'akinsho/org-bullets.nvim' },
+      { 'nvim-orgmode/orgmode', require = 'akinsho/org-bullets.nvim' },
       { 'liuchengxu/vista.vim', cmd = 'Vista' },
       { 'ellisonleao/glow.nvim', cmd = 'Glow' },
       { 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } },

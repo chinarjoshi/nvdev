@@ -20,7 +20,7 @@ local configs = {
     },
   },
   orgmode = {
-    org_agenda_files = { '~/my-orgs/**/*' },
+    org_agenda_files = { '~/org/**/*' },
     org_default_notes_file = '~/org/notes.org',
   },
   trouble = {
@@ -39,6 +39,7 @@ local configs = {
       always_show_bufferline = false,
       show_close_icon = false,
       show_buffer_close_icons = false,
+      enforce_regular_tabs = true,
       modified_icon = '',
     }
   },

@@ -34,12 +34,8 @@ g.nvim_tree_icons = {
 
 nvim_tree.setup {
   nvim_tree_quit_on_open = true,
-  open_on_setup = false,
   disable_netrw = true,
   hijack_netrw = true,
-  auto_close = true,
-  open_on_tab = false,
-  hijack_cursor = true,
   update_cwd = true,
   update_focused_file = {
     enable = true,
