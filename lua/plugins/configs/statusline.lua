@@ -592,4 +592,3 @@ feline.setup {
   },
   components = components,
 }
-

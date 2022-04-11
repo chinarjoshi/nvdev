@@ -21,7 +21,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   },
 }
 
-local on_attach = function(client, bufnr)
+local on_attach = function(client, _)
   if client.name == 'sumneko_lua' then
     client.resolved_capabilities.document_formatting = false
   end
@@ -53,7 +53,7 @@ end
 
 vim.diagnostic.config {
   virtual_text = false,
-  signs = true,
+  signs = false,
   underline = true,
   update_in_insert = false,
 }

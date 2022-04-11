@@ -3,7 +3,7 @@ local utils = require 'core.utils'
 
 local mappings = {
   -- Hotkeys
-  ['<space>'] = { 'Telescope git_files theme=ivy layout_config={height=15}', 'Find file in project' },
+  ['<space>'] = { 'lua require("core.utils").project_files()', 'Find file in project' },
   ['<tab>'] = { 'Telescope projects theme=ivy layout_config={height=15}', 'Projects' },
   ['/'] = { 'Telescope live_grep theme=ivy layout_config={height=15}', 'Search project' },
   [','] = { 'Telescope buffers theme=ivy layout_config={height=15}', 'Switch buffer' },
@@ -18,7 +18,12 @@ local mappings = {
   ['}'] = { 'tabnext', 'Next tab' },
   ['{'] = { 'tabprevious', 'Previous tab' },
   -- Quitting
-  q = { name = 'quit', q = { 'wqa', 'Quit' }, f = { 'qa!', 'Force quit' }, r = { 'Restart' } },
+  q = { name = 'quit',
+    q = { 'q', 'Quit' },
+    f = { 'qa!', 'Force quit' },
+    r = { 'Restart' },
+    w = { 'wqa', 'Write and quit' }
+  },
   -- Files
   f = {
     name = 'file',
@@ -123,8 +128,8 @@ end
 for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
   utils.map('<C-' .. letter .. '>', '<C-w>' .. letter)
 end
-vim.cmd 'nnoremap ; :'
-vim.cmd 'nnoremap : ;'
+-- vim.cmd 'nnoremap ; :'
+-- vim.cmd 'nnoremap : ;'
 
 function _G.set_terminal_keymaps()
   local opts = { noremap = true }

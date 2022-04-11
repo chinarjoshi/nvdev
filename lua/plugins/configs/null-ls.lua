@@ -17,4 +17,5 @@ null_ls.setup {
     diagnostics.flake8,
     diagnostics.luacheck.with { extra_args = { '--globals vim' } },
   },
+  fallback_severity = vim.diagnostic.severity.HINT,
 }

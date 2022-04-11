@@ -1,16 +1,18 @@
 local ok, telescope = pcall(require, 'telescope')
-local present, actions = pcall(require, 'telescope.actions')
-if not (ok and present) then
+if not ok then
   return
 end
+
+local actions = require 'telescope.actions'
 
 telescope.setup {
   defaults = {
     mappings = {
       i = {
-        ['C-j'] = actions.move_selection_next,
-        ['C-k'] = actions.move_selection_previous,
+        ['<C-j>'] = actions.move_selection_next,
+        ['<C-k>'] = actions.move_selection_previous,
         ['<esc>'] = actions.close,
+        ['<C-u>'] = false,
       },
     },
     preview = false,

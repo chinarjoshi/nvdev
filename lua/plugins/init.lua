@@ -14,36 +14,27 @@ require('plugins.packer').startup(function(use)
 
       -------------------------------- LSP,
       { 'neovim/nvim-lspconfig', module = 'lspconfig' },
+      { 'williamboman/nvim-lsp-installer', module = 'nvim-lsp-installer' },
       { 'jose-elias-alvarez/null-ls.nvim', module = 'null-ls' },
       { 'ray-x/lsp_signature.nvim', after = 'nvim-lspconfig' },
-      { 'folke/lsp-colors.nvim', after = 'nvim-lspconfig' },
-      { 'williamboman/nvim-lsp-installer', module = 'nvim-lsp-installer' },
       { 'folke/trouble.nvim', cmd = { 'Trouble', 'TroubleToggle' } },
       { 'onsails/lspkind-nvim', after = 'nvim-cmp' },
 
       -------------------------------- Completion,
       { 'hrsh7th/nvim-cmp', after = 'friendly-snippets' },
-      { 'hrsh7th/cmp-nvim-lua', after = 'cmp_luasnip' },
-      { 'hrsh7th/cmp-nvim-lsp', after = 'cmp-nvim-lua' },
-      { 'hrsh7th/cmp-cmdline', after = 'cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-path', after = 'cmp-cmdline' },
+      { 'hrsh7th/cmp-nvim-lsp', after = 'cmp_luasnip' },
+      { 'hrsh7th/cmp-path', after = 'cmp-nvim-lsp' },
       { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
-
-      --------------------------------- Snippets,
       { 'L3MON4D3/LuaSnip', after = 'nvim-cmp' },
       { 'rafamadriz/friendly-snippets', module = 'cmp_nvim_lsp', event = 'BufRead' },
-      { 'michaelb/sniprun', cmd = 'SnipRun' },
-
-      --------------------------------- Git,
-      { 'lewis6991/gitsigns.nvim', opt = true },
-      { 'TimUntersberger/neogit', cmd = 'Neogit' },
 
       --------------------------------- Editing,
       { 'ggandor/lightspeed.nvim', event = 'BufRead' },
       { 'tpope/vim-surround', event = 'BufRead' },
       { 'tpope/vim-commentary', event = 'BufRead' },
-      { 'tpope/vim-repeat', event = 'BufRead' },
       { 'folke/todo-comments.nvim', module = 'todo-comments' },
+      { 'lewis6991/gitsigns.nvim', opt = true },
+      { 'TimUntersberger/neogit', cmd = 'Neogit' },
 
       --------------------------------- Windows and Splits,
       { 'https://gitlab.com/yorickpeterse/nvim-window.git', module = 'nvim-window' },
@@ -61,11 +52,7 @@ require('plugins.packer').startup(function(use)
       { 'windwp/nvim-autopairs', after = 'nvim-cmp' },
       { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm' },
       { 'lukas-reineke/indent-blankline.nvim', event = 'BufRead' },
-      { 'nvim-orgmode/orgmode', require = 'akinsho/org-bullets.nvim' },
       { 'liuchengxu/vista.vim', cmd = 'Vista' },
-      { 'ellisonleao/glow.nvim', cmd = 'Glow' },
-      { 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } },
-      { 'andymass/vim-matchup', opt = true },
     }
   do
     use(plugin)
