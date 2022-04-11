@@ -56,7 +56,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'path' },
     { name = 'nvim_lua' },
-    { name = 'cmdline'},
+    { name = 'cmdline' },
   },
   experimental = {
     ghost_text = true,

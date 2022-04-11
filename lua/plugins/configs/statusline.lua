@@ -1,32 +1,32 @@
 local ok, feline = pcall(require, 'feline')
 if not ok then
-    return
+  return
 end
 
 local lsp = require 'feline.providers.lsp'
 local lsp_severity = vim.diagnostic.severity
 local api = vim.api
 local colors = {
-   white = "#abb2bf",
-   black = "#11121D",
-   one_bg = "#191a25",
-   one_bg2 = "#21222d",
-   grey = "#222126",
-   grey_fg = "#3e3f4a",
-   grey_fg2 = "#454651",
-   red = "#ee6d85",
-   pink = "#fe6D85",
-   green = "#98c379",
-   nord_blue = "#648ce1",
-   blue = "#7199ee",
-   yellow = "#d7a65f",
-   dark_purple = "#9071c9",
-   teal = "#519aba",
-   orange = "#f6955b",
-   cyan = "#38a89d",
-   statusline_bg = "#151621",
-   lightbg = "#262732",
-   lightbg2 = "#1c1d28",
+  white = '#abb2bf',
+  black = '#11121D',
+  one_bg = '#191a25',
+  one_bg2 = '#21222d',
+  grey = '#222126',
+  grey_fg = '#3e3f4a',
+  grey_fg2 = '#454651',
+  red = '#ee6d85',
+  pink = '#fe6D85',
+  green = '#98c379',
+  nord_blue = '#648ce1',
+  blue = '#7199ee',
+  yellow = '#d7a65f',
+  dark_purple = '#9071c9',
+  teal = '#519aba',
+  orange = '#f6955b',
+  cyan = '#38a89d',
+  statusline_bg = '#151621',
+  lightbg = '#262732',
+  lightbg2 = '#1c1d28',
 }
 
 local statusline_style = {

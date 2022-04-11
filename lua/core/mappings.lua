@@ -18,11 +18,12 @@ local mappings = {
   ['}'] = { 'tabnext', 'Next tab' },
   ['{'] = { 'tabprevious', 'Previous tab' },
   -- Quitting
-  q = { name = 'quit',
+  q = {
+    name = 'quit',
     q = { 'q', 'Quit' },
     f = { 'qa!', 'Force quit' },
     r = { 'Restart' },
-    w = { 'wqa', 'Write and quit' }
+    w = { 'wqa', 'Write and quit' },
   },
   -- Files
   f = {

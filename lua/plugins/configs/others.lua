@@ -37,7 +37,7 @@ local configs = {
       show_buffer_close_icons = false,
       enforce_regular_tabs = true,
       modified_icon = '',
-    }
+    },
   },
   material = {
     contrast = {
@@ -48,7 +48,7 @@ local configs = {
       comments = true,
     },
     custom_highlights = {
-      CursorLine = { bg = '#0f1018'},
+      CursorLine = { bg = '#0f1018' },
       PmenuSel = { fg = c.cyan, bg = c.selection },
       DiagnosticHint = { fg = c.purple },
       DiagnosticError = { fg = c.red },
@@ -56,7 +56,7 @@ local configs = {
       DiagnosticInformation = { fg = c.green },
       DiagnosticInfo = { fg = c.blue },
       RedOnBlack = { fg = c.red },
-    }
+    },
   },
 }
 
