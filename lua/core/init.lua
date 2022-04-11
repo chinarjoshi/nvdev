@@ -1,3 +1,4 @@
+-- For inital package loading
 for _, plugin in
   ipairs {
     'packer',

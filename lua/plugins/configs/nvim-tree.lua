@@ -7,46 +7,13 @@ end
 g.nvim_tree_add_trailing = 0
 g.nvim_tree_git_hl = 0
 g.nvim_tree_highlight_opened_files = 0
-g.nvim_tree_root_folder_modifier = table.concat { ':t:gs?$?/..', string.rep(' ', 1000), '?:gs?^??' }
-
-g.nvim_tree_icons = {
-  default = '',
-  symlink = '',
-  git = {
-    deleted = '',
-    ignored = '◌',
-    renamed = '➜',
-    staged = '✓',
-    unmerged = '',
-    unstaged = '✗',
-    untracked = '★',
-  },
-  folder = {
-    default = '',
-    empty = '',
-    empty_open = '',
-    open = '',
-    symlink = '',
-    symlink_open = '',
-  },
-}
 
 nvim_tree.setup {
-  nvim_tree_quit_on_open = true,
-  nvim_tree_indent_markers = 1,
   disable_netrw = true,
-  hijack_netrw = true,
   update_cwd = true,
-  update_focused_file = {
-    enable = true,
-    update_cwd = false,
-  },
-  view = {
-    allow_resize = true,
-    width = 30,
-  },
-  git = {
-    enable = false,
-    ignore = true,
-  },
+  actions = {
+    open_file = {
+      quit_on_open = true
+    }
+  }
 }

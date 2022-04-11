@@ -32,6 +32,7 @@ require('plugins.packer').startup(function(use)
       { 'ggandor/lightspeed.nvim', event = 'BufRead' },
       { 'tpope/vim-surround', event = 'BufRead' },
       { 'tpope/vim-commentary', event = 'BufRead' },
+      { 'tpope/vim-repeat', event = 'BufRead' },
       { 'folke/todo-comments.nvim', module = 'todo-comments' },
       { 'lewis6991/gitsigns.nvim', opt = true },
       { 'TimUntersberger/neogit', cmd = 'Neogit' },

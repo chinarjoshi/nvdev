@@ -43,6 +43,7 @@ g.vista_icon_indent = '["╰─▸ ", "├─▸ "]'
 g.vista_default_executive = 'ctags'
 
 -- Autocommands
+cmd 'autocmd FileType xml,html,xhtml,css,scss,javascript,json,lua,yaml setlocal shiftwidth=2 tabstop=2'
 cmd "au TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch', timeout=200}"
 cmd [[let g:vista#renderer#icons = { "function": "\u0192", "variable":
 \ "uf00d", "prototype": "\uf013", "macro": "\uf00b" }]]
