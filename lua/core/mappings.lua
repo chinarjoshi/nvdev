@@ -28,12 +28,11 @@ local mappings = {
   -- Files
   f = {
     name = 'file',
-    f = { 'Telescope find_files theme=ivy layout_config={height=15}', 'Find' },
+    f = { 'Telescope oldfiles theme=ivy layout_config={height=15}', 'Opened files' },
     s = { 'w', 'Save' },
-    p = { 'Telescope projects theme=ivy layout_config={height=15}', 'Projects' },
+    p = { 'lua require("core.utils").config_files()', 'Edit configuration' },
     t = { 'NvimTreeToggle', 'Tree' },
     c = { '%y+', 'Copy file' },
-    o = { 'Telescope oldfiles theme=ivy layout_config={height=15}', 'Opened files' },
   },
   o = { name = 'orgmode', a = { 'Agenda' }, c = { 'Capture' } },
   -- Search
@@ -89,7 +88,8 @@ local mappings = {
     c = { 'TroubleToggle document_diagnostics', 'Document diagnostics' },
     w = { 'TroubleToggle workspace_diagnostics', 'Workspace diagnostics' },
     r = { 'TroubleToggle lsp_references', 'References' },
-    d = { 'TroubleToggle lsp_definitions', 'Definitions' },
+    d = { 'lua require("cmp").setup.buffer { enabled = false }', 'Disable completion' },
+    e = { 'lua require("cmp").setup.buffer { enabled = true }', 'Enable completion' },
     t = { 'TroubleToggle lsp_type_definitions', 'Type definitions' },
     a = { 'Telescope lsp_code_actions theme=ivy layout_config={height=15}', 'Actions' },
   },

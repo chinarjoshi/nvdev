@@ -46,7 +46,7 @@ g.vista_default_executive = 'ctags' -- Use ctags to generate tag list
 -- Don't make new comment on enter
 -- Make terminal always in insert mode
 cmd [[
-  au FileType xml,html,xhtml,css,scss,javascript,json,lua,yaml setlocal shiftwidth=2 tabstop=2
+  au FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
   au TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch', timeout=200}
   au BufWinEnter,WinEnter,TermEnter * if (bufname('%') == "NvimTree" ||
    \ stridx(bufname('%'), "term") != -1) | set laststatus=0 | else | set laststatus=2 | endif

@@ -25,6 +25,10 @@ local on_attach = function(client, _)
   if client.name == 'sumneko_lua' then
     client.resolved_capabilities.document_formatting = false
   end
+
+  if client.resolved_capabilities.document_formatting then
+    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+  end
 end
 
 lsp_installer.on_server_ready(function(server)
@@ -57,6 +61,7 @@ vim.diagnostic.config {
   underline = true,
   update_in_insert = false,
 }
+
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = 'single',

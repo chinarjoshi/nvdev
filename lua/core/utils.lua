@@ -49,4 +49,10 @@ M.project_files = function()
   end
 end
 
+-- Find files in nvim directory
+M.config_files = function()
+  local opts = require"telescope.themes".get_ivy{layout_config={height=15},cwd='~/dotfiles/nvim'}
+  require"telescope.builtin".find_files(opts)
+end
+
 return M

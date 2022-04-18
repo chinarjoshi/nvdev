@@ -8,12 +8,11 @@ local formatting = null_ls.builtins.formatting
 
 null_ls.setup {
   sources = {
-    formatting.stylua,
-    formatting.black,
     formatting.prettier,
-    -- formatting.rustfmt,
-    -- formatting.clang_format,
-    -- diagnostics.cppcheck,
+    formatting.black,
+    formatting.isort,
+    diagnostics.write_good.with { filetypes = { "markdown", "text" } },
+    formatting.stylua,
     diagnostics.flake8,
     diagnostics.luacheck.with { extra_args = { '--globals vim' } },
   },
