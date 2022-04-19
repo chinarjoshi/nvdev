@@ -1,5 +1,4 @@
 local o = vim.opt
-local cmd = vim.cmd
 local g = vim.g
 
 --- Global options
@@ -40,16 +39,17 @@ g.vista_icon_indent = '["╰─▸ ", "├─▸ "]' -- Vista plugin visual enha
 g.vista_default_executive = 'ctags' -- Use ctags to generate tag list
 
 --- Autocommands:
+-- Don't show statusline on and terminal
 -- Tab = 2 spaces for these languages
 -- Highlight text on yank
--- Don't show statusline on nvim-tree and terminal
+-- Format on save
 -- Don't make new comment on enter
 -- Make terminal always in insert mode
-cmd [[
+vim.cmd [[
+  au TermEnter,WinEnter * if (&filetype == "toggleterm") | set laststatus=0 | else | set laststatus=2 | endif
   au FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
   au TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch', timeout=200}
-  au BufWinEnter,WinEnter,TermEnter * if (bufname('%') == "NvimTree" ||
-   \ stridx(bufname('%'), "term") != -1) | set laststatus=0 | else | set laststatus=2 | endif
+  au BufWritePre * lua vim.lsp.buf.formatting_sync()
   au BufEnter * set fo-=c fo-=r fo-=o
   au BufLeave term://* stopinsert
   au TermOpen * startinsert

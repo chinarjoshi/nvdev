@@ -99,6 +99,7 @@ local lsp = {
   d = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'Definition' },
   D = { '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Declaration' },
   e = { '<cmd>lua vim.diagnostic.open_float(0, {scope="line"})<CR>', 'Diagnostic' },
+  f = { '<cmd>lua vim.lsp.buf.formatting()<CR>', 'Format' },
   ['['] = { '<cmd>lua vim.diagnostic.goto_prev()<CR>', 'Previous diagnostic' },
   [']'] = { '<cmd>lua vim.diagnostic.goto_next()<CR>', 'Next diagnostic' },
   i = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Implementaiton' },
@@ -113,7 +114,6 @@ local lsp = {
   n = { '<cmd>lua vim.lsp.buf.rename()<CR>', 'Name' },
   a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', 'Action' },
   r = { '<cmd>lua vim.lsp.buf.references()<CR>', 'References' },
-  f = { '<cmd>lua vim.lsp.buf.formatting()<CR>', 'Format' },
 }
 
 utils.rep(mappings)

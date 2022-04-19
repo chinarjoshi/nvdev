@@ -25,15 +25,12 @@ for _, plugin in
     'stabilize',
     'focus',
     'winshift',
-    'base16',
     'feline',
     'colorizer',
     'nvim-autopairs',
     'toggleterm',
     'indent-blankline',
-    'orgmode',
     'glow',
-    'iswap',
   }
 do
   require(plugin)

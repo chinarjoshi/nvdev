@@ -22,12 +22,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 local on_attach = function(client, _)
-  if client.name == 'sumneko_lua' then
+  if client.name == 'sumneko_lua' or client.name == 'jsonls' then
     client.resolved_capabilities.document_formatting = false
-  end
-
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
   end
 end
 
