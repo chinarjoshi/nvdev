@@ -73,6 +73,7 @@ for _, module in
     'bufferline',
     'colorizer',
     'material',
+    'lsp-format',
   }
 do
   local ok, plugin = pcall(require, module)

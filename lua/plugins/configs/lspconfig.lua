@@ -39,17 +39,7 @@ lsp_installer.on_server_ready(function(server)
   server:setup(opts)
 end)
 
-for key, icon in
-  pairs {
-    Error = '',
-    Hint = '',
-    Warn = '',
-    Info = '',
-  }
-do
-  local hl = 'DiagnosticSign' .. key
-  vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
-end
+require('lspconfig').gopls.setup { on_attach = on_attach }
 
 vim.diagnostic.config {
   virtual_text = false,
@@ -57,7 +47,6 @@ vim.diagnostic.config {
   underline = true,
   update_in_insert = false,
 }
-
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = 'single',

@@ -35,8 +35,8 @@ require('plugins.packer').startup(function(use)
       { 'tpope/vim-commentary', event = 'BufRead' },
       { 'tpope/vim-repeat', event = 'BufRead' },
       { 'folke/todo-comments.nvim', module = 'todo-comments' },
-      { 'lewis6991/gitsigns.nvim', opt = true },
       { 'TimUntersberger/neogit', cmd = 'Neogit' },
+      { 'lewis6991/gitsigns.nvim' },
 
       --------------------------------- Windows and Splits,
       { 'https://gitlab.com/yorickpeterse/nvim-window.git', module = 'nvim-window' },
