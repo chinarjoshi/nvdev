@@ -47,7 +47,7 @@ g.vista_default_executive = 'ctags' -- Use ctags to generate tag list
 -- Make terminal always in insert mode
 vim.cmd [[
   au TermEnter,WinEnter * if (&filetype == "toggleterm") | set laststatus=0 | else | set laststatus=2 | endif
-  au FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
+  au FileType json,xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
   au TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch', timeout=200}
   au BufWritePre * lua vim.lsp.buf.formatting_sync()
   au BufEnter * set fo-=c fo-=r fo-=o

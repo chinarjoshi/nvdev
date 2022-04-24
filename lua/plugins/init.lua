@@ -16,6 +16,7 @@ require('plugins.packer').startup(function(use)
       { 'neovim/nvim-lspconfig', module = 'lspconfig' },
       { 'williamboman/nvim-lsp-installer', module = 'nvim-lsp-installer' },
       { 'jose-elias-alvarez/null-ls.nvim', module = 'null-ls' },
+      { 'lukas-reineke/lsp-format.nvim', after = 'nvim-lspconfig' },
       { 'ray-x/lsp_signature.nvim', after = 'nvim-lspconfig' },
       { 'folke/trouble.nvim', cmd = { 'Trouble', 'TroubleToggle' } },
       { 'onsails/lspkind-nvim', after = 'nvim-cmp' },
