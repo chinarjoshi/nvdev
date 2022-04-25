@@ -13,50 +13,49 @@ require('plugins.packer').startup(function(use)
       { 'nathom/filetype.nvim' },
 
       -------------------------------- LSP,
-      { 'neovim/nvim-lspconfig', module = 'lspconfig' },
-      { 'williamboman/nvim-lsp-installer', module = 'nvim-lsp-installer' },
-      { 'jose-elias-alvarez/null-ls.nvim', module = 'null-ls' },
-      { 'lukas-reineke/lsp-format.nvim', after = 'nvim-lspconfig' },
-      { 'ray-x/lsp_signature.nvim', after = 'nvim-lspconfig' },
-      { 'folke/trouble.nvim', cmd = { 'Trouble', 'TroubleToggle' } },
-      { 'onsails/lspkind-nvim', after = 'nvim-cmp' },
+      'neovim/nvim-lspconfig',
+      'williamboman/nvim-lsp-installer',
+      'jose-elias-alvarez/null-ls.nvim',
+      'lukas-reineke/lsp-format.nvim',
+      'ray-x/lsp_signature.nvim',
+      'onsails/lspkind-nvim',
 
       -------------------------------- Completion,
-      { 'hrsh7th/nvim-cmp', after = 'friendly-snippets' },
-      { 'hrsh7th/cmp-nvim-lsp', after = 'cmp_luasnip' },
-      { 'hrsh7th/cmp-path', after = 'cmp-nvim-lsp' },
-      { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
-      { 'L3MON4D3/LuaSnip', after = 'nvim-cmp' },
-      { 'rafamadriz/friendly-snippets', module = 'cmp_nvim_lsp', event = 'BufRead' },
+      'hrsh7th/nvim-cmp',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
+      'saadparwaiz1/cmp_luasnip',
+      'L3MON4D3/LuaSnip',
+      'rafamadriz/friendly-snippets',
+      'windwp/nvim-autopairs',
 
       --------------------------------- Editing,
-      { 'ggandor/lightspeed.nvim', event = 'BufRead' },
-      { 'tpope/vim-surround', event = 'BufRead' },
-      { 'tpope/vim-commentary', event = 'BufRead' },
-      { 'tpope/vim-repeat', event = 'BufRead' },
-      { 'folke/todo-comments.nvim', module = 'todo-comments' },
-      { 'TimUntersberger/neogit', cmd = 'Neogit' },
-      { 'lewis6991/gitsigns.nvim' },
+      'ggandor/lightspeed.nvim',
+      'tpope/vim-surround',
+      'tpope/vim-commentary',
+      'tpope/vim-repeat',
+      'folke/todo-comments.nvim',
+      'lewis6991/gitsigns.nvim',
+      'michaelb/sniprun',
 
-      --------------------------------- Windows and Splits,
+      --------------------------------- Aesthetic,
+      'marko-cerovac/material.nvim',
+      'feline-nvim/feline.nvim',
+      'kyazdani42/nvim-web-devicons',
+      'akinsho/bufferline.nvim',
+      'norcalli/nvim-colorizer.lua',
+      'lukas-reineke/indent-blankline.nvim',
+
+      --------------------------------- Etc.
+      { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm' },
       { 'https://gitlab.com/yorickpeterse/nvim-window.git', module = 'nvim-window' },
       { 'beauwilliams/focus.nvim', module = 'focus' },
       { 'sindrets/winshift.nvim', cmd = 'WinShift' },
-      { 'akinsho/bufferline.nvim' },
-
-      --------------------------------- Aesthetic,
-      { 'marko-cerovac/material.nvim' },
-      { 'feline-nvim/feline.nvim' },
-      { 'kyazdani42/nvim-web-devicons' },
-      { 'norcalli/nvim-colorizer.lua', event = 'BufRead' },
-
-      --------------------------------- Etc.
-      { 'windwp/nvim-autopairs', after = 'nvim-cmp' },
-      { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm' },
-      { 'lukas-reineke/indent-blankline.nvim', event = 'BufRead' },
-      { 'liuchengxu/vista.vim', cmd = 'Vista' },
+      { 'folke/trouble.nvim', cmd = { 'Trouble', 'TroubleToggle' } },
+      { 'TimUntersberger/neogit', cmd = 'Neogit' },
     }
   do
-    use(plugin)
+    -- If lazyloader for plugin is not specified, then lazyload on BufRead
+    use(type(plugin) == 'string' and { plugin, event = { 'BufRead', 'BufNewFile' } } or plugin)
   end
 end)

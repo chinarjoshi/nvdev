@@ -8,6 +8,7 @@ vim.opt.shadafile = 'NONE'
 
 for _, module in
   ipairs {
+    -- 'core',
     'core.settings',
     'core.mappings',
     'plugins',

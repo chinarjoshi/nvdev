@@ -1,6 +1,7 @@
--- For inital package loading
+-- For debugging after initial package installation
 for _, plugin in
   ipairs {
+    --  Base
     'packer',
     'nvim-tree',
     'telescope',
@@ -9,28 +10,41 @@ for _, plugin in
     'plenary',
     'impatient',
     'filetype',
+
+    -- LSP
     'lspconfig',
-    'null-ls',
-    'lsp_signature',
     'nvim-lsp-installer',
-    'trouble',
+    'null-ls',
+    'lsp-format',
+    'lsp_signature',
+    'lspkind',
+
+    -- Completion
     'cmp',
     'luasnip',
-    'sniprun',
-    'gitsigns',
-    'neogit',
+
+    -- Editing
     'lightspeed',
     'todo-comments',
+    'gitsigns',
+    'sniprun',
+
+    -- Aestetic
+    'material',
+    'feline',
+    'nvim-web-devicons',
+    'bufferline',
+    'colorizer',
+
+    -- Etc
+    'neogit',
     'nvim-window',
-    'stabilize',
     'focus',
     'winshift',
-    'feline',
-    'colorizer',
     'nvim-autopairs',
     'toggleterm',
-    'indent-blankline',
-    'glow',
+    'trouble',
+    'indent_blankline',
   }
 do
   require(plugin)
