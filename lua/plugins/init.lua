@@ -53,6 +53,7 @@ require('plugins.packer').startup(function(use)
       { 'sindrets/winshift.nvim', cmd = 'WinShift' },
       { 'folke/trouble.nvim', cmd = { 'Trouble', 'TroubleToggle' } },
       { 'TimUntersberger/neogit', cmd = 'Neogit' },
+      { 'nvim-neorg/neorg' },
     }
   do
     -- If lazyloader for plugin is not specified, then lazyload on BufRead
