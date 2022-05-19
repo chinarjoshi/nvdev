@@ -1,5 +1,3 @@
-local c = require 'material.colors'
-
 local configs = {
   ['nvim-autopairs'] = { fast_wrap = {} },
   lsp_signature = {
@@ -39,30 +37,18 @@ local configs = {
       modified_icon = '',
     },
   },
-  material = {
-    contrast = {
-      sidebars = true,
-      popup_menu = true,
-    },
-    italics = {
-      comments = true,
-    },
-    custom_highlights = {
-      CursorLine = { bg = '#0f1018' },
-      PmenuSel = { fg = c.cyan, bg = c.selection },
-      DiagnosticHint = { fg = c.purple },
-      DiagnosticError = { fg = c.red },
-      DiagnosticWarn = { fg = c.yellow },
-      DiagnosticInformation = { fg = c.green },
-      DiagnosticInfo = { fg = c.blue },
-      RedOnBlack = { fg = c.red },
-    },
+  ['nvim-treesitter.configs'] = {
+    ensure_installed = 'all',
+    highlight = { enable = true },
+    indent = { enable = true },
+    autopairs = { enable = true },
   },
 }
 
 for _, module in
   ipairs {
     'nvim-autopairs',
+    'nvim-treesitter.configs',
     'lsp_signature',
     'gitsigns',
     'trouble',
@@ -72,7 +58,6 @@ for _, module in
     'project_nvim',
     'bufferline',
     'colorizer',
-    'material',
     'lsp-format',
   }
 do
@@ -86,5 +71,3 @@ local ok, luasnip = pcall(require, 'luasnip')
 if ok then
   luasnip.config.set_config { history = true, updateevents = 'TextChanged,TextChangedI' }
 end
-
-vim.cmd 'colorscheme material'
