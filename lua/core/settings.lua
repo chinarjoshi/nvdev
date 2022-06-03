@@ -49,11 +49,11 @@ vim.cmd [[
   au TermEnter,WinEnter * if (&filetype == "toggleterm") | set laststatus=0 | else | set laststatus=2 | endif
   au FileType json,xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
   au TextYankPost * silent! lua vim.highlight.on_yank{higroup='IncSearch', timeout=200}
-  au BufWritePre * lua vim.lsp.buf.formatting_sync()
   au BufEnter * set fo-=c fo-=r fo-=o
   au BufLeave term://* stopinsert
   au TermOpen * startinsert
 ]]
+-- au BufWritePre * lua vim.lsp.buf.formatting_sync()
 
 -- Builtin plugins to disable (performance)
 for _, plugin in

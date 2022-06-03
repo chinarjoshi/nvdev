@@ -23,7 +23,7 @@ opt.resolveSupport = {
 }
 
 local on_attach = function(client, _)
-  if client.name == 'sumneko_lua' or client.name == 'jsonls' then
+  if client.name == 'sumneko_lua' or client.name == 'jsonls' or client.name == 'tsserver' then
     client.resolved_capabilities.document_formatting = false
   end
 end

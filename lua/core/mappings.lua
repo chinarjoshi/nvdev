@@ -129,8 +129,8 @@ end
 for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
   utils.map('<C-' .. letter .. '>', '<C-w>' .. letter)
 end
--- vim.cmd 'nnoremap ; :'
--- vim.cmd 'nnoremap : ;'
+vim.cmd 'nnoremap ; :'
+vim.cmd 'nnoremap : ;'
 
 function _G.set_terminal_keymaps()
   local opts = { noremap = true }
