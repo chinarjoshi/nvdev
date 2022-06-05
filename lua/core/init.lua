@@ -3,9 +3,9 @@ for _, plugin in
   ipairs {
     --  Base
     'packer',
-    'nvim-tree',
+    --'nvim-tree',
     'telescope',
-    'project_nvim',
+    -- 'project_nvim',
     'which-key',
     'plenary',
     'impatient',
@@ -42,7 +42,7 @@ for _, plugin in
     'focus',
     'winshift',
     'nvim-autopairs',
-    'toggleterm',
+    --'toggleterm',
     'trouble',
     'indent_blankline',
   }

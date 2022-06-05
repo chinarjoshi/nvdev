@@ -4,7 +4,7 @@ require('plugins.packer').startup(function(use)
       -------------------------------- Base
       { 'wbthomason/packer.nvim', cmd = { 'PackerSync', 'PackerStatus' } },
       { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
-      { 'kyazdani42/nvim-tree.lua', cmd = { 'NvimTreeToggle', 'NvimTreeFocus' } },
+      { 'kyazdani42/nvim-tree.lua' },
       { 'nvim-telescope/telescope.nvim', module = 'telescope', cmd = 'Telescope' },
       { 'ahmedkhalf/project.nvim', cmd = 'Telescope projects' },
       { 'folke/which-key.nvim', module = 'which-key' },
@@ -47,7 +47,7 @@ require('plugins.packer').startup(function(use)
       'lukas-reineke/indent-blankline.nvim',
 
       --------------------------------- Etc.
-      { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm' },
+      { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm', tag = 'v1.*' },
       { 'https://gitlab.com/yorickpeterse/nvim-window.git', module = 'nvim-window' },
       { 'beauwilliams/focus.nvim', module = 'focus' },
       { 'sindrets/winshift.nvim', cmd = 'WinShift' },

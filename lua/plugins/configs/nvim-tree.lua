@@ -4,10 +4,6 @@ if not ok then
   return
 end
 
-g.nvim_tree_add_trailing = 0
-g.nvim_tree_git_hl = 0
-g.nvim_tree_highlight_opened_files = 0
-
 nvim_tree.setup {
   disable_netrw = true,
   update_cwd = true,
