@@ -14,7 +14,7 @@
 ## Quick Pitch
 
  1. **Leader Mappings**
-  - Cleverly thought out hotkeys for common functions (e.g. \<SPC>\<SPC> to search project files) and two letters for less common functions (e.g. \<SPC\>tn to make new tab)
+  - Cleverly thought out and discoverable hotkeys for common functions (e.g. \<SPC>\<SPC> to search project files) and two letters for less common functions (e.g. \<SPC\>tn to make new tab)
   - Phonetic behavior always using first letter of function as the mapping ("search TODO-list" becomes \<SPC\>st)
   - Covers all common usage for both vim features and plugin features
 
@@ -53,7 +53,6 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 ```
 ├── lua
 │   ├── core
-│   │   ├── highlights.lua
 │   │   ├── init.lua
 │   │   ├── mappings.lua
 │   │   ├── settings.lua
@@ -61,24 +60,22 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 │   └── plugins
 │       ├── configs
 │       │   ├── cmp.lua
-│       │   ├── colors.lua
 │       │   ├── icons.lua
 │       │   ├── indent-blankline.lua
 │       │   ├── lspconfig.lua
-│       │   ├── lspkind_icons.lua
-│       │   ├── null_ls.lua
-│       │   ├── nvimtree.lua
+│       │   ├── lspkind-icons.lua
+│       │   ├── null-ls.lua
+│       │   ├── nvim-tree.lua
 │       │   ├── others.lua
 │       │   ├── statusline.lua
 │       │   ├── telescope.lua
 │       │   ├── treesitter.lua
-│       │   ├── which-key.lua
 │       │   └── windows.lua
 │       ├── init.lua
 │       └── packer.lua
 └── init.lua
 
-4 directories, 22 files
+4 directories, 19 files
 ```
 
 ### Files
@@ -87,8 +84,8 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
  * [lua](lua): Folder containing lua modules
 
 `/nvim/lua/core`
- * [highlights.lua](lua/highlights.lua): Highlights for nvim and plugin ui's
  * [init.lua](lua/init.lua): Initial setup file that calls all plugins for lazy loading purposes
+ * [mappings.lua](lua/mappings.lua): Defines keybindings through which-key
  * [settings.lua](lua/settings.lua): Sets editor options, defines autocommands, and disables builtin plugins
  * [utils.lua](lua/utils.lua): A few utility functions and quick variables to change
 
@@ -99,17 +96,15 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 `/nvim/lua/configs`
  * [cmp.lua](lua/configs/cmp.lua): Autocompletion
- * [colors.lua](lua/configs/colors.lua): Theme and RGB colorizer
  * [icons.lua](lua/configs/icons.lua): Custom devicons
  * [indent-blankline.lua](lua/configs/indent-blankline.lua): Indent line
  * [lspconfig.lua](lua/configs/lspconfig.lua): LSP and installer configuration
  * [null-ls.lua](lua/configs/null-ls.lua): Adapter for command line formatters/linters
  * [nvim-tree](lua/configs/nvim-tree.lua): File tree
  * [others.lua](lua/configs/others.lua): All other plugin setup
- * [feline.lua](lua/configs/feline.lua): Statusline
+ * [statusline.lua](lua/configs/feline.lua): Statusline
  * [telescope.lua](lua/configs/telescope.lua): Fuzzy finder
  * [treesitter.lua](lua/configs/treesitter.lua): Treesitter interface
- * [which-key.lua](lua/configs/which-key.lua): Help for leader key mappings
  * [windows.lua](lua/configs/windows.lua): Window and split based plugins
 
 ## Plugin List
@@ -131,7 +126,7 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
  * nvim-lspconfig
  * null-ls.nvim
  * lsp\_signature.nvim
- * lsp-colors.nvim
+ * nvim-lsp-installer
  * trouble.nvim
  * lspkind-nvim
 
@@ -146,26 +141,20 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
  * nvim-window
  * focus.nvim
  * winshift.nvim
- * luatab.nvim
 
 ### Aesthetic
- * nvim-base16.lua
+ * material.nvim
  * feline.nvim
  * nvim-web-devicons
  * nvim-colorizer
 
 ### Etc.
  * neogit
+ * neorg
  * gitsigns.nvim
  * nvim-autopairs
  * toggleterm.nvim
  * indent-blankline.nvim
- * orgmode
- * vista.vim
- * glow.nvim
- * iswap.nvim
- * vim-matchup
- * sniprun
 
 
 ## Gallery
@@ -205,10 +194,9 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 </p>
 
 ## Inspirations
- * [NvChad](https://github.com/NvChad/NvChad) for most of the ricing and organization I built upon
+ * [NvChad](https://github.com/NvChad/NvChad) for the inspiration and organizational structure
  * [neovim-lua](https://github.com/brainfucksec/neovim-lua) for autocommands and understanding lua
 
 ## TODO
- * Add documentation to all files
  * Fix window auto-focusing behavior ([windows.lua](lua/plugins/configs/windows.lua))
- * Fix snippets not showing in python files
+ * Fix certain snippets not showing in python files
