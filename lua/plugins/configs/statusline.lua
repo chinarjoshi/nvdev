@@ -14,9 +14,9 @@ local colors = {
   grey = '#222126',
   grey_fg = '#3e3f4a',
   grey_fg2 = '#454651',
-  red = '#ee6d85',
+  red = '#be4d65',
   pink = '#fe6D85',
-  green = '#98c379',
+  green = '#73a176',
   nord_blue = '#648ce1',
   blue = '#7199ee',
   yellow = '#d7a65f',
@@ -36,63 +36,6 @@ local statusline_style = {
   locked_icon = '  ',
   vi_mode_icon = ' ',
 }
-local shortline = true
-
-local function severity_color()
-  local color = 'nord_blue'
-  local exists = function(sev)
-    return vim.tbl_count(vim.diagnostic.get(0, { severity = sev }))
-  end
-  if exists 'Error' > 0 then
-    color = 'red'
-  elseif exists 'Warn' > 0 then
-    color = 'yellow'
-  elseif exists 'Info' > 0 then
-    color = 'white'
-  elseif exists 'Hint' > 0 then
-    color = 'blue'
-  end
-  return color
-end
-
-local main_icon = {
-  provider = function()
-    if vim.bo.readonly then
-      return statusline_style.locked_icon
-    else
-      return statusline_style.main_icon
-    end
-  end,
-  hl = function()
-    return {
-      fg = colors.statusline_bg,
-      bg = colors[severity_color()],
-    }
-  end,
-  right_sep = function()
-    return {
-      str = statusline_style.right,
-      hl = {
-        fg = colors[severity_color()],
-        bg = colors.lightbg,
-      },
-    }
-  end,
-}
-local inactive_main_icon = {
-  provider = vim.bo.readonly and statusline_style.locked_icon or statusline_style.main_icon,
-  hl = {
-    fg = colors.white,
-    bg = colors.one_bg2,
-  },
-  right_sep = {
-    str = statusline_style.right,
-    hl = {
-      fg = colors.one_bg2,
-      bg = colors.lightbg,
-    },
-  },
-}
 
 local file_name = {
   provider = function()
@@ -101,9 +44,6 @@ local file_name = {
     local extension = vim.fn.expand '%:e'
     local icon = require('nvim-web-devicons').get_icon(filename, extension) or ' '
     return ' ' .. icon .. ' ' .. dir_name .. '/' .. filename .. ' '
-  end,
-  enabled = shortline or function(winid)
-    return api.nvim_win_get_width(tonumber(winid) or 0) > 70
   end,
   hl = function()
     return {
@@ -125,7 +65,7 @@ local inactive_file_name = {
     local icon = require('nvim-web-devicons').get_icon(filename, extension) or ' '
     return ' ' .. icon .. ' ' .. dir_name .. '/' .. filename .. ' '
   end,
-  enabled = shortline or function(winid)
+  enabled = function(winid)
     return api.nvim_win_get_width(tonumber(winid) or 0) > 70
   end,
   hl = {
@@ -175,7 +115,7 @@ local diff = {
 
 local git_branch = {
   provider = 'git_branch',
-  enabled = shortline or function(winid)
+  enabled = function(winid)
     return api.nvim_win_get_width(tonumber(winid) or 0) > 70
   end,
   hl = {
@@ -231,12 +171,12 @@ local lsp_icon = {
       for _, client in pairs(vim.lsp.buf_get_clients(0)) do
         clients[#clients + 1] = client.name
       end
-      return '  LSP'
+      return '  ' .. clients[#clients]
     else
       return ''
     end
   end,
-  enabled = shortline or function(winid)
+  enabled = function(winid)
     return api.nvim_win_get_width(tonumber(winid) or 0) > 70
   end,
   hl = { fg = colors.grey_fg2, bg = colors.statusline_bg },
@@ -256,168 +196,6 @@ local tabpages = {
   end,
 
   hl = { fg = colors.grey_fg2, bg = colors.statusline_bg },
-}
-
-local mode_colors = {
-  ['n'] = { 'NORMAL', colors.red },
-  ['no'] = { 'N-PENDING', colors.red },
-  ['i'] = { 'INSERT', colors.dark_purple },
-  ['ic'] = { 'INSERT', colors.dark_purple },
-  ['t'] = { 'TERMINAL', colors.green },
-  ['v'] = { 'VISUAL', colors.cyan },
-  ['V'] = { 'V-LINE', colors.cyan },
-  [''] = { 'V-BLOCK', colors.cyan },
-  ['R'] = { 'REPLACE', colors.orange },
-  ['Rv'] = { 'V-REPLACE', colors.orange },
-  ['s'] = { 'SELECT', colors.nord_blue },
-  ['S'] = { 'S-LINE', colors.nord_blue },
-  [''] = { 'S-BLOCK', colors.nord_blue },
-  ['c'] = { 'COMMAND', colors.orange },
-  ['cv'] = { 'COMMAND', colors.orange },
-  ['ce'] = { 'COMMAND', colors.orange },
-  ['r'] = { 'PROMPT', colors.teal },
-  ['rm'] = { 'MORE', colors.teal },
-  ['r?'] = { 'CONFIRM', colors.teal },
-  ['!'] = { 'SHELL', colors.green },
-}
-
-local empty_space = {
-  {
-    provider = ' ' .. statusline_style.left,
-    hl = {
-      fg = colors.one_bg2,
-      bg = colors.statusline_bg,
-    },
-  },
-  {
-    provider = statusline_style.left,
-    hl = function()
-      return {
-        fg = mode_colors[vim.fn.mode()][2],
-        bg = colors.one_bg2,
-      }
-    end,
-  },
-  {
-    provider = function()
-      return ' ' .. mode_colors[vim.fn.mode()][1] .. ' '
-    end,
-    hl = function()
-      return {
-        fg = mode_colors[vim.fn.mode()][2],
-        bg = colors.one_bg,
-      }
-    end,
-  },
-}
-
-local mode_icon = {
-  provider = statusline_style.vi_mode_icon,
-  hl = function()
-    return {
-      fg = colors.statusline_bg,
-      bg = mode_colors[vim.fn.mode()][2],
-    }
-  end,
-}
-
-local separator = {
-  provider = statusline_style.left,
-  enabled = shortline or function(winid)
-    return api.nvim_win_get_width(tonumber(winid) or 0) > 90
-  end,
-  hl = {
-    fg = colors.grey,
-    bg = colors.one_bg,
-  },
-  {
-    provider = statusline_style.left,
-    enabled = shortline or function(winid)
-      return api.nvim_win_get_width(tonumber(winid) or 0) > 90
-    end,
-    hl = {
-      fg = colors.black,
-      bg = colors.grey,
-    },
-  },
-}
-
-local position_icon = {
-  provider = function()
-    local scroll_bar_blocks = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
-    local curr_line = api.nvim_win_get_cursor(0)[1]
-    local lines = api.nvim_buf_line_count(0)
-    return string.rep(scroll_bar_blocks[math.floor(curr_line / lines * 7) + 1], 2)
-  end,
-  enabled = shortline or function(winid)
-    return api.nvim_win_get_width(tonumber(winid) or 0) > 90
-  end,
-  hl = {
-    fg = colors.green,
-    bg = colors.black,
-  },
-}
-
-local current_line = {
-  provider = function()
-    local current_line = vim.fn.line '.'
-    local total_line = vim.fn.line '$'
-
-    if current_line == 1 then
-      return ' Top '
-    elseif current_line == vim.fn.line '$' then
-      return ' Bot '
-    end
-    local result, _ = math.modf((current_line / total_line) * 100)
-    return ' ' .. result .. '%% '
-  end,
-
-  enabled = shortline or function(winid)
-    return api.nvim_win_get_width(tonumber(winid) or 0) > 90
-  end,
-
-  hl = {
-    fg = colors.green,
-    bg = colors.one_bg,
-  },
-}
-
-local inactive_mode_icon = {
-  provider = statusline_style.vi_mode_icon,
-  hl = function()
-    return {
-      fg = colors.white,
-      bg = colors.grey,
-    }
-  end,
-}
-
-local inactive_empty_space = {
-  {
-    provider = ' ' .. statusline_style.left,
-    hl = {
-      fg = colors.one_bg,
-      bg = colors.statusline_bg,
-    },
-  },
-  {
-    provider = statusline_style.left,
-    hl = function()
-      return {
-        fg = colors.grey,
-        bg = colors.one_bg,
-      }
-    end,
-  },
-  {
-    provider = function()
-      return ' ' .. mode_colors[vim.fn.mode()][1] .. ' '
-    end,
-    hl = {
-      fg = colors.grey_fg2,
-      bg = colors.one_bg,
-    },
-  },
 }
 
 local inactive_diagnostic = {
@@ -459,75 +237,10 @@ local inactive_diagnostic = {
   },
 }
 
-local inactive_separator = {
-  {
-    provider = statusline_style.left,
-    enabled = shortline or function(winid)
-      return api.nvim_win_get_width(tonumber(winid) or 0) > 90
-    end,
-    hl = {
-      fg = colors.one_bg,
-      bg = colors.one_bg,
-    },
-  },
-  {
-    provider = statusline_style.left,
-    enabled = shortline or function(winid)
-      return api.nvim_win_get_width(tonumber(winid) or 0) > 90
-    end,
-    hl = {
-      fg = colors.black,
-      bg = colors.one_bg,
-    },
-  },
-}
-
-local inactive_position_icon = {
-  provider = function()
-    local scroll_bar_blocks = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
-    local curr_line = api.nvim_win_get_cursor(0)[1]
-    local lines = api.nvim_buf_line_count(0)
-    return string.rep(scroll_bar_blocks[math.floor(curr_line / lines * 7) + 1], 2)
-  end,
-  enabled = shortline or function(winid)
-    return api.nvim_win_get_width(tonumber(winid) or 0) > 90
-  end,
-  hl = {
-    fg = colors.grey_fg2,
-    bg = colors.black,
-  },
-}
-
-local inactive_current_line = {
-  provider = function()
-    local current_line = vim.fn.line '.'
-    local total_line = vim.fn.line '$'
-
-    if current_line == 1 then
-      return ' Top '
-    elseif current_line == vim.fn.line '$' then
-      return ' Bot '
-    end
-    local result, _ = math.modf((current_line / total_line) * 100)
-    return ' ' .. result .. '%% '
-  end,
-
-  enabled = shortline or function(winid)
-    return api.nvim_win_get_width(tonumber(winid) or 0) > 90
-  end,
-
-  hl = {
-    fg = colors.grey_fg2,
-    bg = colors.one_bg,
-  },
-}
-
 -- components are divided in 3 sections
-
 local components = {
   active = {
     {
-      main_icon,
       file_name,
       diff.add,
       diff.change,
@@ -544,17 +257,10 @@ local components = {
     {
       lsp_icon,
       git_branch,
-      empty_space[1],
-      empty_space[2],
-      mode_icon,
-      empty_space[3],
-      separator[1],
-      separator[2],
     },
   },
   inactive = {
     {
-      inactive_main_icon,
       inactive_file_name,
       diff.add,
       diff.change,
@@ -571,19 +277,9 @@ local components = {
     {
       lsp_icon,
       git_branch,
-      inactive_empty_space[1],
-      inactive_empty_space[2],
-      inactive_mode_icon,
-      inactive_empty_space[3],
-      inactive_separator[1],
-      inactive_separator[2],
-      inactive_position_icon,
-      inactive_current_line,
     },
   },
 }
-table.insert(components.active[3], position_icon)
-table.insert(components.active[3], current_line)
 
 feline.setup {
   theme = {
