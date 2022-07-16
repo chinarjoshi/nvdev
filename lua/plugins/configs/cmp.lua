@@ -60,9 +60,9 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'copilot' },
     { name = 'nvim_lsp' },
+    { name = 'cmdline' },
     { name = 'path' },
     { name = 'nvim_lua' },
-    { name = 'cmdline' },
   },
   enabled = function()
     local context = require 'cmp.config.context'
@@ -74,6 +74,27 @@ cmp.setup {
     end
   end,
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
+  },
+  view = {
+    entries = {name = 'custom', selection_order = 'near_cursor' }
   },
 }
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})

@@ -1,10 +1,10 @@
 local ok, key = pcall(require, 'which-key')
 local utils = require 'core.utils'
 
+--- Global mappings
 local mappings = {
   -- Hotkeys
   ['<space>'] = { 'lua require("core.utils").project_files()', 'Find file in project' },
-  ['C-<space>'] = { 'copilot#Accept("<CR>")', 'Accept copilot reccomendation' },
   ['<tab>'] = { 'Telescope projects theme=ivy layout_config={height=15}', 'Projects' },
   ['/'] = { 'Telescope live_grep theme=ivy layout_config={height=15}', 'Search project' },
   [','] = { 'Telescope buffers theme=ivy layout_config={height=15}', 'Switch buffer' },
@@ -92,6 +92,8 @@ local mappings = {
     t = { 'TroubleToggle lsp_type_definitions', 'Type definitions' },
     a = { 'Telescope lsp_code_actions theme=ivy layout_config={height=15}', 'Actions' },
   },
+
+  d = { 'Neogen', 'Generate documentation' },
 }
 
 local lsp = {
@@ -131,6 +133,7 @@ for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
 end
 vim.cmd 'nnoremap ; :'
 vim.cmd 'nnoremap : ;'
+vim.cmd [[imap <silent><script><silent><expr> <C-a> copilot#Accept("\<CR>")]]
 
 function _G.set_terminal_keymaps()
   local opts = { noremap = true }

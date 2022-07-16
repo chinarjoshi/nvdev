@@ -23,7 +23,7 @@ o.undofile = true -- Create persistent edit history
 o.numberwidth = 2 -- Minimum length of number column
 o.synmaxcol = 240 -- Maximum length line for syntax highlighting (performance)
 o.shiftwidth = 4 -- Default spaces for shifting with >>
-o.pumheight = 20 -- Max height for pop up menu
+o.pumheight = 10 -- Max height for pop up menu
 o.hidden = true -- Don't unload buffers when not visible
 o.number = true -- Show line numbers
 o.history = 100 -- Only remember past 100 commands
@@ -32,9 +32,8 @@ o.tabstop = 4 -- Tab = 4 spaces
 o.mouse = 'a' -- Enable mouse usage
 o.cul = true -- Enable cursorline
 o.shortmess:append 'sI' -- Don't show the intro blurb when no file
-g.diagnostics_visible = true
--- g.copilot_no_tab_map = true
--- g.copilot_assume_enabled = true -- Enable copilot
+g.diagnostics_visible = false
+g.copilot_no_tab_map = true
 g.material_style = require('core.utils').vars.theme -- Theme style
 g.python3_host_prog = '/usr/bin/python3' -- Default location of python (performance)
 g.mapleader = ' ' -- Space as leader key

@@ -16,6 +16,8 @@ local on_attach = function(client, _)
   end
 end
 
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 for _, server in ipairs {
   'pyright',
   'sumneko_lua',
@@ -27,7 +29,7 @@ for _, server in ipairs {
   'jsonls',
   'sqls',
 } do
-  lspconfig[server].setup { on_attach = on_attach }
+  lspconfig[server].setup { on_attach = on_attach, capabilities = capabilities }
 end
 
 vim.diagnostic.config {
