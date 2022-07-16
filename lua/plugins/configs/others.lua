@@ -31,31 +31,29 @@ local configs = {
   ['nvim-treesitter.configs'] = {
     ensure_installed = 'all',
     highlight = { enable = true },
-    indent = { enable = true },
+    indent = { enable = true, disable = { 'python' } },
     autopairs = { enable = true },
   },
   neogen = {
-    snippet_engine = 'luasnip'
-  }
+    snippet_engine = 'luasnip',
+  },
 }
 
-for _, module in
-  ipairs {
-    'nvim-autopairs',
-    'nvim-treesitter.configs',
-    'lsp_signature',
-    'gitsigns',
-    'trouble',
-    'todo-comments',
-    'toggleterm',
-    'neogit',
-    'project_nvim',
-    'bufferline',
-    'colorizer',
-    'lsp-format',
-    'neogen',
-  }
-do
+for _, module in ipairs {
+  'nvim-autopairs',
+  'nvim-treesitter.configs',
+  'lsp_signature',
+  'gitsigns',
+  'trouble',
+  'todo-comments',
+  'toggleterm',
+  'neogit',
+  'project_nvim',
+  'bufferline',
+  'colorizer',
+  'lsp-format',
+  'neogen',
+} do
   local ok, plugin = pcall(require, module)
   if ok then
     plugin.setup(configs[module] or {})
