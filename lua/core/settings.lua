@@ -32,7 +32,7 @@ o.tabstop = 4 -- Tab = 4 spaces
 o.mouse = 'a' -- Enable mouse usage
 o.cul = true -- Enable cursorline
 o.shortmess:append 'sI' -- Don't show the intro blurb when no file
-g.diagnostics_visible = false
+g.diagnostics_visible = true
 g.copilot_no_tab_map = true
 g.material_style = require('core.utils').vars.theme -- Theme style
 g.python3_host_prog = '/usr/bin/python3' -- Default location of python (performance)
@@ -55,7 +55,6 @@ vim.cmd [[
   au BufLeave term://* stopinsert
   au TermOpen * startinsert
 ]]
--- au BufWritePre * lua vim.lsp.buf.formatting_sync()
 
 -- Builtin plugins to disable (performance)
 for _, plugin in
