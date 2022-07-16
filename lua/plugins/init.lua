@@ -21,6 +21,7 @@ require('plugins.packer').startup(function(use)
       'onsails/lspkind-nvim',
 
       -------------------------------- Completion,
+      'github/copilot.vim',
       'hrsh7th/nvim-cmp',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
@@ -30,7 +31,6 @@ require('plugins.packer').startup(function(use)
       'windwp/nvim-autopairs',
 
       --------------------------------- Editing,
-      'ggandor/lightspeed.nvim',
       'tpope/vim-surround',
       'tpope/vim-commentary',
       'tpope/vim-repeat',
@@ -48,12 +48,11 @@ require('plugins.packer').startup(function(use)
 
       --------------------------------- Etc.
       { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm', tag = 'v1.*' },
-      { 'https://gitlab.com/yorickpeterse/nvim-window.git', module = 'nvim-window' },
       { 'beauwilliams/focus.nvim', module = 'focus' },
       { 'sindrets/winshift.nvim', cmd = 'WinShift' },
       { 'folke/trouble.nvim', cmd = { 'Trouble', 'TroubleToggle' } },
       { 'TimUntersberger/neogit', cmd = 'Neogit' },
-      { 'nvim-neorg/neorg' },
+      { 'danymat/neogen', cmd = 'Neogen' }
     }
   do
     -- If lazyloader for plugin is not specified, then lazyload on BufRead

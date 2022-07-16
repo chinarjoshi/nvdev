@@ -32,6 +32,9 @@ o.tabstop = 4 -- Tab = 4 spaces
 o.mouse = 'a' -- Enable mouse usage
 o.cul = true -- Enable cursorline
 o.shortmess:append 'sI' -- Don't show the intro blurb when no file
+g.diagnostics_visible = true
+-- g.copilot_no_tab_map = true
+-- g.copilot_assume_enabled = true -- Enable copilot
 g.material_style = require('core.utils').vars.theme -- Theme style
 g.python3_host_prog = '/usr/bin/python3' -- Default location of python (performance)
 g.mapleader = ' ' -- Space as leader key

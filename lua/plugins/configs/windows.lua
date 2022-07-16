@@ -4,17 +4,11 @@ local args = {
     excluded_filetypes = { 'NvimTree', 'Trouble' },
     excluded_buftypes = { 'NvimTree', 'prompt' },
   },
-  ['nvim-window'] = {
-    chars = { 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';' },
-    normal_hl = 'RedOnBlack',
-    border = 'none',
-  },
 }
 for _, name in
   ipairs {
-    'focus', -- FIX: Behavior
+    'focus',
     'winshift',
-    'nvim-window',
   }
 do
   local ok, plugin = pcall(require, name)

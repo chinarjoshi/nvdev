@@ -1,13 +1,4 @@
 local configs = {
-  ['nvim-autopairs'] = { fast_wrap = {} },
-  lsp_signature = {
-    floating_window = false,
-    fix_pos = true,
-    hint_enable = true,
-    hint_prefix = ' ',
-    hint_scheme = 'String',
-    hi_parameter = 'Search',
-  },
   gitsigns = {
     signs = {
       add = { hl = 'DiffAdd', text = '│', numhl = 'GitSignsAddNr' },
@@ -43,6 +34,9 @@ local configs = {
     indent = { enable = true },
     autopairs = { enable = true },
   },
+  neogen = {
+    snippet_engine = 'luasnip'
+  }
 }
 
 for _, module in
@@ -59,6 +53,7 @@ for _, module in
     'bufferline',
     'colorizer',
     'lsp-format',
+    'neogen',
   }
 do
   local ok, plugin = pcall(require, module)

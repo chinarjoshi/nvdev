@@ -10,6 +10,17 @@ M.vars = {
   },
 }
 
+-- Toggle buffer diagnostics
+M.toggle_diagnostics = function()
+  if vim.g.diagnostics_visible then
+    vim.g.diagnostics_visible = false
+    vim.diagnostic.disable()
+  else
+    vim.g.diagnostics_visible = true
+    vim.diagnostic.enable()
+  end
+end
+
 -- Replace each leaf node of a tree with <cmd>_<cr> for which-key (Readability)
 M.rep = function(table)
   if type(table[1]) == 'string' then

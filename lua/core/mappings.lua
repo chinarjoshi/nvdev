@@ -4,6 +4,7 @@ local utils = require 'core.utils'
 local mappings = {
   -- Hotkeys
   ['<space>'] = { 'lua require("core.utils").project_files()', 'Find file in project' },
+  ['C-<space>'] = { 'copilot#Accept("<CR>")', 'Accept copilot reccomendation' },
   ['<tab>'] = { 'Telescope projects theme=ivy layout_config={height=15}', 'Projects' },
   ['/'] = { 'Telescope live_grep theme=ivy layout_config={height=15}', 'Search project' },
   [','] = { 'Telescope buffers theme=ivy layout_config={height=15}', 'Switch buffer' },
@@ -34,7 +35,6 @@ local mappings = {
     t = { 'NvimTreeFindFileToggle', 'Tree' },
     c = { '%y+', 'Copy file' },
   },
-  o = { name = 'orgmode', a = { 'Agenda' }, c = { 'Capture' } },
   -- Search
   s = {
     name = 'search',
@@ -68,7 +68,6 @@ local mappings = {
   -- Windows
   w = {
     name = 'window',
-    w = { "lua require'nvim-window'.pick()", 'Pick' },
     W = { 'WinShift swap', 'Swap' },
     c = { 'wincmd c', 'Delete' },
     s = { 'wincmd s', 'Hori split' },
@@ -96,27 +95,28 @@ local mappings = {
 }
 
 local lsp = {
-  d = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'Definition' },
-  D = { '<cmd>lua vim.lsp.buf.declaration()<CR>', 'Declaration' },
-  e = { '<cmd>lua vim.diagnostic.open_float(0, {scope="line"})<CR>', 'Diagnostic' },
-  f = { '<cmd>lua vim.lsp.buf.formatting()<CR>', 'Format' },
-  ['['] = { '<cmd>lua vim.diagnostic.goto_prev()<CR>', 'Previous diagnostic' },
-  [']'] = { '<cmd>lua vim.diagnostic.goto_next()<CR>', 'Next diagnostic' },
-  i = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Implementaiton' },
-  s = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature' },
+  d = { 'lua require("core.utils").toggle_diagnostics()', 'Toggle diagnostics' },
+  D = { 'lua vim.lsp.buf.definition()', 'Definition' },
+  e = { 'lua vim.diagnostic.open_float(0, {scope="line"})', 'Diagnostic' },
+  f = { 'lua vim.lsp.buf.formatting()', 'Format' },
+  ['['] = { 'lua vim.diagnostic.goto_prev()', 'Previous diagnostic' },
+  [']'] = { 'lua vim.diagnostic.goto_next()', 'Next diagnostic' },
+  i = { 'lua vim.lsp.buf.implementation()', 'Implementaiton' },
+  s = { 'lua vim.lsp.buf.signature_help()', 'Signature' },
   w = {
     name = 'workspace',
-    a = { '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', 'Add' },
-    r = { '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', 'Remove' },
-    l = { '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', 'List' },
+    a = { 'lua vim.lsp.buf.add_workspace_folder()', 'Add' },
+    r = { 'lua vim.lsp.buf.remove_workspace_folder()', 'Remove' },
+    l = { 'lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))', 'List' },
   },
-  t = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type' },
-  n = { '<cmd>lua vim.lsp.buf.rename()<CR>', 'Name' },
-  a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', 'Action' },
-  r = { '<cmd>lua vim.lsp.buf.references()<CR>', 'References' },
+  t = { 'lua vim.lsp.buf.type_definition()', 'Type' },
+  n = { 'lua vim.lsp.buf.rename()', 'Name' },
+  a = { 'lua vim.lsp.buf.code_action()', 'Action' },
+  r = { 'lua vim.lsp.buf.references()', 'References' },
 }
 
 utils.rep(mappings)
+utils.rep(lsp)
 if ok then
   key.register(mappings, { prefix = '<leader>' })
   key.register(lsp, { prefix = 'g' })
