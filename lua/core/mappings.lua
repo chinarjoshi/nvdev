@@ -93,7 +93,13 @@ local mappings = {
     a = { 'Telescope lsp_code_actions theme=ivy layout_config={height=15}', 'Actions' },
   },
 
-  d = { 'Neogen', 'Generate documentation' },
+  d = {
+    name = 'documentation',
+    d = {'Neogen', 'Function' },
+    c = {'Neogen class', 'Class' },
+    f = {'Neogen file', 'File' },
+    t = {'Neogen type', 'Type' },
+  }
 }
 
 local lsp = {

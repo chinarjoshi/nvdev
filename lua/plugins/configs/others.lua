@@ -37,8 +37,12 @@ local configs = {
   neogen = {
     snippet_engine = 'luasnip',
   },
+  focus = {
+    signcolumn = false,
+    excluded_filetypes = { 'NvimTree', 'Trouble' },
+    excluded_buftypes = { 'NvimTree', 'prompt' },
+  },
 }
-
 for _, module in ipairs {
   'nvim-autopairs',
   'nvim-treesitter.configs',
@@ -53,6 +57,8 @@ for _, module in ipairs {
   'colorizer',
   'lsp-format',
   'neogen',
+  'focus',
+  'winshift',
 } do
   local ok, plugin = pcall(require, module)
   if ok then
