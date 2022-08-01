@@ -28,6 +28,7 @@ material.setup {
     DiagnosticInformation = { fg = c.green },
     DiagnosticInfo = { fg = c.blue },
     RedOnBlack = { fg = c.red },
+    Comment = { fg = '#7688a3' },
   },
 }
 
