@@ -17,7 +17,6 @@ require('plugins.packer').startup(function(use)
       'williamboman/nvim-lsp-installer',
       'jose-elias-alvarez/null-ls.nvim',
       'lukas-reineke/lsp-format.nvim',
-      'ray-x/lsp_signature.nvim',
       'onsails/lspkind-nvim',
 
       -------------------------------- Completion,
@@ -37,6 +36,7 @@ require('plugins.packer').startup(function(use)
       'folke/todo-comments.nvim',
       'lewis6991/gitsigns.nvim',
       'michaelb/sniprun',
+      'Vimjas/vim-python-pep8-indent',
 
       --------------------------------- Aesthetic,
       'marko-cerovac/material.nvim',
@@ -50,6 +50,7 @@ require('plugins.packer').startup(function(use)
       { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm', tag = 'v1.*' },
       { 'beauwilliams/focus.nvim', module = 'focus' },
       { 'sindrets/winshift.nvim', cmd = 'WinShift' },
+      { 'mizlan/iswap.nvim', cmd = 'ISwap' },
       { 'folke/trouble.nvim', cmd = { 'Trouble', 'TroubleToggle' } },
       { 'TimUntersberger/neogit', cmd = 'Neogit' },
       { 'danymat/neogen', cmd = 'Neogen' }

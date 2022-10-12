@@ -8,7 +8,7 @@ o.fillchars = { eob = ' ' } -- Don't show ~ at EOF
 o.foldmethod = 'marker' -- Show marker when folding code
 o.termguicolors = true -- Use 24 bit color display
 o.signcolumn = 'yes:1' -- Force 1 column wide signcolumn
-o.smartindent = true -- Use language aware indentation
+-- o.smartindent = true -- Use language aware indentation
 o.lazyredraw = true -- Don't redraw idle screen (performance)
 o.splitbelow = true -- Auto focus on vertical split
 o.splitright = true -- Auto focus on horizontal split

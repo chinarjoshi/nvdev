@@ -29,6 +29,7 @@ material.setup {
     DiagnosticInfo = { fg = c.blue },
     RedOnBlack = { fg = c.red },
     Comment = { fg = '#7688a3' },
+    Cursor = { bg = c.red },
   },
 }
 

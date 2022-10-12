@@ -137,8 +137,6 @@ end
 for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
   utils.map('<C-' .. letter .. '>', '<C-w>' .. letter)
 end
-vim.cmd 'nnoremap ; :'
-vim.cmd 'nnoremap : ;'
 vim.cmd [[imap <silent><script><silent><expr> <C-a> copilot#Accept("\<CR>")]]
 
 function _G.set_terminal_keymaps()

@@ -1,17 +1,9 @@
 local configs = {
-  gitsigns = {
-    signs = {
-      add = { hl = 'DiffAdd', text = '│', numhl = 'GitSignsAddNr' },
-      change = { hl = 'DiffChange', text = '│', numhl = 'GitSignsChangeNr' },
-      delete = { hl = 'DiffDelete', text = '│', numhl = 'GitSignsDeleteNr' },
-      topdelete = { hl = 'DiffDelete', text = '‾', numhl = 'GitSignsDeleteNr' },
-      changedelete = { hl = 'DiffChangeDelete', text = '~', numhl = 'GitSignsChangeNr' },
-    },
-  },
   trouble = {
     height = 20,
     width = 50,
   },
+
   ['todo-comments'] = {
     highlight = {
       keyword = 'wide',
@@ -46,7 +38,6 @@ local configs = {
 for _, module in ipairs {
   'nvim-autopairs',
   'nvim-treesitter.configs',
-  'lsp_signature',
   'gitsigns',
   'trouble',
   'todo-comments',
@@ -56,6 +47,7 @@ for _, module in ipairs {
   'bufferline',
   'colorizer',
   'lsp-format',
+  'iswap',
   'neogen',
   'focus',
   'winshift',
