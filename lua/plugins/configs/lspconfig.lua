@@ -1,10 +1,7 @@
-local ok, lsp_installer = pcall(require, 'nvim-lsp-installer')
-local present, lspconfig = pcall(require, 'lspconfig')
-if not (ok and present) then
+local ok, lspconfig = pcall(require, 'lspconfig')
+if not ok then
   return
 end
-
-lsp_installer.setup()
 
 local on_attach = function(client, _)
   if
@@ -12,7 +9,7 @@ local on_attach = function(client, _)
     or client.name == 'jsonls'
     or client.name == 'tsserver'
   then
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = false
   end
 end
 

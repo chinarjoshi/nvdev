@@ -58,11 +58,9 @@ cmp.setup {
   },
   sources = cmp.config.sources {
     { name = 'luasnip' },
-    { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'cmdline' },
     { name = 'path' },
-    { name = 'nvim_lua' },
   },
   enabled = function()
     local context = require 'cmp.config.context'
@@ -73,16 +71,13 @@ cmp.setup {
         and not context.in_syntax_group("Comment")
     end
   end,
-  experimental = {
-    ghost_text = false,
-  },
   view = {
     entries = {name = 'custom', selection_order = 'near_cursor' }
   },
 }
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }

@@ -3,21 +3,27 @@ require('plugins.packer').startup(function(use)
     ipairs {
       -------------------------------- Base
       { 'wbthomason/packer.nvim', cmd = { 'PackerSync', 'PackerStatus' } },
-      { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
-      { 'kyazdani42/nvim-tree.lua' },
-      { 'nvim-telescope/telescope.nvim', module = 'telescope', cmd = 'Telescope' },
-      { 'ahmedkhalf/project.nvim', cmd = 'Telescope projects' },
+      { 'nvim-treesitter/nvim-treesitter', event = 'BufWinEnter', run = ':TSUpdate' },
+      { 'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle' },
+      { 'ibhagwan/fzf-lua', module = 'fzf-lua' },
+      { 'ahmedkhalf/project.nvim', module = 'project_nvim' },
       { 'folke/which-key.nvim', module = 'which-key' },
-      { 'lewis6991/impatient.nvim' },
       { 'nvim-lua/plenary.nvim' },
+      { 'lewis6991/impatient.nvim' },
       { 'nathom/filetype.nvim' },
 
       -------------------------------- LSP,
       'neovim/nvim-lspconfig',
-      'williamboman/nvim-lsp-installer',
+      'mfussenegger/nvim-dap',
       'jose-elias-alvarez/null-ls.nvim',
       'lukas-reineke/lsp-format.nvim',
-      'onsails/lspkind-nvim',
+
+      -------------------------------- Maintainance
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+      "jayp0521/mason-nvim-dap.nvim",
+      "jayp0521/mason-null-ls.nvim",
+      { "RubixDev/mason-update-all", cmd = 'MasonUpdateAll' },
 
       -------------------------------- Completion,
       'github/copilot.vim',
@@ -35,19 +41,18 @@ require('plugins.packer').startup(function(use)
       'tpope/vim-repeat',
       'folke/todo-comments.nvim',
       'lewis6991/gitsigns.nvim',
-      'michaelb/sniprun',
+      { 'michaelb/sniprun', cmd = 'SnipRun' },
       'Vimjas/vim-python-pep8-indent',
 
       --------------------------------- Aesthetic,
       'marko-cerovac/material.nvim',
-      'feline-nvim/feline.nvim',
       'kyazdani42/nvim-web-devicons',
       'akinsho/bufferline.nvim',
       'norcalli/nvim-colorizer.lua',
       'lukas-reineke/indent-blankline.nvim',
 
       --------------------------------- Etc.
-      { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm', tag = 'v1.*' },
+      { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm', tag = '*' },
       { 'beauwilliams/focus.nvim', module = 'focus' },
       { 'sindrets/winshift.nvim', cmd = 'WinShift' },
       { 'mizlan/iswap.nvim', cmd = 'ISwap' },
@@ -57,6 +62,7 @@ require('plugins.packer').startup(function(use)
     }
   do
     -- If lazyloader for plugin is not specified, then lazyload on BufRead
-    use(type(plugin) == 'string' and { plugin, event = { 'BufRead', 'BufNewFile' } } or plugin)
+    use(type(plugin) == 'string' and { plugin, event = 'BufWinEnter' } or plugin)
+    -- use(plugin)
   end
 end)

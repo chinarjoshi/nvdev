@@ -1,14 +1,7 @@
 local present, impatient = pcall(require, 'impatient')
 
-if present then
-  impatient.enable_profile()
-end
-
-vim.opt.shadafile = 'NONE'
-
 for _, module in
   ipairs {
-    -- 'core',
     'core.settings',
     'core.mappings',
     'plugins',
@@ -19,5 +12,3 @@ do
     error("\n\nError loading '" .. module .. "' in init.lua\n\n" .. err)
   end
 end
-
-vim.opt.shadafile = ''

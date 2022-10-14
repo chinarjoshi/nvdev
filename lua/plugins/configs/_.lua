@@ -3,11 +3,18 @@ local configs = {
     height = 20,
     width = 50,
   },
-
+  indent_blankline = {
+    buftype_exclude = { 'terminal' },
+    show_trailing_blankline_indent = false,
+    show_first_indent_level = false,
+  },
   ['todo-comments'] = {
     highlight = {
       keyword = 'wide',
     },
+  },
+  ['nvim-tree'] = {
+    actions = { open_file = { quit_on_open = true } }
   },
   toggleterm = { size = 15 },
   bufferline = {
@@ -51,6 +58,7 @@ for _, module in ipairs {
   'neogen',
   'focus',
   'winshift',
+  'mason',
 } do
   local ok, plugin = pcall(require, module)
   if ok then
