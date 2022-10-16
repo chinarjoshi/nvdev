@@ -1,19 +1,21 @@
-local present, packer = pcall(require, 'packer')
+vim.cmd 'packadd packer.nvim'
+-- load packer init options
+local packer = require 'packer'
 
 packer.init {
-  display = {
-    open_fn = function()
-        return require('packer.util').float { border = 'single' }
-    end,
-    prompt_border = 'single',
-  },
-  git = {
-    clone_timeout = 6000,
-  },
   auto_clean = true,
   compile_on_sync = true,
+  git = { clone_timeout = 6000 },
+  display = {
+    working_sym = 'ﲊ',
+    error_sym = '✗ ',
+    done_sym = ' ',
+    removed_sym = ' ',
+    moved_sym = '',
+    open_fn = function()
+      return require('packer.util').float { border = 'single' }
+    end,
+  },
 }
-
--- require('core.utils').loadall()
 
 return packer

@@ -1,14 +1,6 @@
-local present, impatient = pcall(require, 'impatient')
+vim.defer_fn(function()
+  pcall(require, 'impatient')
+end, 0)
 
-for _, module in
-  ipairs {
-    'core.settings',
-    'core.mappings',
-    'plugins',
-  }
-do
-  local ok, err = pcall(require, module)
-  if not ok then
-    error("\n\nError loading '" .. module .. "' in init.lua\n\n" .. err)
-  end
-end
+require 'core.options'
+require 'core.mappings'

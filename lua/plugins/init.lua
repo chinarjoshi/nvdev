@@ -1,68 +1,210 @@
 require('plugins.packer').startup(function(use)
-  for _, plugin in
-    ipairs {
-      -------------------------------- Base
-      { 'wbthomason/packer.nvim', cmd = { 'PackerSync', 'PackerStatus' } },
-      { 'nvim-treesitter/nvim-treesitter', event = 'BufWinEnter', run = ':TSUpdate' },
-      { 'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle' },
-      { 'ibhagwan/fzf-lua', module = 'fzf-lua' },
-      { 'ahmedkhalf/project.nvim', module = 'project_nvim' },
-      { 'folke/which-key.nvim', module = 'which-key' },
-      { 'nvim-lua/plenary.nvim' },
-      { 'lewis6991/impatient.nvim' },
-      { 'nathom/filetype.nvim' },
+  -------------------------------- Base
+  use {
+    'wbthomason/packer.nvim',
+    cmd = { 'PackerSync', 'PackerStatus' },
+    config = function()
+      require 'plugins'
+    end,
+  }
 
-      -------------------------------- LSP,
-      'neovim/nvim-lspconfig',
-      'mfussenegger/nvim-dap',
-      'jose-elias-alvarez/null-ls.nvim',
-      'lukas-reineke/lsp-format.nvim',
+  use 'lewis6991/impatient.nvim'
 
-      -------------------------------- Maintainance
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-      "jayp0521/mason-nvim-dap.nvim",
-      "jayp0521/mason-null-ls.nvim",
-      { "RubixDev/mason-update-all", cmd = 'MasonUpdateAll' },
+  use {
+    'nvim-lua/plenary.nvim',
+    module = 'plenary',
+  }
 
-      -------------------------------- Completion,
-      'github/copilot.vim',
-      'hrsh7th/nvim-cmp',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'saadparwaiz1/cmp_luasnip',
-      'L3MON4D3/LuaSnip',
-      'rafamadriz/friendly-snippets',
-      'windwp/nvim-autopairs',
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    module = 'nvim-treesitter',
+    setup = function()
+      require('core.lazy_load').on_file_open 'nvim-treesitter'
+    end,
+    cmd = require('core.lazy_load').treesitter_cmds,
+    run = ':TSUpdate',
+    config = function()
+      require 'plugins.configs.treesitter'
+    end,
+  }
 
-      --------------------------------- Editing,
-      'tpope/vim-surround',
-      'tpope/vim-commentary',
-      'tpope/vim-repeat',
-      'folke/todo-comments.nvim',
-      'lewis6991/gitsigns.nvim',
-      { 'michaelb/sniprun', cmd = 'SnipRun' },
-      'Vimjas/vim-python-pep8-indent',
+  use {
+    'folke/which-key.nvim',
+    module = 'which-key',
+    keys = { '<leader>', '"', '\'', '`' },
+    config = function()
+      require 'plugins.configs.whichkey'
+    end,
+  }
 
-      --------------------------------- Aesthetic,
-      'marko-cerovac/material.nvim',
-      'kyazdani42/nvim-web-devicons',
-      'akinsho/bufferline.nvim',
-      'norcalli/nvim-colorizer.lua',
-      'lukas-reineke/indent-blankline.nvim',
+  -------------------------------- LSP,
+  use {
+    'neovim/nvim-lspconfig',
+    opt = true,
+    setup = function()
+      require('core.lazy_load').on_file_open 'nvim-lspconfig'
+    end,
+    config = function()
+      require 'plugins.configs.lspconfig'
+    end,
+  }
 
-      --------------------------------- Etc.
-      { 'akinsho/toggleterm.nvim', cmd = 'ToggleTerm', tag = '*' },
-      { 'beauwilliams/focus.nvim', module = 'focus' },
-      { 'sindrets/winshift.nvim', cmd = 'WinShift' },
-      { 'mizlan/iswap.nvim', cmd = 'ISwap' },
-      { 'folke/trouble.nvim', cmd = { 'Trouble', 'TroubleToggle' } },
-      { 'TimUntersberger/neogit', cmd = 'Neogit' },
-      { 'danymat/neogen', cmd = 'Neogen' }
-    }
-  do
-    -- If lazyloader for plugin is not specified, then lazyload on BufRead
-    use(type(plugin) == 'string' and { plugin, event = 'BufWinEnter' } or plugin)
-    -- use(plugin)
-  end
+  use {
+    'mfussenegger/nvim-dap',
+    cmd = 'Debug',
+    config = function()
+      print 'ASDF'
+    end,
+  }
+
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    opt = true,
+    setup = function()
+      require('core.lazy_load').on_file_open 'null-ls.nvim'
+    end,
+    config = function() end,
+  }
+
+  use {
+    'williamboman/mason.nvim',
+    cmd = require('core.lazy_load').mason_cmds,
+    config = function()
+      require 'plugins.configs.mason'
+    end,
+  }
+
+  use { 'williamboman/mason-lspconfig.nvim', after = 'mason.nvim', }
+  use { 'jayp0521/mason-nvim-dap.nvim', after = 'mason-lspconfig.nvim', }
+  use { 'jayp0521/mason-null-ls.nvim', after = 'mason-nvim-dap.nvim', }
+  use { 'RubixDev/mason-update-all', cmd = 'MasonUpdateAll' }
+
+  -------------------------------- Completion
+  use {
+    'rafamadriz/friendly-snippets',
+    module = { 'cmp', 'cmp_nvim_lsp' },
+    event = 'InsertEnter',
+  }
+
+  use {
+    'github/copilot.vim',
+    after = 'friendly-snippets',
+  }
+
+  use {
+    'hrsh7th/nvim-cmp',
+    after = 'friendly-snippets',
+    config = function()
+      require 'plugins.configs.cmp'
+    end,
+  }
+
+  use {
+    'L3MON4D3/LuaSnip',
+    wants = 'friendly-snippets',
+    after = 'nvim-cmp',
+    config = function()
+      require('plugins.configs.others').luasnip()
+    end,
+  }
+
+  use { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' }
+  use { 'hrsh7th/cmp-nvim-lsp', after = 'LuaSnip' }
+  use { 'hrsh7th/cmp-path', after = 'cmp-nvim-lsp' }
+
+  use {
+    'windwp/nvim-autopairs',
+    after = 'nvim-cmp',
+    config = function()
+      require('plugins.configs.others').autopairs()
+    end,
+  }
+
+  --------------------------------- Aesthetic
+
+  use {
+    'marko-cerovac/material.nvim',
+    config = function()
+      vim.cmd 'colorscheme material'
+    end,
+  }
+
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    opt = true,
+    setup = function()
+      require('core.lazy_load').on_file_open 'indent-blankline.nvim'
+    end,
+    config = function()
+      require('plugins.configs.others').blankline()
+    end,
+  }
+
+  use {
+    'kyazdani42/nvim-web-devicons',
+    module = 'nvim-web-devicons',
+    config = function()
+      require('plugins.configs.others').devicons()
+    end,
+  }
+
+  --------------------------------- Navigation
+  use {
+    'ibhagwan/fzf-lua',
+    module = 'fzf-lua',
+    cmd = 'fzf-lua',
+    config = function()
+      print 'TMP'
+    end,
+  }
+
+  use {
+    'kyazdani42/nvim-tree.lua',
+    ft = 'alpha',
+    cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
+    config = function()
+      require 'plugins.configs.nvimtree'
+    end,
+  }
+
+  --------------------------------- Editing,
+  use {
+    'lewis6991/gitsigns.nvim',
+    ft = 'gitcommit',
+    setup = function()
+      require('core.lazy_load').gitsigns()
+    end,
+    config = function()
+      require('plugins.configs.others').gitsigns()
+    end,
+  }
+
+  use {
+    'numToStr/Comment.nvim',
+    module = 'Comment',
+    keys = { 'gc', 'gb' },
+    config = function()
+      require('plugins.configs.others').comment()
+    end,
+  }
+
+  --------------------------------- Etc.
+  use {
+    'akinsho/toggleterm.nvim',
+    tag = '*',
+    cmd = 'ToggleTerm',
+    config = function()
+      require('plugins.configs.others').toggleterm()
+    end,
+  }
+
+  use { 'folke/trouble.nvim', cmd = { 'Trouble', 'TroubleToggle' } }
+
+  use { 'beauwilliams/focus.nvim', event = 'WinNew', }
+
+  use { 'sindrets/winshift.nvim', after = 'focus.nvim', }
+
+  use { 'TimUntersberger/neogit', cmd = 'Neogit', }
+
+  use { 'danymat/neogen', cmd = 'Neogen' }
 end)

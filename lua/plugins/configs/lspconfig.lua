@@ -1,37 +1,57 @@
-local ok, lspconfig = pcall(require, 'lspconfig')
-if not ok then
+local present, lspconfig = pcall(require, 'lspconfig')
+
+if not present then
   return
 end
 
-local on_attach = function(client, _)
-  if
-    client.name == 'sumneko_lua'
-    or client.name == 'jsonls'
-    or client.name == 'tsserver'
-  then
-    client.server_capabilities.document_formatting = false
-  end
+local M = {}
+
+-- export on_attach & capabilities for custom lspconfigs
+
+M.on_attach = function(client, _)
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
 end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
-for _, server in ipairs {
-  'pyright',
-  'sumneko_lua',
-  'rust_analyzer',
-  'clangd',
-  'tsserver',
-  'cssls',
-  'html',
-  'jsonls',
-  'sqls',
-} do
-  lspconfig[server].setup { on_attach = on_attach, capabilities = capabilities }
-end
-
-vim.diagnostic.config {
-  virtual_text = true,
-  signs = true,
-  underline = true,
-  update_in_insert = false,
+M.capabilities.textDocument.completion.completionItem = {
+  documentationFormat = { 'markdown', 'plaintext' },
+  snippetSupport = true,
+  preselectSupport = true,
+  insertReplaceSupport = true,
+  labelDetailsSupport = true,
+  deprecatedSupport = true,
+  commitCharactersSupport = true,
+  tagSupport = { valueSet = { 1 } },
+  resolveSupport = {
+    properties = {
+      'documentation',
+      'detail',
+      'additionalTextEdits',
+    },
+  },
 }
+
+lspconfig.sumneko_lua.setup {
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      workspace = {
+        library = {
+          [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+          [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
+        },
+        maxPreload = 100000,
+        preloadFileSize = 10000,
+      },
+    },
+  },
+}
+
+return M
