@@ -1,34 +1,30 @@
 local o = vim.opt
 local g = vim.g
 local au = vim.api.nvim_create_autocmd
+local map = require('core.utils').map
+local utils = require('core.utils')
+local maps = require('core.mappings')
 
+-- Options
 o.laststatus = 0
 o.cmdheight = 0
-
 o.clipboard = 'unnamedplus'
 o.cursorline = true
-
--- Indenting
 o.expandtab = true
 o.shiftwidth = 4
 o.smartindent = true
 o.tabstop = 4
-o.softtabstop = 4
-
 o.fillchars = { eob = ' ' }
+o.completeopt = 'menuone,noselect'
 o.ignorecase = true
 o.smartcase = true
+o.pumheight = 10
+o.linebreak = true
 o.mouse = 'a'
-
--- Numbers
 o.number = true
 o.relativenumber = true
 o.numberwidth = 2
 o.ruler = false
-
--- disable nvim intro
-o.shortmess:append 'sI'
-
 o.signcolumn = 'yes:1'
 o.splitbelow = true
 o.splitright = true
@@ -36,9 +32,7 @@ o.termguicolors = true
 o.timeoutlen = 400
 o.undofile = true
 o.swapfile = false
-
--- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
+o.shortmess:append 'sI'
 o.whichwrap:append '<>[]hl'
 
 -- Global variables
@@ -46,6 +40,31 @@ g.mapleader = ' '
 g.material_style = 'deep ocean'
 g.copilot_no_tab_map = true
 g.diagnostics_visible = true
+
+map('<ESC>', '<cmd>noh<CR>')
+map('<C-s>', '<cmd>w<CR>')
+map('<C-q>', '<cmd>q<CR>')
+vim.cmd [[imap <silent><script><silent><expr> <C-a> copilot#Accept("\<CR>")]]
+
+utils.alter_keymap(maps.general.prefix, maps.general, utils.register)
+utils.alter_keymap(maps.lsp.prefix, maps.lsp, utils.register)
+
+for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
+  map('<C-' .. letter .. '>', '<C-w>' .. letter)
+end
+
+for _, dir in ipairs { 'up', 'down', 'left', 'right' } do
+  map('<' .. dir .. '>', '<cmd>WinShift ' .. dir .. '<cr>')
+end
+
+au('TermOpen term://*', {
+    callback = function()
+      local opts = { noremap = true }
+      vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+    end
+})
 
 au('FileType', {
   pattern = 'qf',

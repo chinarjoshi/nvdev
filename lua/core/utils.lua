@@ -1,8 +1,31 @@
 local M = {}
-local autocmd = vim.api.nvim_create_autocmd
+
+M.map = function(key, map)
+    vim.api.nvim_set_keymap('n', key, map, { noremap = true })
+end
+
+M.alter_keymap = function(prefix, value, fn)
+    if type(value[1]) == 'string' or type(value[1]) == 'function' then
+        if type(value[1]) == 'string' then
+            value[1] = '<cmd>' .. value[1] .. '<cr>'
+        end
+        fn(prefix, value)
+        return
+    end
+
+    for k, v in pairs(value) do
+        if type(v) ~= 'string' then
+            M.alter_keymap(prefix .. k, v, fn)
+        end
+    end
+end
+
+M.register = function(key, value) vim.keymap.set('n', key, value[1], { noremap = true }) end
+
+M.filter = function(_, value) value = value[2] end
 
 M.lazy_load = function(tb)
-  autocmd(tb.events, {
+  vim.api.nvim_create_autocmd(tb.events, {
     group = vim.api.nvim_create_augroup(tb.augroup_name, {}),
     callback = function()
       if tb.condition() then
@@ -35,25 +58,8 @@ M.on_file_open = function(plugin_name)
   }
 end
 
-M.packer_cmds = {
-  'PackerSnapshot',
-  'PackerSnapshotRollback',
-  'PackerSnapshotDelete',
-  'PackerInstall',
-  'PackerUpdate',
-  'PackerSync',
-  'PackerClean',
-  'PackerCompile',
-  'PackerStatus',
-  'PackerProfile',
-  'PackerLoad',
-}
-
-M.treesitter_cmds = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSEnable', 'TSDisable', 'TSModuleInfo' }
-M.mason_cmds = { 'Mason', 'MasonInstall', 'MasonInstallAll', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' }
-
 M.gitsigns = function()
-  autocmd({ 'BufRead' }, {
+  vim.api.nvim_create_autocmd({ 'BufRead' }, {
     group = vim.api.nvim_create_augroup('GitSignsLazyLoad', { clear = true }),
     callback = function()
       vim.fn.system('git rev-parse ' .. vim.fn.expand '%:p:h')

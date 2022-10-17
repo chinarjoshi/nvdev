@@ -19,9 +19,8 @@ require('plugins.packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     module = 'nvim-treesitter',
     setup = function()
-      require('core.lazy_load').on_file_open 'nvim-treesitter'
+      require('core.utils').on_file_open 'nvim-treesitter'
     end,
-    cmd = require('core.lazy_load').treesitter_cmds,
     run = ':TSUpdate',
     config = function()
       require 'plugins.configs.treesitter'
@@ -30,8 +29,7 @@ require('plugins.packer').startup(function(use)
 
   use {
     'folke/which-key.nvim',
-    module = 'which-key',
-    keys = { '<leader>', '"', '\'', '`' },
+    keys = {'<leader>', 'g'},
     config = function()
       require 'plugins.configs.whichkey'
     end,
@@ -42,7 +40,7 @@ require('plugins.packer').startup(function(use)
     'neovim/nvim-lspconfig',
     opt = true,
     setup = function()
-      require('core.lazy_load').on_file_open 'nvim-lspconfig'
+      require('core.utils').on_file_open 'nvim-lspconfig'
     end,
     config = function()
       require 'plugins.configs.lspconfig'
@@ -51,9 +49,14 @@ require('plugins.packer').startup(function(use)
 
   use {
     'mfussenegger/nvim-dap',
-    cmd = 'Debug',
+    module = 'dapui',
+  }
+
+  use {
+    'rcarriga/nvim-dap-ui',
+    after = 'nvim-dap',
     config = function()
-      print 'ASDF'
+      require('dapui').setup()
     end,
   }
 
@@ -61,34 +64,26 @@ require('plugins.packer').startup(function(use)
     'jose-elias-alvarez/null-ls.nvim',
     opt = true,
     setup = function()
-      require('core.lazy_load').on_file_open 'null-ls.nvim'
+      require('core.utils').on_file_open 'null-ls.nvim'
     end,
-    config = function() end,
+    config = function()
+      require 'plugins.configs.null-ls'
+    end,
   }
 
   use {
     'williamboman/mason.nvim',
-    cmd = require('core.lazy_load').mason_cmds,
+    cmd = 'Mason',
     config = function()
-      require 'plugins.configs.mason'
+      require('mason').setup()
     end,
   }
-
-  use { 'williamboman/mason-lspconfig.nvim', after = 'mason.nvim', }
-  use { 'jayp0521/mason-nvim-dap.nvim', after = 'mason-lspconfig.nvim', }
-  use { 'jayp0521/mason-null-ls.nvim', after = 'mason-nvim-dap.nvim', }
-  use { 'RubixDev/mason-update-all', cmd = 'MasonUpdateAll' }
 
   -------------------------------- Completion
   use {
     'rafamadriz/friendly-snippets',
     module = { 'cmp', 'cmp_nvim_lsp' },
     event = 'InsertEnter',
-  }
-
-  use {
-    'github/copilot.vim',
-    after = 'friendly-snippets',
   }
 
   use {
@@ -100,19 +95,6 @@ require('plugins.packer').startup(function(use)
   }
 
   use {
-    'L3MON4D3/LuaSnip',
-    wants = 'friendly-snippets',
-    after = 'nvim-cmp',
-    config = function()
-      require('plugins.configs.others').luasnip()
-    end,
-  }
-
-  use { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' }
-  use { 'hrsh7th/cmp-nvim-lsp', after = 'LuaSnip' }
-  use { 'hrsh7th/cmp-path', after = 'cmp-nvim-lsp' }
-
-  use {
     'windwp/nvim-autopairs',
     after = 'nvim-cmp',
     config = function()
@@ -120,12 +102,28 @@ require('plugins.packer').startup(function(use)
     end,
   }
 
-  --------------------------------- Aesthetic
+  use {
+    'L3MON4D3/LuaSnip',
+    after = 'nvim-autopairs',
+    config = function()
+      require('plugins.configs.others').luasnip()
+    end,
+  }
 
+  use { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' }
+  use { 'hrsh7th/cmp-nvim-lsp', after = 'cmp_luasnip' }
+  use { 'hrsh7th/cmp-path', after = 'cmp-nvim-lsp' }
+
+  use {
+    'github/copilot.vim',
+    after = 'cmp-path',
+  }
+
+  --------------------------------- Aesthetic
   use {
     'marko-cerovac/material.nvim',
     config = function()
-      vim.cmd 'colorscheme material'
+      require 'plugins.configs.others'.material()
     end,
   }
 
@@ -133,7 +131,7 @@ require('plugins.packer').startup(function(use)
     'lukas-reineke/indent-blankline.nvim',
     opt = true,
     setup = function()
-      require('core.lazy_load').on_file_open 'indent-blankline.nvim'
+      require('core.utils').on_file_open 'indent-blankline.nvim'
     end,
     config = function()
       require('plugins.configs.others').blankline()
@@ -143,24 +141,22 @@ require('plugins.packer').startup(function(use)
   use {
     'kyazdani42/nvim-web-devicons',
     module = 'nvim-web-devicons',
-    config = function()
-      require('plugins.configs.others').devicons()
-    end,
   }
+
+  use{
+        'onsails/lspkind.nvim',
+        module = 'lspkind',
+    }
 
   --------------------------------- Navigation
   use {
     'ibhagwan/fzf-lua',
     module = 'fzf-lua',
-    cmd = 'fzf-lua',
-    config = function()
-      print 'TMP'
-    end,
+    cmd = 'FzfLua',
   }
 
   use {
     'kyazdani42/nvim-tree.lua',
-    ft = 'alpha',
     cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
     config = function()
       require 'plugins.configs.nvimtree'
@@ -172,10 +168,10 @@ require('plugins.packer').startup(function(use)
     'lewis6991/gitsigns.nvim',
     ft = 'gitcommit',
     setup = function()
-      require('core.lazy_load').gitsigns()
+      require('core.utils').gitsigns()
     end,
     config = function()
-      require('plugins.configs.others').gitsigns()
+      require('gitsigns').setup()
     end,
   }
 
@@ -184,7 +180,7 @@ require('plugins.packer').startup(function(use)
     module = 'Comment',
     keys = { 'gc', 'gb' },
     config = function()
-      require('plugins.configs.others').comment()
+      require('Comment').setup()
     end,
   }
 
@@ -198,13 +194,35 @@ require('plugins.packer').startup(function(use)
     end,
   }
 
-  use { 'folke/trouble.nvim', cmd = { 'Trouble', 'TroubleToggle' } }
+  use {
+    'folke/trouble.nvim',
+    cmd = { 'Trouble', 'TroubleToggle' },
+    config = function()
+      require('trouble').setup()
+    end,
+  }
 
-  use { 'beauwilliams/focus.nvim', event = 'WinNew', }
+  use {
+    'beauwilliams/focus.nvim',
+    event = 'WinNew',
+    config = function()
+      require('focus').setup()
+    end,
+  }
 
-  use { 'sindrets/winshift.nvim', after = 'focus.nvim', }
+  use {
+    'sindrets/winshift.nvim',
+    after = 'focus.nvim',
+    config = function()
+      require('winshift').setup()
+    end,
+  }
 
-  use { 'TimUntersberger/neogit', cmd = 'Neogit', }
-
-  use { 'danymat/neogen', cmd = 'Neogen' }
+  use {
+    'TimUntersberger/neogit',
+    cmd = 'Neogit',
+    config = function()
+      require('neogit').setup()
+    end,
+  }
 end)

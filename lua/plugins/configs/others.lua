@@ -10,7 +10,6 @@ M.autopairs = function()
 
   local options = {
     fast_wrap = {},
-    disable_filetype = { 'TelescopePrompt', 'vim' },
   }
 
   autopairs.setup(options)
@@ -42,53 +41,11 @@ M.blankline = function()
     buftype_exclude = { 'terminal' },
     show_trailing_blankline_indent = false,
     show_first_indent_level = false,
-    show_current_context = true,
-    show_current_context_start = true,
+    -- show_current_context = true,
+    -- show_current_context_start = true,
   }
 
   blankline.setup(options)
-end
-
-M.colorizer = function()
-  local present, colorizer = pcall(require, 'colorizer')
-
-  if not present then
-    return
-  end
-
-  local options = {
-    filetypes = {
-      '*',
-    },
-    user_default_options = {
-      RGB = true, -- #RGB hex codes
-      RRGGBB = true, -- #RRGGBB hex codes
-      names = false, -- "Name" codes like Blue
-      RRGGBBAA = false, -- #RRGGBBAA hex codes
-      rgb_fn = false, -- CSS rgb() and rgba() functions
-      hsl_fn = false, -- CSS hsl() and hsla() functions
-      css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-      css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-      mode = 'background', -- Set the display mode.
-    },
-  }
-
-  colorizer.setup(options)
-  -- execute colorizer as soon as possible
-  vim.defer_fn(function()
-    require('colorizer').attach_to_buffer(0)
-  end, 0)
-end
-
-M.comment = function()
-  local present, nvim_comment = pcall(require, 'Comment')
-
-  if not present then
-    return
-  end
-
-  local options = {}
-  nvim_comment.setup(options)
 end
 
 M.luasnip = function()
@@ -119,35 +76,24 @@ M.luasnip = function()
   })
 end
 
-M.gitsigns = function()
-  local present, gitsigns = pcall(require, 'gitsigns')
+M.material = function()
+    local present, material = pcall(require, 'material')
+    
+    if not present then
+        return
+    end
+    material.setup {
+      contrast = {
+        sidebars = true,
+        popup_menu = true,
+      },
+      italics = { comments = true },
+      custom_highlights = {
+        Comment = { fg = '#708094' },
+        }
+    }
 
-  if not present then
-    return
-  end
-
-  -- local options = {
-  --   signs = {
-  --     add = { hl = "DiffAdd", text = "│", numhl = "GitSignsAddNr" },
-  --     change = { hl = "DiffChange", text = "│", numhl = "GitSignsChangeNr" },
-  --     delete = { hl = "DiffDelete", text = "", numhl = "GitSignsDeleteNr" },
-  --     topdelete = { hl = "DiffDelete", text = "‾", numhl = "GitSignsDeleteNr" },
-  --     changedelete = { hl = "DiffChangeDelete", text = "~", numhl = "GitSignsChangeNr" },
-  --   },
-  -- }
-  --
-  -- gitsigns.setup(options)
-  gitsigns.setup {}
-end
-
-M.devicons = function()
-  local present, devicons = pcall(require, 'nvim-web-devicons')
-
-  if present then
-    local options = { override = require('nvchad_ui.icons').devicons }
-
-    devicons.setup(options)
-  end
+    vim.cmd 'colorscheme material'
 end
 
 return M

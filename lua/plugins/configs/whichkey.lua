@@ -1,37 +1,41 @@
-local present, wk = pcall(require, 'which-key')
-
-if not present then
+local ok, which_key = pcall(require, 'which-key')
+if not ok then
   return
 end
 
-local options = {
+local utils = require 'core.utils'
+local maps = require 'core.mappings'
 
-  icons = {
-    breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
-    separator = '  ', -- symbol used between a key and it's label
-    group = '+', -- symbol prepended to a group
-  },
-
-  popup_mappings = {
-    scroll_down = '<c-d>', -- binding to scroll down inside the popup
-    scroll_up = '<c-u>', -- binding to scroll up inside the popup
-  },
-
+which_key.setup {
+  ignore_missing = true,
   window = {
-    border = 'none', -- none/single/double/shadow
+    margin = { 0, 0, 0, 0 },
+    padding = { 0, 0, 0, 0 },
+    winblend = 0,
+    border = 'single',
   },
-
   layout = {
-    spacing = 6, -- spacing between columns
+    height = { min = 1, max = 15 },
+    width = { min = 1, max = 50 },
+    spacing = 1,
   },
-
-  hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ' },
-
-  triggers_blacklist = {
-    -- list of mode / prefixes that should never be hooked by WhichKey
-    i = { 'j', 'k' },
-    v = { 'j', 'k' },
+  key_labels = {
+    ['<space>'] = 'SPC',
+    ['<CR>'] = 'RET',
+    ['<Tab>'] = 'TAB',
+  },
+  spelling = { enabled = true },
+  presets = {
+    operators = false,
+    motions = false,
+    text_objects = false,
+    windows = false,
+    nav = false,
+    g = false,
   },
 }
 
-wk.setup(options)
+for _, value in pairs(maps) do
+    utils.alter_keymap('', value, utils.filter)
+    which_key.register(value, { prefix = value.prefix })
+end

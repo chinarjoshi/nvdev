@@ -1,5 +1,5 @@
 vim.cmd 'packadd packer.nvim'
--- load packer init options
+
 local packer = require 'packer'
 
 packer.init {
