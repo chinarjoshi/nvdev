@@ -1,6 +1,6 @@
-local present, telescope = pcall(require, "telescope")
+local present, telescope = pcall(require, 'telescope')
 if not present then
-    return
+  return
 end
 
 local actions = require 'telescope.actions'
@@ -23,11 +23,11 @@ telescope.setup {
   },
 
   pickers = {
-    find_files = { theme = 'ivy', },
+    find_files = { theme = 'ivy' },
     git_files = { theme = 'ivy' },
     projects = { theme = 'ivy' },
     buffers = { theme = 'ivy' },
     grep_string = { theme = 'ivy' },
     live_grep = { theme = 'ivy' },
-  }
+  },
 }

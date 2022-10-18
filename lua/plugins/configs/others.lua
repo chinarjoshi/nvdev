@@ -104,7 +104,7 @@ M.focus = function()
 
   focus.setup {
     excluded_filetypes = { 'fzf', 'NvimTree' },
-    signcolumn = false
+    signcolumn = false,
   }
 end
 

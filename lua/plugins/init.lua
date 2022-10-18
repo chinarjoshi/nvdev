@@ -159,7 +159,7 @@ require('plugins.packer').startup(function(use)
     cmd = 'Telescope',
     module = 'telescope',
     config = function()
-      require('plugins.configs.telescope')
+      require 'plugins.configs.telescope'
     end,
   }
 
@@ -169,16 +169,16 @@ require('plugins.packer').startup(function(use)
     run = 'make',
     config = function()
       require('telescope').load_extension 'fzf'
-    end
+    end,
   }
 
   use {
-    "ahmedkhalf/project.nvim",
+    'ahmedkhalf/project.nvim',
     after = 'telescope.nvim',
     config = function()
-      require("project_nvim").setup()
+      require('project_nvim').setup()
       require('telescope').load_extension 'projects'
-    end
+    end,
   }
 
   use {

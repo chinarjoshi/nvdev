@@ -44,7 +44,7 @@ g.diagnostics_visible = true
 map('<ESC>', 'noh')
 map('<C-s>', 'w')
 map('<C-q>', 'q')
-vim.cmd [[imap <silent><script><silent><expr> <C-a> copilot#Accept("\<CR>")]]
+vim.cmd [[imap <silent><script><silent><expr> <C-c> copilot#Accept("\<CR>")]]
 
 utils.register_or_filter_keymap(maps.general.prefix, maps.general, true)
 utils.register_or_filter_keymap(maps.lsp.prefix, maps.lsp, true)
@@ -84,6 +84,7 @@ vim.cmd [[
   au BufEnter * set fo-=c fo-=r fo-=o
   au BufLeave term://* stopinsert
   au TermOpen * startinsert
+  au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 ]]
 
 -- disable some builtin vim plugins

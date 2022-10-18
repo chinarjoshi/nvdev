@@ -18,6 +18,7 @@ M.general = {
   q = { 'q', 'Quit' },
   Q = { 'q!', 'Quit' },
   s = { 'w', 'Save' },
+  S = { 'w !sudo tee %', 'Sudo save' },
   m = { 'Mason', 'Mason' },
   t = {
     name = 'tab',
