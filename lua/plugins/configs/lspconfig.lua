@@ -7,13 +7,13 @@ end
 
 lsp_format.setup()
 
-local on_attach = function(client)
+local on_attach = function(client, _)
   if client.name == 'sumneko_lua'
       or client.name == 'jsonls'
       or client.name == 'tsserver'
       or client.name == 'pyright'
   then
-    client.server_capabilities.document_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
   end
 
   lsp_format.on_attach(client)

@@ -39,7 +39,7 @@ o.whichwrap:append '<>[]hl'
 g.mapleader = ' '
 g.material_style = 'deep ocean'
 g.copilot_no_tab_map = true
-g.diagnostics_visible = true
+g.diagnostics_visible = false
 
 map('<ESC>', 'noh')
 map('<C-s>', 'w')
