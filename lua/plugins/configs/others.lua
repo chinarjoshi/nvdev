@@ -77,23 +77,35 @@ M.luasnip = function()
 end
 
 M.material = function()
-    local present, material = pcall(require, 'material')
-    
-    if not present then
-        return
-    end
-    material.setup {
-      contrast = {
-        sidebars = true,
-        popup_menu = true,
-      },
-      italics = { comments = true },
-      custom_highlights = {
-        Comment = { fg = '#708094' },
-        }
-    }
+  local present, material = pcall(require, 'material')
 
-    vim.cmd 'colorscheme material'
+  if not present then
+    return
+  end
+  material.setup {
+    contrast = {
+      sidebars = true,
+      popup_menu = true,
+    },
+    italics = { comments = true },
+    custom_highlights = {
+      Comment = { fg = '#708094' },
+    },
+  }
+
+  vim.cmd 'colorscheme material'
+end
+
+M.focus = function()
+  local present, focus = pcall(require, 'focus')
+  if not present then
+    return
+  end
+
+  focus.setup {
+    excluded_filetypes = { 'fzf', 'NvimTree' },
+    signcolumn = false
+  }
 end
 
 return M

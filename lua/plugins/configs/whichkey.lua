@@ -36,6 +36,6 @@ which_key.setup {
 }
 
 for _, value in pairs(maps) do
-    utils.alter_keymap('', value, utils.filter)
-    which_key.register(value, { prefix = value.prefix })
+  utils.register_or_filter_keymap('', value, false)
+  which_key.register(value, { prefix = value.prefix })
 end

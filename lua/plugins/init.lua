@@ -29,7 +29,7 @@ require('plugins.packer').startup(function(use)
 
   use {
     'folke/which-key.nvim',
-    keys = {'<leader>', 'g'},
+    keys = { '<leader>', 'g' },
     config = function()
       require 'plugins.configs.whichkey'
     end,
@@ -45,6 +45,11 @@ require('plugins.packer').startup(function(use)
     config = function()
       require 'plugins.configs.lspconfig'
     end,
+  }
+
+  use {
+    'lukas-reineke/lsp-format.nvim',
+    after = 'nvim-lspconfig',
   }
 
   use {
@@ -123,7 +128,7 @@ require('plugins.packer').startup(function(use)
   use {
     'marko-cerovac/material.nvim',
     config = function()
-      require 'plugins.configs.others'.material()
+      require('plugins.configs.others').material()
     end,
   }
 
@@ -143,23 +148,46 @@ require('plugins.packer').startup(function(use)
     module = 'nvim-web-devicons',
   }
 
-  use{
-        'onsails/lspkind.nvim',
-        module = 'lspkind',
-    }
+  use {
+    'onsails/lspkind.nvim',
+    module = 'lspkind',
+  }
 
   --------------------------------- Navigation
   use {
-    'ibhagwan/fzf-lua',
-    module = 'fzf-lua',
-    cmd = 'FzfLua',
+    'nvim-telescope/telescope.nvim',
+    cmd = 'Telescope',
+    module = 'telescope',
+    config = function()
+      require('plugins.configs.telescope')
+    end,
+  }
+
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    after = 'telescope.nvim',
+    run = 'make',
+    config = function()
+      require('telescope').load_extension 'fzf'
+    end
+  }
+
+  use {
+    "ahmedkhalf/project.nvim",
+    after = 'telescope.nvim',
+    config = function()
+      require("project_nvim").setup()
+      require('telescope').load_extension 'projects'
+    end
   }
 
   use {
     'kyazdani42/nvim-tree.lua',
     cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
     config = function()
-      require 'plugins.configs.nvimtree'
+      require('nvim-tree').setup {
+        actions = { open_file = { quit_on_open = true } },
+      }
     end,
   }
 
@@ -190,7 +218,7 @@ require('plugins.packer').startup(function(use)
     tag = '*',
     cmd = 'ToggleTerm',
     config = function()
-      require('plugins.configs.others').toggleterm()
+      require('toggleterm').setup()
     end,
   }
 
@@ -206,7 +234,7 @@ require('plugins.packer').startup(function(use)
     'beauwilliams/focus.nvim',
     event = 'WinNew',
     config = function()
-      require('focus').setup()
+      require('plugins.configs.others').focus()
     end,
   }
 

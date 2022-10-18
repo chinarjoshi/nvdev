@@ -1,28 +1,45 @@
 local M = {}
 
 M.map = function(key, map)
-    vim.api.nvim_set_keymap('n', key, map, { noremap = true })
+  vim.keymap.set('n', key, '<cmd>' .. map .. '<cr>', { noremap = true })
 end
 
-M.alter_keymap = function(prefix, value, fn)
-    if type(value[1]) == 'string' or type(value[1]) == 'function' then
-        if type(value[1]) == 'string' then
-            value[1] = '<cmd>' .. value[1] .. '<cr>'
-        end
-        fn(prefix, value)
-        return
+M.register_or_filter_keymap = function(prefix, value, is_register)
+  if type(value[1]) == 'string' or type(value[1]) == 'function' then
+    if is_register then
+      if type(value[1]) == 'string' then
+        value[1] = '<cmd>' .. value[1] .. '<cr>'
+      end
+      vim.keymap.set('n', prefix, value[1], { noremap = true })
+    else
+      value = value[2]
     end
+    return
+  end
 
-    for k, v in pairs(value) do
-        if type(v) ~= 'string' then
-            M.alter_keymap(prefix .. k, v, fn)
-        end
+  for k, v in pairs(value) do
+    if type(v) ~= 'string' then
+      M.register_or_filter_keymap(prefix .. k, v, is_register)
     end
+  end
 end
 
-M.register = function(key, value) vim.keymap.set('n', key, value[1], { noremap = true }) end
+M.project_files = function()
+  local is_git = pcall(require('telescope.builtin').git_files)
+  if not is_git then
+    vim.cmd ':Telescope projects theme=ivy'
+  end
+end
 
-M.filter = function(_, value) value = value[2] end
+M.toggle_diagnostics = function()
+  if vim.g.diagnostics_visible then
+    vim.g.diagnostics_visible = false
+    vim.diagnostic.disable()
+  else
+    vim.g.diagnostics_visible = true
+    vim.diagnostic.enable()
+  end
+end
 
 M.lazy_load = function(tb)
   vim.api.nvim_create_autocmd(tb.events, {

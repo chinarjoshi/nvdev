@@ -1,17 +1,22 @@
 local present, lspconfig = pcall(require, 'lspconfig')
+local present2, lsp_format = pcall(require, 'lsp-format')
 
-if not present then
+if not present and present2 then
   return
 end
 
-local on_attach = function(client, _)
+lsp_format.setup()
+
+local on_attach = function(client)
   if client.name == 'sumneko_lua'
-    or client.name == 'jsonls'
-    or client.name == 'tsserver'
-    or client.name == 'pyright'
+      or client.name == 'jsonls'
+      or client.name == 'tsserver'
+      or client.name == 'pyright'
   then
     client.server_capabilities.document_formatting = false
   end
+
+  lsp_format.on_attach(client)
 end
 
 lspconfig['sumneko_lua'].setup {

@@ -2,8 +2,8 @@ local o = vim.opt
 local g = vim.g
 local au = vim.api.nvim_create_autocmd
 local map = require('core.utils').map
-local utils = require('core.utils')
-local maps = require('core.mappings')
+local utils = require 'core.utils'
+local maps = require 'core.mappings'
 
 -- Options
 o.laststatus = 0
@@ -41,29 +41,29 @@ g.material_style = 'deep ocean'
 g.copilot_no_tab_map = true
 g.diagnostics_visible = true
 
-map('<ESC>', '<cmd>noh<CR>')
-map('<C-s>', '<cmd>w<CR>')
-map('<C-q>', '<cmd>q<CR>')
+map('<ESC>', 'noh')
+map('<C-s>', 'w')
+map('<C-q>', 'q')
 vim.cmd [[imap <silent><script><silent><expr> <C-a> copilot#Accept("\<CR>")]]
 
-utils.alter_keymap(maps.general.prefix, maps.general, utils.register)
-utils.alter_keymap(maps.lsp.prefix, maps.lsp, utils.register)
+utils.register_or_filter_keymap(maps.general.prefix, maps.general, true)
+utils.register_or_filter_keymap(maps.lsp.prefix, maps.lsp, true)
 
 for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
-  map('<C-' .. letter .. '>', '<C-w>' .. letter)
+  vim.keymap.set('n', '<C-' .. letter .. '>', '<C-w>' .. letter)
 end
 
 for _, dir in ipairs { 'up', 'down', 'left', 'right' } do
-  map('<' .. dir .. '>', '<cmd>WinShift ' .. dir .. '<cr>')
+  vim.keymap.set('n', '<' .. dir .. '>', '<cmd>WinShift ' .. dir .. '<cr>')
 end
 
 au('TermOpen term://*', {
-    callback = function()
-      local opts = { noremap = true }
-      vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
-      vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
-    end
+  callback = function()
+    local opts = { noremap = true }
+    vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+    vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+    vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+  end,
 })
 
 au('FileType', {
@@ -79,13 +79,12 @@ au('TextYankPost', {
   end,
 })
 
-au('FileType', {
-  pattern = { '.json', '.xml', '.css', '.js', '.lua', '.yml' },
-  callback = function()
-    vim.o.shiftwidth = 2
-    vim.o.tabstop = 2
-  end,
-})
+vim.cmd [[
+  au FileType json,xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
+  au BufEnter * set fo-=c fo-=r fo-=o
+  au BufLeave term://* stopinsert
+  au TermOpen * startinsert
+]]
 
 -- disable some builtin vim plugins
 local default_plugins = {
