@@ -38,18 +38,25 @@ require('plugins.packer').startup(function(use)
   -------------------------------- LSP,
   use {
     'neovim/nvim-lspconfig',
-    opt = true,
-    setup = function()
-      require('core.utils').on_file_open 'nvim-lspconfig'
-    end,
+    after = 'lsp-format.nvim',
     config = function()
       require 'plugins.configs.lspconfig'
     end,
   }
 
+  use({
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    after = 'nvim-lspconfig',
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  })
+
   use {
     'lukas-reineke/lsp-format.nvim',
-    after = 'nvim-lspconfig',
+    setup = function()
+      require('core.utils').on_file_open 'nvim-lspconfig'
+    end,
   }
 
   use {
@@ -67,7 +74,6 @@ require('plugins.packer').startup(function(use)
 
   use {
     'jose-elias-alvarez/null-ls.nvim',
-    opt = true,
     setup = function()
       require('core.utils').on_file_open 'null-ls.nvim'
     end,
@@ -134,7 +140,6 @@ require('plugins.packer').startup(function(use)
 
   use {
     'lukas-reineke/indent-blankline.nvim',
-    opt = true,
     setup = function()
       require('core.utils').on_file_open 'indent-blankline.nvim'
     end,
@@ -212,6 +217,16 @@ require('plugins.packer').startup(function(use)
     end,
   }
 
+  use({
+    "kylechui/nvim-surround",
+    setup = function()
+      require('core.utils').on_file_open 'nvim-surround'
+    end,
+    config = function()
+      require("nvim-surround").setup()
+    end
+  })
+
   --------------------------------- Etc.
   use {
     'akinsho/toggleterm.nvim',
@@ -226,7 +241,7 @@ require('plugins.packer').startup(function(use)
     'folke/trouble.nvim',
     cmd = { 'Trouble', 'TroubleToggle' },
     config = function()
-      require('trouble').setup()
+      require('trouble').setup { height = 25 }
     end,
   }
 

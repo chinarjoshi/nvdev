@@ -44,6 +44,7 @@ g.diagnostics_visible = true
 map('<ESC>', 'noh')
 map('<C-s>', 'w')
 map('<C-q>', 'q')
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 vim.cmd [[imap <silent><script><silent><expr> <C-c> copilot#Accept("\<CR>")]]
 
 utils.register_or_filter_keymap(maps.general.prefix, maps.general, true)
@@ -79,13 +80,14 @@ au('TextYankPost', {
   end,
 })
 
-vim.cmd [[
-  au FileType json,xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
-  au BufEnter * set fo-=c fo-=r fo-=o
-  au BufLeave term://* stopinsert
-  au TermOpen * startinsert
-  au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
-]]
+au('FileType', {
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+  end,
+})
+
+vim.cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
 
 -- disable some builtin vim plugins
 local default_plugins = {

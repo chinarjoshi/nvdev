@@ -8,11 +8,10 @@ end
 lsp_format.setup()
 
 local on_attach = function(client)
-  if
-    client.name == 'sumneko_lua'
-    or client.name == 'jsonls'
-    or client.name == 'tsserver'
-    or client.name == 'pyright'
+  if client.name == 'sumneko_lua'
+      or client.name == 'jsonls'
+      or client.name == 'tsserver'
+      or client.name == 'pyright'
   then
     client.server_capabilities.document_formatting = false
   end
@@ -42,6 +41,12 @@ for _, server in ipairs {
   'jdtls',
 } do
   lspconfig[server].setup { on_attach = on_attach }
+end
+
+local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 vim.diagnostic.config {
