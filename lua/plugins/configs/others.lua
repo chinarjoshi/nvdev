@@ -103,7 +103,7 @@ M.focus = function()
   end
 
   focus.setup {
-    excluded_filetypes = { 'fzf', 'NvimTree' },
+    excluded_filetypes = { 'NvimTree' },
     signcolumn = false,
   }
 end
