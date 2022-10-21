@@ -13,7 +13,6 @@ null_ls.setup {
     formatting.stylua,
     diagnostics.flake8,
     diagnostics.write_good.with { filetypes = { 'markdown', 'text' } },
-    diagnostics.luacheck.with { extra_args = { '--globals vim' } },
   },
   fallback_severity = vim.diagnostic.severity.INFO,
 }

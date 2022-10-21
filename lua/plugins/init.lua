@@ -55,7 +55,7 @@ require('plugins.packer').startup(function(use)
   use {
     'lukas-reineke/lsp-format.nvim',
     setup = function()
-      require('core.utils').on_file_open 'nvim-lspconfig'
+      require('core.utils').on_file_open 'lsp-format.nvim'
     end,
   }
 
@@ -133,6 +133,7 @@ require('plugins.packer').startup(function(use)
   --------------------------------- Aesthetic
   use {
     'marko-cerovac/material.nvim',
+    commit = '88e1d132cc7b27a8304b897873384bee343b2d2c',
     config = function()
       require('plugins.configs.others').material()
     end,
@@ -217,7 +218,7 @@ require('plugins.packer').startup(function(use)
     end,
   }
 
-  use({
+  use {
     "kylechui/nvim-surround",
     setup = function()
       require('core.utils').on_file_open 'nvim-surround'
@@ -225,9 +226,17 @@ require('plugins.packer').startup(function(use)
     config = function()
       require("nvim-surround").setup()
     end
-  })
+  }
 
   --------------------------------- Etc.
+  use {
+    'nvim-neorg/neorg',
+    ft = 'norg',
+    config = function()
+      require('plugins.configs.neorg')
+    end,
+  }
+
   use {
     'akinsho/toggleterm.nvim',
     tag = '*',

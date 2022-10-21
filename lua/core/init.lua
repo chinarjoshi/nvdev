@@ -18,7 +18,7 @@ o.fillchars = { eob = ' ' }
 o.completeopt = 'menuone,noselect'
 o.ignorecase = true
 o.smartcase = true
-o.pumheight = 10
+o.pumheight = 5
 o.linebreak = true
 o.mouse = 'a'
 o.number = true
