@@ -44,14 +44,6 @@ require('plugins.packer').startup(function(use)
     end,
   }
 
-  use({
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    after = 'nvim-lspconfig',
-    config = function()
-      require("lsp_lines").setup()
-    end,
-  })
-
   use {
     'lukas-reineke/lsp-format.nvim',
     setup = function()

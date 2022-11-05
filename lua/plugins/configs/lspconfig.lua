@@ -1,11 +1,7 @@
 local present, lspconfig = pcall(require, 'lspconfig')
-local present2, lsp_format = pcall(require, 'lsp-format')
-
-if not present and present2 then
+if not present then
   return
 end
-
-lsp_format.setup()
 
 local on_attach = function(client, _)
   if client.name == 'sumneko_lua'
@@ -15,8 +11,6 @@ local on_attach = function(client, _)
   then
     client.server_capabilities.documentFormattingProvider = false
   end
-
-  lsp_format.on_attach(client)
 end
 
 lspconfig['sumneko_lua'].setup {

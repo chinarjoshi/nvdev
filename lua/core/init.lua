@@ -39,7 +39,7 @@ o.whichwrap:append '<>[]hl'
 g.mapleader = ' '
 g.material_style = 'deep ocean'
 g.copilot_no_tab_map = true
-g.diagnostics_visible = false
+g.diagnostics_visible = true
 
 map('<ESC>', 'noh')
 map('<C-s>', 'w')
@@ -80,12 +80,12 @@ au('TextYankPost', {
   end,
 })
 
-au('FileType', {
-  callback = function()
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.tabstop = 2
-  end,
-})
+-- au('FileType', {
+--   callback = function()
+--     vim.opt_local.shiftwidth = 2
+--     vim.opt_local.tabstop = 2
+--   end,
+-- })
 
 vim.cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
 
