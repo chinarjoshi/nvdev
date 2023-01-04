@@ -39,7 +39,7 @@ M.general = {
   },
 }
 
-M.lsp = {
+M.lspconfig = {
   prefix = 'g',
   d = { require('core.utils').toggle_diagnostics, 'Toggle diagnostics' },
   D = { vim.lsp.buf.definition, 'Definition' },

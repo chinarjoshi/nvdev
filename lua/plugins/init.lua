@@ -2,7 +2,7 @@ require('plugins.packer').startup(function(use)
   -------------------------------- Base
   use {
     'wbthomason/packer.nvim',
-    cmd = { 'PackerSync', 'PackerStatus' },
+    -- cmd = { 'PackerSync', 'PackerStatus' },
     config = function()
       require 'plugins'
     end,
@@ -27,40 +27,14 @@ require('plugins.packer').startup(function(use)
     end,
   }
 
-  use {
-    'folke/which-key.nvim',
-    keys = { '<leader>', 'g' },
-    config = function()
-      require 'plugins.configs.whichkey'
-    end,
-  }
-
   -------------------------------- LSP,
   use {
     'neovim/nvim-lspconfig',
-    after = 'lsp-format.nvim',
+    setup = function()
+      require('core.utils').on_file_open 'null-ls.nvim'
+    end,
     config = function()
       require 'plugins.configs.lspconfig'
-    end,
-  }
-
-  use {
-    'lukas-reineke/lsp-format.nvim',
-    setup = function()
-      require('core.utils').on_file_open 'lsp-format.nvim'
-    end,
-  }
-
-  use {
-    'mfussenegger/nvim-dap',
-    module = 'dapui',
-  }
-
-  use {
-    'rcarriga/nvim-dap-ui',
-    after = 'nvim-dap',
-    config = function()
-      require('dapui').setup()
     end,
   }
 
@@ -82,19 +56,19 @@ require('plugins.packer').startup(function(use)
     end,
   }
 
-  -------------------------------- Completion
-  use {
-    'rafamadriz/friendly-snippets',
-    module = { 'cmp', 'cmp_nvim_lsp' },
-    event = 'InsertEnter',
-  }
-
+ -------------------------------- Completion
   use {
     'hrsh7th/nvim-cmp',
     after = 'friendly-snippets',
     config = function()
       require 'plugins.configs.cmp'
     end,
+  }
+
+  use {
+    'rafamadriz/friendly-snippets',
+    module = { 'cmp', 'cmp_nvim_lsp' },
+    event = 'InsertEnter',
   }
 
   use {
@@ -125,9 +99,8 @@ require('plugins.packer').startup(function(use)
   --------------------------------- Aesthetic
   use {
     'marko-cerovac/material.nvim',
-    commit = '88e1d132cc7b27a8304b897873384bee343b2d2c',
     config = function()
-      require('plugins.configs.others').material()
+      require('plugins.configs.material')
     end,
   }
 
@@ -153,30 +126,11 @@ require('plugins.packer').startup(function(use)
 
   --------------------------------- Navigation
   use {
-    'nvim-telescope/telescope.nvim',
-    cmd = 'Telescope',
-    module = 'telescope',
+    'ibhagwan/fzf-lua',
+    cmd = 'Fzf',
     config = function()
-      require 'plugins.configs.telescope'
-    end,
-  }
-
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    after = 'telescope.nvim',
-    run = 'make',
-    config = function()
-      require('telescope').load_extension 'fzf'
-    end,
-  }
-
-  use {
-    'ahmedkhalf/project.nvim',
-    after = 'telescope.nvim',
-    config = function()
-      require('project_nvim').setup()
-      require('telescope').load_extension 'projects'
-    end,
+      require 'plugins.configs.fzf'
+    end
   }
 
   use {
@@ -191,14 +145,13 @@ require('plugins.packer').startup(function(use)
 
   --------------------------------- Editing,
   use {
-    'lewis6991/gitsigns.nvim',
-    ft = 'gitcommit',
-    setup = function()
-      require('core.utils').gitsigns()
-    end,
-    config = function()
-      require('gitsigns').setup()
-    end,
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter',
+  }
+
+  use {
+    'RRethy/nvim-treesitter-textsubjects',
+    after = 'nvim-treesitter',
   }
 
   use {
@@ -210,25 +163,7 @@ require('plugins.packer').startup(function(use)
     end,
   }
 
-  use {
-    "kylechui/nvim-surround",
-    setup = function()
-      require('core.utils').on_file_open 'nvim-surround'
-    end,
-    config = function()
-      require("nvim-surround").setup()
-    end
-  }
-
   --------------------------------- Etc.
-  use {
-    'nvim-neorg/neorg',
-    ft = 'norg',
-    config = function()
-      require('plugins.configs.neorg')
-    end,
-  }
-
   use {
     'akinsho/toggleterm.nvim',
     tag = '*',
@@ -239,34 +174,21 @@ require('plugins.packer').startup(function(use)
   }
 
   use {
+    'lewis6991/gitsigns.nvim',
+    ft = 'gitcommit',
+    setup = function()
+      require('core.utils').gitsigns()
+    end,
+    config = function()
+      require('plugins.configs.others').gitsigns()
+    end,
+  }
+
+  use {
     'folke/trouble.nvim',
     cmd = { 'Trouble', 'TroubleToggle' },
     config = function()
-      require('trouble').setup { height = 25 }
-    end,
-  }
-
-  use {
-    'beauwilliams/focus.nvim',
-    event = 'WinNew',
-    config = function()
-      require('plugins.configs.others').focus()
-    end,
-  }
-
-  use {
-    'sindrets/winshift.nvim',
-    after = 'focus.nvim',
-    config = function()
-      require('winshift').setup()
-    end,
-  }
-
-  use {
-    'TimUntersberger/neogit',
-    cmd = 'Neogit',
-    config = function()
-      require('neogit').setup()
+      require('trouble').setup { height = 50 }
     end,
   }
 end)

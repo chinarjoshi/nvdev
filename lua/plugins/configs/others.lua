@@ -8,11 +8,8 @@ M.autopairs = function()
     return
   end
 
-  local options = {
-    fast_wrap = {},
-  }
-
-  autopairs.setup(options)
+  autopairs.setup()
+  autopairs.remove_rule('(')
 
   local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
@@ -75,24 +72,21 @@ M.luasnip = function()
   })
 end
 
-M.material = function()
-  local present, material = pcall(require, 'material')
+M.gitsigns = function()
+  local present, gitsigns = pcall(require, 'gitsigns')
 
   if not present then
     return
   end
-  material.setup {
-    contrast = {
-      sidebars = true,
-      popup_menu = true,
-    },
-    italics = { comments = true },
-    custom_highlights = {
-      Comment = { fg = '#708094' },
-    },
+  gitsigns.setup {
+    signs = {
+      add = { text = '│' },
+      change = { text = '│'},
+      changedelete = { text = '│'},
+      delete = { text = '│'},
+      topdelete = { text = '│'},
+    }
   }
-
-  vim.cmd 'colorscheme material'
 end
 
 M.focus = function()

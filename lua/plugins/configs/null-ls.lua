@@ -8,11 +8,15 @@ local formatting = null_ls.builtins.formatting
 
 null_ls.setup {
   sources = {
+    -- Python
     formatting.black,
     formatting.isort,
-    formatting.stylua,
     diagnostics.flake8,
-    diagnostics.write_good.with { filetypes = { 'markdown', 'text' } },
+    -- Rust
+    formatting.rustfmt,
+    -- C/C++
+    -- Lua
+    formatting.stylua,
   },
   fallback_severity = vim.diagnostic.severity.INFO,
 }

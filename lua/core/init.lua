@@ -5,42 +5,45 @@ local map = require('core.utils').map
 local utils = require 'core.utils'
 local maps = require 'core.mappings'
 
--- Options
+-- Minimalist UI adjustment
+o.cursorline = true
 o.laststatus = 0
 o.cmdheight = 0
-o.clipboard = 'unnamedplus'
-o.cursorline = true
-o.expandtab = true
-o.shiftwidth = 4
-o.smartindent = true
-o.tabstop = 4
-o.fillchars = { eob = ' ' }
-o.completeopt = 'menuone,noselect'
-o.ignorecase = true
-o.smartcase = true
 o.pumheight = 5
-o.linebreak = true
-o.mouse = 'a'
-o.number = true
-o.relativenumber = true
+o.fillchars = { eob = ' ' }
+o.clipboard = 'unnamedplus'
 o.numberwidth = 2
 o.ruler = false
-o.signcolumn = 'yes:1'
-o.splitbelow = true
-o.splitright = true
+o.number = true
+o.relativenumber = true
+o.linebreak = true
 o.termguicolors = true
-o.timeoutlen = 400
-o.undofile = true
-o.swapfile = false
+o.completeopt = 'menuone,noselect'
 o.shortmess:append 'sI'
 o.whichwrap:append '<>[]hl'
 
--- Global variables
+-- Smarter defaults
+o.expandtab = true
+o.smartindent = true
+o.shiftwidth = 4
+o.tabstop = 4
+o.ignorecase = true
+o.smartcase = true
+o.mouse = 'a'
+o.signcolumn = 'yes:1'
+o.splitbelow = true
+o.splitright = true
+o.timeoutlen = 400
+o.undofile = true
+o.swapfile = false
+
+-- Misc. global variables
 g.mapleader = ' '
 g.material_style = 'deep ocean'
 g.copilot_no_tab_map = true
 g.diagnostics_visible = true
 
+-- Hotkeys
 map('<ESC>', 'noh')
 map('<C-s>', 'w')
 map('<C-q>', 'q')
@@ -48,7 +51,7 @@ vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 vim.cmd [[imap <silent><script><silent><expr> <C-c> copilot#Accept("\<CR>")]]
 
 utils.register_or_filter_keymap(maps.general.prefix, maps.general, true)
-utils.register_or_filter_keymap(maps.lsp.prefix, maps.lsp, true)
+utils.register_or_filter_keymap(maps.lspconfig.prefix, maps.lspconfig, true)
 
 for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
   vim.keymap.set('n', '<C-' .. letter .. '>', '<C-w>' .. letter)
@@ -67,69 +70,63 @@ au('TermOpen term://*', {
   end,
 })
 
-au('FileType', {
-  pattern = 'qf',
-  callback = function()
-    vim.opt_local.buflisted = false
-  end,
-})
-
 au('TextYankPost', {
   callback = function()
     vim.highlight.on_yank { higroup = 'IncSearch', timeout = 250 }
   end,
 })
 
--- au('FileType', {
---   callback = function()
---     vim.opt_local.shiftwidth = 2
---     vim.opt_local.tabstop = 2
---   end,
--- })
+au('FileType lua,js,html', {
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+  end,
+})
 
+-- Resume editing on same line
 vim.cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
 
 -- disable some builtin vim plugins
 local default_plugins = {
-  '2html_plugin',
-  'getscript',
-  'getscriptPlugin',
-  'gzip',
-  'logipat',
-  'netrw',
-  'netrwPlugin',
-  'netrwSettings',
-  'netrwFileHandlers',
-  'matchit',
-  'tar',
-  'tarPlugin',
-  'rrhelper',
-  'spellfile_plugin',
-  'vimball',
-  'vimballPlugin',
-  'zip',
-  'zipPlugin',
-  'tutor',
-  'rplugin',
-  'syntax',
-  'synmenu',
-  'optwin',
-  'compiler',
-  'bugreport',
-  'ftplugin',
+  "2html_plugin",
+  "getscript",
+  "getscriptPlugin",
+  "gzip",
+  "logipat",
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "matchit",
+  "tar",
+  "tarPlugin",
+  "rrhelper",
+  "spellfile_plugin",
+  "vimball",
+  "vimballPlugin",
+  "zip",
+  "zipPlugin",
+  "tutor",
+  "rplugin",
+  "syntax",
+  "synmenu",
+  "optwin",
+  "compiler",
+  "bugreport",
+  "ftplugin",
 }
 
 for _, plugin in pairs(default_plugins) do
-  g['loaded_' .. plugin] = 1
+  g["loaded_" .. plugin] = 1
 end
 
 local default_providers = {
-  'node',
-  'perl',
-  'python3',
-  'ruby',
+  "node",
+  "perl",
+  "python3",
+  "ruby",
 }
 
 for _, provider in ipairs(default_providers) do
-  vim.g['loaded_' .. provider .. '_provider'] = 0
+  vim.g["loaded_" .. provider .. "_provider"] = 0
 end
