@@ -25,6 +25,7 @@ material.setup {
   },
   disable = {
       colored_cursor = true,
+      background = true,
   },
   custom_highlights = {
     Comment = { fg = '#708094' },

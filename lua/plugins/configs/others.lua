@@ -15,6 +15,19 @@ M.autopairs = function()
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 end
 
+M.toggleterm = function()
+  local present, toggleterm = pcall(require, "toggleterm")
+
+  if not present then
+    return
+  end
+
+  toggleterm.setup {
+    size = 30,
+    autochdir = true,
+  }
+end
+
 M.blankline = function()
   local present, blankline = pcall(require, 'indent_blankline')
 

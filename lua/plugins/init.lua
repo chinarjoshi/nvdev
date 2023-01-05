@@ -169,7 +169,7 @@ require('plugins.packer').startup(function(use)
     tag = '*',
     cmd = 'ToggleTerm',
     config = function()
-      require('toggleterm').setup()
+      require('plugins.configs.others').toggleterm()
     end,
   }
 
