@@ -56,7 +56,7 @@ require('plugins.packer').startup(function(use)
     end,
   }
 
- -------------------------------- Completion
+  -------------------------------- Completion
   use {
     'hrsh7th/nvim-cmp',
     after = 'friendly-snippets',
@@ -100,7 +100,7 @@ require('plugins.packer').startup(function(use)
   use {
     'marko-cerovac/material.nvim',
     config = function()
-      require('plugins.configs.material')
+      require 'plugins.configs.material'
     end,
   }
 
@@ -130,7 +130,7 @@ require('plugins.packer').startup(function(use)
     cmd = 'Fzf',
     config = function()
       require 'plugins.configs.fzf'
-    end
+    end,
   }
 
   use {
