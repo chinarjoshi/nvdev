@@ -82,13 +82,6 @@ au('TextYankPost', {
   end,
 })
 
-au('FileType lua,js,html', {
-  callback = function()
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.tabstop = 2
-  end,
-})
-
 -- Resume editing on same line
 vim.cmd [[au BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
 
