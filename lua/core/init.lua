@@ -17,6 +17,7 @@ opt.shortmess:append "sI"
 opt.whichwrap:append "<>[]hl"
 opt.signcolumn = "yes:1"
 opt.fillchars = { eob = " " }
+opt.scrolloff = 5
 
 -- Smarter editing defaults
 opt.tabstop = 4

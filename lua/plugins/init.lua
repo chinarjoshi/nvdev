@@ -37,6 +37,18 @@ require("lazy").setup {
   },
 
   {
+    "onsails/lspkind.nvim"
+  },
+
+  {
+    'marko-cerovac/material.nvim',
+    config = function()
+      vim.cmd 'colorscheme material'
+    end,
+    lazy = false
+  },
+
+  {
     "lewis6991/gitsigns.nvim",
     ft = { "gitcommit", "diff" },
     init = function()

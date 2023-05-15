@@ -48,4 +48,9 @@ require("lspconfig").lua_ls.setup {
   },
 }
 
+vim.diagnostic.config {
+  virtual_text = false,
+  underline = true,
+}
+
 return M
