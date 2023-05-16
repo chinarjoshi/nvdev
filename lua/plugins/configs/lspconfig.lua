@@ -1,3 +1,5 @@
+local lspconfig = require 'lspconfig'
+
 local M = {}
 
 M.on_attach = function(client, bufnr)
@@ -47,6 +49,16 @@ require("lspconfig").lua_ls.setup {
     },
   },
 }
+
+for _, server in ipairs(vim.g.language_servers) do
+  lspconfig[server].setup { on_attach = M.on_attach }
+end
+
+local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 vim.diagnostic.config {
   virtual_text = false,

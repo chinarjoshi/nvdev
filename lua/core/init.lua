@@ -1,6 +1,5 @@
 local opt = vim.opt
 local g = vim.g
-local au = vim.api.nvim_command
 
 -- UI adjustments
 opt.laststatus = 0
@@ -18,6 +17,7 @@ opt.whichwrap:append "<>[]hl"
 opt.signcolumn = "yes:1"
 opt.fillchars = { eob = " " }
 opt.scrolloff = 5
+g.material_style = 'deep ocean'
 
 -- Smarter editing defaults
 opt.tabstop = 4
@@ -38,6 +38,14 @@ opt.updatetime = 250
 opt.timeoutlen = 400
 
 g.mapleader = " "
+g.language_servers = {
+    'pyright',
+    'clangd',
+    'rust_analyzer',
+    'jdtls',
+    'bashls',
+    'cmake',
+}
 
 -- disable some default providers
 for _, provider in ipairs { "node", "perl", "python3", "ruby" } do
@@ -55,5 +63,15 @@ autocmd("FileType", {
   pattern = "qf",
   callback = function()
     vim.opt_local.buflisted = false
+  end,
+})
+
+-- 2 space tab filetypes
+autocmd("FileType", {
+  pattern = "lua,js,html,json",
+  callback = function()
+    opt.tabstop = 2
+    opt.shiftwidth = 2
+    opt.softtabstop = 2
   end,
 })

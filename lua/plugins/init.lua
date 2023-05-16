@@ -42,7 +42,11 @@ require("lazy").setup {
 
   {
     'marko-cerovac/material.nvim',
-    config = function()
+    opts = function()
+      return require "plugins.configs.material"
+    end,
+    config = function(_, opts)
+      require("material").setup(opts)
       vim.cmd 'colorscheme material'
     end,
     lazy = false
@@ -168,11 +172,6 @@ require("lazy").setup {
     config = function(_, opts)
       local telescope = require "telescope"
       telescope.setup(opts)
-
-      -- load extensions
-      for _, ext in ipairs(opts.extensions_list) do
-        telescope.load_extension(ext)
-      end
     end,
   },
 
