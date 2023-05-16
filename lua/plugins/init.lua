@@ -1,25 +1,7 @@
 require("lazy").setup {
+
+  ------------------------------ Base
   "nvim-lua/plenary.nvim",
-
-  {
-    "nvim-tree/nvim-web-devicons",
-    config = function(_, opts)
-      require("nvim-web-devicons").setup(opts)
-    end,
-  },
-
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    init = function()
-      require("core.utils").lazy_load "indent-blankline.nvim"
-    end,
-    opts = function()
-      return require("plugins.configs.others").blankline
-    end,
-    config = function(_, opts)
-      require("indent_blankline").setup(opts)
-    end,
-  },
 
   {
     "nvim-treesitter/nvim-treesitter",
@@ -36,31 +18,14 @@ require("lazy").setup {
     end,
   },
 
+  ------------------------------ LSP
   {
-    "onsails/lspkind.nvim"
-  },
-
-  {
-    'marko-cerovac/material.nvim',
-    opts = function()
-      return require "plugins.configs.material"
+    "neovim/nvim-lspconfig",
+    init = function()
+      require("core.utils").lazy_load "nvim-lspconfig"
     end,
-    config = function(_, opts)
-      require("material").setup(opts)
-      vim.cmd 'colorscheme material'
-    end,
-    lazy = false
-  },
-
-  {
-    "lewis6991/gitsigns.nvim",
-    ft = { "gitcommit", "diff" },
-    init = require('core.utils').lazy_gitsigns,
-    opts = function()
-      return require("plugins.configs.others").gitsigns
-    end,
-    config = function(_, opts)
-      require("gitsigns").setup(opts)
+    config = function()
+      require "plugins.configs.lspconfig"
     end,
   },
 
@@ -75,16 +40,7 @@ require("lazy").setup {
     end,
   },
 
-  {
-    "neovim/nvim-lspconfig",
-    init = function()
-      require("core.utils").lazy_load "nvim-lspconfig"
-    end,
-    config = function()
-      require "plugins.configs.lspconfig"
-    end,
-  },
-
+  ------------------------------ Completion
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -130,25 +86,41 @@ require("lazy").setup {
   },
 
   {
-    "numToStr/Comment.nvim",
-    keys = { "gcc", "gbc" },
-    config = function()
-      require("Comment").setup()
-    end,
+    'github/copilot.vim',
+    event = 'InsertEnter'
   },
 
-  -- file managing , picker etc
+  ------------------------------ UI
   {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    'marko-cerovac/material.nvim',
     opts = function()
-      return require "plugins.configs.nvimtree"
+      return require "plugins.configs.material"
     end,
     config = function(_, opts)
-      require("nvim-tree").setup(opts)
+      require("material").setup(opts)
+      vim.cmd 'colorscheme material'
+    end,
+    lazy = false
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    init = function()
+      require("core.utils").lazy_load "indent-blankline.nvim"
+    end,
+    opts = function()
+      return require("plugins.configs.others").blankline
+    end,
+    config = function(_, opts)
+      require("indent_blankline").setup(opts)
     end,
   },
 
+  { "nvim-tree/nvim-web-devicons", },
+
+  { "onsails/lspkind.nvim" },
+
+  ------------------------------ Navigation
   {
     "nvim-telescope/telescope.nvim",
     branch = '0.1.x',
@@ -165,6 +137,67 @@ require("lazy").setup {
       telescope.load_extension('fzf')
     end,
   },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    opts = function()
+      return require "plugins.configs.nvimtree"
+    end,
+    config = function(_, opts)
+      require("nvim-tree").setup(opts)
+    end,
+  },
+
+  ------------------------------ Editing
+  {
+    "numToStr/Comment.nvim",
+    keys = { "gcc", "gbc" },
+    config = function()
+      require("Comment").setup()
+    end,
+  },
+
+  {
+    "folke/zen-mode.nvim",
+    dependencies = {
+      {
+        "folke/twilight.nvim",
+        config = function()
+          require("twilight").setup {
+            dimming = {
+              alpha = .5
+            }
+          }
+        end
+      }
+    },
+    config = function()
+      require("zen-mode").setup()
+    end
+  },
+
+  {
+    'sunjon/shade.nvim',
+    config = function()
+      require("shade").setup()
+    end
+  },
+
+  ------------------------------ Misc.
+  {
+    "lewis6991/gitsigns.nvim",
+    ft = { "gitcommit", "diff" },
+    init = require('core.utils').lazy_gitsigns,
+    opts = function()
+      return require("plugins.configs.others").gitsigns
+    end,
+    config = function(_, opts)
+      require("gitsigns").setup(opts)
+    end,
+  },
+
+  { 'akinsho/toggleterm.nvim', version = "*", config = true },
 
   {
     "folke/which-key.nvim",

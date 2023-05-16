@@ -22,6 +22,7 @@ M.general = {
   s = { 'silent w', 'Save' },
   S = { 'w !sudo tee %', 'Sudo save' },
   m = { 'Mason', 'Mason' },
+  n = { 'Notes', {} },
   t = {
     name = 'tab',
     n = { 'tabnew', 'New' },
@@ -39,6 +40,7 @@ M.general = {
     f = { 'Neogen file', 'File' },
     t = { 'Neogen type', 'Type' },
   },
+  z = { 'ZenMode', 'Zen mode' }
 }
 
 M.lspconfig = {
