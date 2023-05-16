@@ -55,21 +55,7 @@ require("lazy").setup {
   {
     "lewis6991/gitsigns.nvim",
     ft = { "gitcommit", "diff" },
-    init = function()
-      -- load gitsigns only when a git file is opened
-      vim.api.nvim_create_autocmd({ "BufRead" }, {
-        group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
-        callback = function()
-          vim.fn.system("git -C " .. '"' .. vim.fn.expand "%:p:h" .. '"' .. " rev-parse")
-          if vim.v.shell_error == 0 then
-            vim.api.nvim_del_augroup_by_name "GitSignsLazyLoad"
-            vim.schedule(function()
-              require("lazy").load { plugins = { "gitsigns.nvim" } }
-            end)
-          end
-        end,
-      })
-    end,
+    init = require('core.utils').lazy_gitsigns,
     opts = function()
       return require("plugins.configs.others").gitsigns
     end,
@@ -167,12 +153,16 @@ require("lazy").setup {
     "nvim-telescope/telescope.nvim",
     branch = '0.1.x',
     cmd = "Telescope",
+    dependencies = {
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+    },
     opts = function()
       return require "plugins.configs.telescope"
     end,
     config = function(_, opts)
       local telescope = require "telescope"
       telescope.setup(opts)
+      telescope.load_extension('fzf')
     end,
   },
 

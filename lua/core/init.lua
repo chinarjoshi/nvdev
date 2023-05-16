@@ -29,6 +29,7 @@ opt.smartindent = true
 opt.ignorecase = true
 opt.splitbelow = true
 opt.splitright = true
+opt.formatoptions:remove { "c", "r", "o" }
 
 -- Performance/IO
 opt.clipboard = "unnamedplus"

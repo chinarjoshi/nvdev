@@ -6,11 +6,11 @@ M.general = {
   prefix = '<leader>',
   -- Hotkeys
   ['<space>'] = { require('core.utils').project_files, 'Project files' },
-  ['<tab>'] = { 'Telescope projects', 'Projects' },
+  ['<tab>'] = { 'Telescope diagnostics', 'Diagnostics' },
   ['/'] = { 'Telescope live_grep', 'Search' },
   [','] = { 'Telescope buffers', 'Buffers' },
   ['.'] = { 'Telescope find_files', 'Files' },
-  ['*'] = { 'Telescope grep_string', 'Find word' },
+  ['*'] = { 'Telescope grep_string', 'Grep word' },
   ['<cr>'] = { 'ToggleTerm', 'Terminal' },
   [';'] = { 'NvimTreeToggle', 'File-tree' },
   [']'] = { 'bn', 'Next buffer' },
