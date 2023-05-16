@@ -28,4 +28,17 @@ M.lazy_load = function(plugin)
   })
 end
 
+M.select_project = function()
+  local pickers = require "telescope.pickers"
+  local finders = require "telescope.finders"
+  local conf = require("telescope.config").values
+  pickers.new(opts, {
+    prompt_title = "colors",
+    finder = finders.new_table {
+      results = { "red", "green", "blue" }
+    },
+    sorter = conf.generic_sorter(opts),
+  }):find()
+end
+
 return M

@@ -165,6 +165,7 @@ require("lazy").setup {
 
   {
     "nvim-telescope/telescope.nvim",
+    branch = '0.1.x',
     cmd = "Telescope",
     opts = function()
       return require "plugins.configs.telescope"
