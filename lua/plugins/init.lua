@@ -206,7 +206,10 @@ require('lazy').setup({
       return require('plugins.configs.others').gitsigns
     end,
     config = function(_, opts)
-      require('gitsigns').setup(opts)
+      local gs = require 'gitsigns'
+      gs.setup(opts)
+      vim.keymap.set('n', '}', gs.next_hunk)
+      vim.keymap.set('n', '{', gs.prev_hunk)
     end,
   },
 

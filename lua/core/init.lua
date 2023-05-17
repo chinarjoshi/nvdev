@@ -89,3 +89,15 @@ autocmd('FileType', {
     opt.softtabstop = 2
   end,
 })
+
+--- Hotkeys
+local map = function(key, value)
+  vim.keymap.set('n', key, value)
+end
+map('<ESC>', ':noh<CR>')
+map('K', vim.lsp.buf.hover)
+map(']', vim.diagnostic.goto_next)
+map('[', vim.diagnostic.goto_prev)
+for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
+  vim.keymap.set('n', '<C-' .. letter .. '>', '<C-w>' .. letter)
+end
