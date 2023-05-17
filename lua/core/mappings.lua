@@ -23,7 +23,7 @@ M.general = {
     name = 'Notes',
   },
   p = { require('lazy').home, 'Package sync' },
-  s = { require('treesj').toggle, 'Split/join list'},
+  j = { require('treesj').toggle, 'Join/split list'},
   g = {
     name = 'Git',
     s = { gs.stage_hunk, 'Stage hunk'},

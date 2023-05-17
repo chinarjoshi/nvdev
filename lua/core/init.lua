@@ -91,13 +91,8 @@ autocmd('FileType', {
 })
 
 --- Hotkeys
-local map = function(key, value)
-  vim.keymap.set('n', key, value)
-end
-map('<ESC>', ':noh<CR>')
-map('K', vim.lsp.buf.hover)
-map(']', vim.diagnostic.goto_next)
-map('[', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<ESC>', ':noh<CR>')
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
   vim.keymap.set('n', '<C-' .. letter .. '>', '<C-w>' .. letter)
 end
