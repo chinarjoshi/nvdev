@@ -1,5 +1,5 @@
 return {
-  sort_by = "case_sensitive",
+  sort_by = 'case_sensitive',
   view = {
     width = 30,
   },

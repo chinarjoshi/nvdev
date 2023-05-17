@@ -1,6 +1,6 @@
 local M = {}
 
-local builtin = require("telescope").builtin
+local builtin = require('telescope').builtin
 
 M.general = {
   prefix = '<leader>',
@@ -40,7 +40,7 @@ M.general = {
     f = { 'Neogen file', 'File' },
     t = { 'Neogen type', 'Type' },
   },
-  z = { 'ZenMode', 'Zen mode' }
+  z = { 'ZenMode', 'Zen mode' },
 }
 
 M.lspconfig = {

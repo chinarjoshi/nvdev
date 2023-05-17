@@ -12,10 +12,10 @@ opt.ruler = false
 opt.number = true
 opt.linebreak = true
 opt.termguicolors = true
-opt.shortmess:append "sI"
-opt.whichwrap:append "<>[]hl"
-opt.signcolumn = "yes:1"
-opt.fillchars = { eob = " " }
+opt.shortmess:append 'sI'
+opt.whichwrap:append '<>[]hl'
+opt.signcolumn = 'yes:1'
+opt.fillchars = { eob = ' ' }
 opt.scrolloff = 5
 g.material_style = 'deep ocean'
 
@@ -29,47 +29,47 @@ opt.smartindent = true
 opt.ignorecase = true
 opt.splitbelow = true
 opt.splitright = true
-opt.formatoptions:remove { "c", "r", "o" }
+opt.formatoptions:remove { 'c', 'r', 'o' }
 
 -- Performance/IO
-opt.clipboard = "unnamedplus"
-opt.mouse = "a"
+opt.clipboard = 'unnamedplus'
+opt.mouse = 'a'
 opt.undofile = true
 opt.updatetime = 250
 opt.timeoutlen = 400
 
-g.mapleader = " "
+g.mapleader = ' '
 g.language_servers = {
-    'pyright',
-    'clangd',
-    'rust_analyzer',
-    'jdtls',
-    'bashls',
-    'cmake',
+  'pyright',
+  'clangd',
+  'rust_analyzer',
+  'jdtls',
+  'bashls',
+  'cmake',
 }
 
 -- disable some default providers
-for _, provider in ipairs { "node", "perl", "python3", "ruby" } do
-  vim.g["loaded_" .. provider .. "_provider"] = 0
+for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
+  vim.g['loaded_' .. provider .. '_provider'] = 0
 end
 
 -- add binaries installed by mason.nvim to path
-vim.env.PATH = vim.env.PATH .. ":" .. vim.fn.stdpath "data" .. "/mason/bin"
+vim.env.PATH = vim.env.PATH .. ':' .. vim.fn.stdpath 'data' .. '/mason/bin'
 
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd
 
 -- dont list quickfix buffers
-autocmd("FileType", {
-  pattern = "qf",
+autocmd('FileType', {
+  pattern = 'qf',
   callback = function()
     vim.opt_local.buflisted = false
   end,
 })
 
 -- 2 space tab filetypes
-autocmd("FileType", {
-  pattern = "lua,js,html,json",
+autocmd('FileType', {
+  pattern = 'lua,js,html,json',
   callback = function()
     opt.tabstop = 2
     opt.shiftwidth = 2

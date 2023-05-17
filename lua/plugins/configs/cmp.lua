@@ -1,5 +1,5 @@
-local cmp = require "cmp"
-local luasnip = require "luasnip"
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -61,7 +61,7 @@ return {
   sources = {
     { name = 'luasnip' },
     { name = 'nvim_lsp' },
-    { name = "nvim_lsp_signature_help" },
+    { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lua' },
     { name = 'path' },
   },

@@ -1,5 +1,5 @@
 return {
-  ensure_installed = { "lua" },
+  ensure_installed = { 'lua' },
 
   highlight = {
     enable = true,

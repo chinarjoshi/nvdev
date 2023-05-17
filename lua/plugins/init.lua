@@ -1,238 +1,238 @@
-require("lazy").setup {
+require('lazy').setup {
 
   ------------------------------ Base
-  "nvim-lua/plenary.nvim",
+  'nvim-lua/plenary.nvim',
 
   {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter',
     init = function()
-      require("core.utils").lazy_load "nvim-treesitter"
+      require('core.utils').lazy_load 'nvim-treesitter'
     end,
-    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-    build = ":TSUpdate",
+    cmd = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSModuleInfo' },
+    build = ':TSUpdate',
     opts = function()
-      return require "plugins.configs.treesitter"
+      return require 'plugins.configs.treesitter'
     end,
     config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      require('nvim-treesitter.configs').setup(opts)
     end,
   },
 
   ------------------------------ LSP
   {
-    "neovim/nvim-lspconfig",
+    'neovim/nvim-lspconfig',
     init = function()
-      require("core.utils").lazy_load "nvim-lspconfig"
+      require('core.utils').lazy_load 'nvim-lspconfig'
     end,
     config = function()
-      require "plugins.configs.lspconfig"
+      require 'plugins.configs.lspconfig'
     end,
   },
 
   {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap" },
+    'rcarriga/nvim-dap-ui',
+    dependencies = { 'mfussenegger/nvim-dap' },
   },
 
   {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
+    'williamboman/mason.nvim',
+    cmd = 'Mason',
     opts = function()
-      return require "plugins.configs.mason"
+      return require 'plugins.configs.mason'
     end,
     config = function(_, opts)
-      require("mason").setup(opts)
+      require('mason').setup(opts)
     end,
   },
 
   ------------------------------ Completion
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
     dependencies = {
       {
-        "L3MON4D3/LuaSnip",
-        dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        'L3MON4D3/LuaSnip',
+        dependencies = 'rafamadriz/friendly-snippets',
+        opts = { history = true, updateevents = 'TextChanged,TextChangedI' },
         config = function(_, opts)
-          require("plugins.configs.others").luasnip(opts)
+          require('plugins.configs.others').luasnip(opts)
         end,
       },
 
       {
-        "windwp/nvim-autopairs",
+        'windwp/nvim-autopairs',
         opts = {
           fast_wrap = {},
-          disable_filetype = { "TelescopePrompt", "vim" },
+          disable_filetype = { 'TelescopePrompt', 'vim' },
         },
         config = function(_, opts)
-          require("nvim-autopairs").setup(opts)
+          require('nvim-autopairs').setup(opts)
 
           -- setup cmp for autopairs
-          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-          require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+          local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+          require('cmp').event:on('confirm_done', cmp_autopairs.on_confirm_done())
         end,
       },
 
       {
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
-        "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
+        'saadparwaiz1/cmp_luasnip',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-nvim-lsp-signature-help',
+        'hrsh7th/cmp-nvim-lua',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
       },
     },
     opts = function()
-      return require "plugins.configs.cmp"
+      return require 'plugins.configs.cmp'
     end,
     config = function(_, opts)
-      require("cmp").setup(opts)
+      require('cmp').setup(opts)
     end,
   },
 
   {
-    "zbirenbaum/copilot.lua",
+    'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
     opts = {
       suggestion = {
         keymap = {
-          accept = "<C-c>",
-          next = "<C-n>",
-          prev = "<C-p>"
-        }
-      }
+          accept = '<C-c>',
+          next = '<C-n>',
+          prev = '<C-p>',
+        },
+      },
     },
     config = function(_, opts)
-      require("copilot").setup(opts)
-    end
+      require('copilot').setup(opts)
+    end,
   },
 
   ------------------------------ UI
   {
     'marko-cerovac/material.nvim',
     opts = function()
-      return require "plugins.configs.material"
+      return require 'plugins.configs.material'
     end,
     config = function(_, opts)
-      require("material").setup(opts)
+      require('material').setup(opts)
       vim.cmd 'colorscheme material'
     end,
-    lazy = false
+    lazy = false,
   },
 
   {
-    "lukas-reineke/indent-blankline.nvim",
+    'lukas-reineke/indent-blankline.nvim',
     init = function()
-      require("core.utils").lazy_load "indent-blankline.nvim"
+      require('core.utils').lazy_load 'indent-blankline.nvim'
     end,
     opts = function()
-      return require("plugins.configs.others").blankline
+      return require('plugins.configs.others').blankline
     end,
     config = function(_, opts)
-      require("indent_blankline").setup(opts)
+      require('indent_blankline').setup(opts)
     end,
   },
 
-  { "nvim-tree/nvim-web-devicons", },
+  { 'nvim-tree/nvim-web-devicons' },
 
-  { "onsails/lspkind.nvim" },
+  { 'onsails/lspkind.nvim' },
 
   ------------------------------ Navigation
   {
-    "nvim-telescope/telescope.nvim",
+    'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    cmd = "Telescope",
+    cmd = 'Telescope',
     dependencies = {
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
     opts = function()
-      return require "plugins.configs.telescope"
+      return require 'plugins.configs.telescope'
     end,
     config = function(_, opts)
-      local telescope = require "telescope"
+      local telescope = require 'telescope'
       telescope.setup(opts)
-      telescope.load_extension('fzf')
+      telescope.load_extension 'fzf'
     end,
   },
 
   {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    'nvim-tree/nvim-tree.lua',
+    cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
     opts = function()
-      return require "plugins.configs.nvimtree"
+      return require 'plugins.configs.nvimtree'
     end,
     config = function(_, opts)
-      require("nvim-tree").setup(opts)
+      require('nvim-tree').setup(opts)
     end,
   },
 
   ------------------------------ Editing
   {
-    "numToStr/Comment.nvim",
-    keys = { "gcc", "gbc" },
+    'numToStr/Comment.nvim',
+    keys = { 'gcc', 'gbc' },
     config = function()
-      require("Comment").setup()
+      require('Comment').setup()
     end,
   },
 
   {
-    "folke/zen-mode.nvim",
+    'folke/zen-mode.nvim',
     dependencies = {
       {
-        "folke/twilight.nvim",
+        'folke/twilight.nvim',
         config = function()
-          require("twilight").setup {
+          require('twilight').setup {
             dimming = {
-              alpha = .5
-            }
+              alpha = 0.5,
+            },
           }
-        end
-      }
+        end,
+      },
     },
     config = function()
-      require("zen-mode").setup()
-    end
+      require('zen-mode').setup()
+    end,
   },
 
   {
     'sunjon/shade.nvim',
     config = function()
-      require("shade").setup {
-        overlay_opacity = 60
+      require('shade').setup {
+        overlay_opacity = 60,
       }
-    end
+    end,
   },
 
   {
     'karb94/neoscroll.nvim',
     config = function()
-      require("neoscroll").setup {
-        mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb'}
+      require('neoscroll').setup {
+        mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' },
       }
-    end
+    end,
   },
 
   ------------------------------ Misc.
   {
-    "lewis6991/gitsigns.nvim",
-    ft = { "gitcommit", "diff" },
+    'lewis6991/gitsigns.nvim',
+    ft = { 'gitcommit', 'diff' },
     init = require('core.utils').lazy_gitsigns,
     opts = function()
-      return require("plugins.configs.others").gitsigns
+      return require('plugins.configs.others').gitsigns
     end,
     config = function(_, opts)
-      require("gitsigns").setup(opts)
+      require('gitsigns').setup(opts)
     end,
   },
 
-  { 'akinsho/toggleterm.nvim', version = "*", config = true },
+  { 'akinsho/toggleterm.nvim', version = '*', config = true },
 
   {
-    "folke/which-key.nvim",
-    keys = { "<leader>", '"', "'", "`", "c", "v" },
+    'folke/which-key.nvim',
+    keys = { '<leader>', '"', '\'', '`', 'c', 'v' },
     config = function(_, opts)
-      require("which-key").setup(opts)
+      require('which-key').setup(opts)
     end,
   },
 }
