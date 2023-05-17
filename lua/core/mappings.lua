@@ -17,7 +17,7 @@ M.general = {
   [','] = { ts.buffers, 'Buffers' },
   ['.'] = { ts.find_files, 'Files' },
   ['*'] = { ts.grep_string, 'Grep word' },
-  ['<cr>'] = { ':ToggleTerm<cr>', 'Terminal' },
+  ['<cr>'] = { ':ToggleTerm size=25<cr>', 'Terminal' },
   [';'] = { ':NvimTreeToggle<cr>', 'File-tree' },
   q = { ':q<cr>', 'Quit' },
   Q = { ':q!<cr>', 'Quit' },
