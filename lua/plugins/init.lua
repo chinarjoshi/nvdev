@@ -1,7 +1,7 @@
-require('lazy').setup {
+require('lazy').setup({
 
   ------------------------------ Base
-  'nvim-lua/plenary.nvim',
+  { 'nvim-lua/plenary.nvim' },
 
   {
     'nvim-treesitter/nvim-treesitter',
@@ -23,29 +23,27 @@ require('lazy').setup {
   { 'neovim/nvim-lspconfig' },
 
   {
-    'rcarriga/nvim-dap-ui',
-    dependencies = { 'mfussenegger/nvim-dap' },
-  },
-
-  {
-    'williamboman/mason.nvim',
-    config = function()
-      require('mason').setup()
-    end,
-    lazy = false,
-    priority = 70,
-  },
-
-  {
     'williamboman/mason-lspconfig.nvim',
+    dependencies = {
+      {
+        'williamboman/mason.nvim',
+        config = function()
+          require('mason').setup()
+        end,
+      },
+    },
     opts = function()
       return require 'plugins.configs.mason_lspconfig'
     end,
     config = function(_, opts)
       require('mason-lspconfig').setup { handlers = opts }
     end,
-    lazy = false,
-    priority = 60,
+    lazy = false
+  },
+
+  {
+    'rcarriga/nvim-dap-ui',
+    dependencies = 'mfussenegger/nvim-dap',
   },
 
   ------------------------------ Completion
@@ -70,8 +68,6 @@ require('lazy').setup {
         },
         config = function(_, opts)
           require('nvim-autopairs').setup(opts)
-
-          -- setup cmp for autopairs
           local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
           require('cmp').event:on('confirm_done', cmp_autopairs.on_confirm_done())
         end,
@@ -96,7 +92,7 @@ require('lazy').setup {
 
   {
     'zbirenbaum/copilot.lua',
-    event = 'InsertEnter',
+    keys = '<C-n>',
     opts = {
       suggestion = {
         keymap = {
@@ -122,7 +118,7 @@ require('lazy').setup {
       vim.cmd 'colorscheme material'
     end,
     lazy = false,
-    priority = 100,
+    priority = 1000,
   },
 
   {
@@ -146,7 +142,6 @@ require('lazy').setup {
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    cmd = 'Telescope',
     dependencies = {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
@@ -162,7 +157,7 @@ require('lazy').setup {
 
   {
     'nvim-tree/nvim-tree.lua',
-    cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
+    cmd = 'NvimTreeToggle',
     opts = { actions = { open_file = { quit_on_open = true } } },
     config = function(_, opts)
       require('nvim-tree').setup(opts)
@@ -175,6 +170,58 @@ require('lazy').setup {
     keys = { 'gcc', 'gbc' },
     config = function()
       require('Comment').setup()
+    end,
+  },
+
+  {
+    'ggandor/leap.nvim',
+    event = 'InsertEnter',
+    config = function()
+      require('leap').add_default_mappings()
+    end,
+  },
+
+  {
+    'karb94/neoscroll.nvim',
+    keys = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' },
+    opts = { mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' } },
+    config = function(_, opts)
+      require('neoscroll').setup(opts)
+    end,
+  },
+
+  {
+    'Wansmer/treesj',
+    config = function()
+      require('treesj').setup()
+    end,
+  },
+
+  ------------------------------ Misc.
+  {
+    'lewis6991/gitsigns.nvim',
+    ft = { 'gitcommit', 'diff' },
+    init = require('core.utils').lazy_gitsigns,
+    opts = function()
+      return require('plugins.configs.others').gitsigns
+    end,
+    config = function(_, opts)
+      require('gitsigns').setup(opts)
+    end,
+  },
+
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = true,
+    cmd = 'ToggleTerm'
+  },
+
+  {
+    'folke/which-key.nvim',
+    keys = ' ',
+    config = function(_, opts)
+      require('which-key').setup(opts)
     end,
   },
 
@@ -193,37 +240,4 @@ require('lazy').setup {
       require('zen-mode').setup()
     end,
   },
-
-  {
-    'karb94/neoscroll.nvim',
-    opts = {
-      mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' },
-    },
-    config = function(_, opts)
-      require('neoscroll').setup(opts)
-    end,
-  },
-
-  ------------------------------ Misc.
-  {
-    'lewis6991/gitsigns.nvim',
-    ft = { 'gitcommit', 'diff' },
-    init = require('core.utils').lazy_gitsigns,
-    opts = function()
-      return require('plugins.configs.others').gitsigns
-    end,
-    config = function(_, opts)
-      require('gitsigns').setup(opts)
-    end,
-  },
-
-  { 'akinsho/toggleterm.nvim', version = '*', config = true },
-
-  {
-    'folke/which-key.nvim',
-    keys = { '<leader>', '"', '\'', '`', 'c', 'v' },
-    config = function(_, opts)
-      require('which-key').setup(opts)
-    end,
-  },
-}
+}, { defaults = { lazy = true } } )
