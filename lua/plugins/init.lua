@@ -30,6 +30,11 @@ require("lazy").setup {
   },
 
   {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap" },
+  },
+
+  {
     "williamboman/mason.nvim",
     cmd = "Mason",
     opts = function()
@@ -71,8 +76,9 @@ require("lazy").setup {
 
       {
         "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
       },
@@ -86,8 +92,20 @@ require("lazy").setup {
   },
 
   {
-    'github/copilot.vim',
-    event = 'InsertEnter'
+    "zbirenbaum/copilot.lua",
+    event = 'InsertEnter',
+    opts = {
+      suggestion = {
+        keymap = {
+          accept = "<C-c>",
+          next = "<C-n>",
+          prev = "<C-p>"
+        }
+      }
+    },
+    config = function(_, opts)
+      require("copilot").setup(opts)
+    end
   },
 
   ------------------------------ UI
@@ -180,7 +198,18 @@ require("lazy").setup {
   {
     'sunjon/shade.nvim',
     config = function()
-      require("shade").setup()
+      require("shade").setup {
+        overlay_opacity = 60
+      }
+    end
+  },
+
+  {
+    'karb94/neoscroll.nvim',
+    config = function()
+      require("neoscroll").setup {
+        mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb'}
+      }
     end
   },
 
