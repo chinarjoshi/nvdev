@@ -5,6 +5,7 @@ require('lazy').setup {
 
   {
     'nvim-treesitter/nvim-treesitter',
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     init = function()
       require('core.utils').lazy_load 'nvim-treesitter'
     end,
@@ -181,12 +182,9 @@ require('lazy').setup {
     dependencies = {
       {
         'folke/twilight.nvim',
-        config = function()
-          require('twilight').setup {
-            dimming = {
-              alpha = 0.5,
-            },
-          }
+        opts = { dimming = { alpha = 0.5 } },
+        config = function(_, opts)
+          require('twilight').setup(opts)
         end,
       },
     },
@@ -197,19 +195,19 @@ require('lazy').setup {
 
   {
     'sunjon/shade.nvim',
-    config = function()
-      require('shade').setup {
-        overlay_opacity = 60,
-      }
+    opts = { overlay_opacity = 60 },
+    config = function(_, opts)
+      require('shade').setup(opts)
     end,
   },
 
   {
     'karb94/neoscroll.nvim',
-    config = function()
-      require('neoscroll').setup {
-        mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' },
-      }
+    opts = {
+      mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' },
+    },
+    config = function(_, opts)
+      require('neoscroll').setup(opts)
     end,
   },
 
