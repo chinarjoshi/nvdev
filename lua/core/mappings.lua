@@ -1,59 +1,54 @@
 local M = {}
 
-local builtin = require('telescope').builtin
+local ts = require 'telescope.builtin'
+local gs = require 'gitsigns'
 
 M.general = {
-  prefix = '<leader>',
   -- Hotkeys
-  ['<space>'] = { require('core.utils').project_files, 'Project files' },
-  ['<tab>'] = { 'Telescope diagnostics', 'Diagnostics' },
-  ['/'] = { 'Telescope live_grep', 'Search' },
-  [','] = { 'Telescope buffers', 'Buffers' },
-  ['.'] = { 'Telescope find_files', 'Files' },
-  ['*'] = { 'Telescope grep_string', 'Grep word' },
-  ['<cr>'] = { 'ToggleTerm', 'Terminal' },
-  [';'] = { 'NvimTreeToggle', 'File-tree' },
-  [']'] = { 'bn', 'Next buffer' },
-  ['['] = { 'bp', 'Prev buffer' },
-  ['}'] = { 'tabnext', 'Next tab' },
-  ['{'] = { 'tabprevious', 'Prev tab' },
-  q = { 'q', 'Quit' },
-  Q = { 'q!', 'Quit' },
-  s = { 'silent w', 'Save' },
-  S = { 'w !sudo tee %', 'Sudo save' },
-  m = { 'Mason', 'Mason' },
-  n = { 'Notes', {} },
-  t = {
-    name = 'tab',
-    n = { 'tabnew', 'New' },
-    c = { 'tabclose', 'Close' },
-    m = { 'tabmove', 'Move' },
+  ['<space>'] = { ts.git_files, 'Project files' },
+  ['<tab>'] = { function() ts.diagnostics { bufnr=0 } end, 'File diagnostics' },
+  ['\\'] = { ts.diagnostics, 'Workspace diagnostics' },
+  ['/'] = { ts.live_grep, 'Search' },
+  [','] = { ts.buffers, 'Buffers' },
+  ['.'] = { ts.find_files, 'Files' },
+  ['*'] = { ts.grep_string, 'Grep word' },
+  ['<cr>'] = { ':ToggleTerm<cr>', 'Terminal' },
+  [';'] = { ':NvimTreeToggle<cr>', 'File-tree' },
+  [']'] = { gs.next_hunk, 'Next change' },
+  ['['] = { gs.prev_hunk, 'Previous change' },
+  ['}'] = { ':bn<cr>', 'Next buffer' },
+  ['{'] = { ':bp<cr>', 'Previous buffer' },
+  q = { ':q<cr>', 'Quit' },
+  Q = { ':q!<cr>', 'Quit' },
+  s = { ':w<cr>', 'Save' },
+  S = { ':w !sudo tee %<cr>', 'Sudo save' },
+  m = { ':Mason<cr>', 'Mason' },
+  n = {
+    name = 'Notes',
   },
-  p = { 'Lazy', 'Package sync' },
-  g = { 'Neogit', 'Git' },
-  c = { 'TroubleToggle workspace_diagnostics', 'Workspace errors' },
-  C = { 'TroubleToggle document_diagnostics', 'File errors' },
+  p = { require('lazy').home, 'Package sync' },
+  s = { require('treesj').toggle, 'Split/join list'},
+  g = {
+    name = 'Git',
+    s = { gs.stage_hunk, 'Stage hunk'},
+    S = { gs.stage_buffer, 'Stage file'},
+    u = { gs.undo_stage_hunk, 'Undo stage hunk'},
+    p = { gs.preview_hunk, 'Preview change' },
+    r = { gs.reset_hunk, 'Reset hunk'},
+    R = { gs.reset_buffer, 'Reset file'},
+    d = { gs.diffthis, 'Diff file' },
+    t = { gs.toggle_deleted, 'Toggle deletions' },
+    b = { gs.blame_line, 'Blame line' },
+  },
   d = {
-    name = 'documentation',
-    d = { 'Neogen', 'Function' },
-    c = { 'Neogen class', 'Class' },
-    f = { 'Neogen file', 'File' },
-    t = { 'Neogen type', 'Type' },
+    name = 'Debugging',
   },
-  z = { 'ZenMode', 'Zen mode' },
+  z = { require('zen-mode').toggle, 'Zen mode' },
 }
 
-M.lspconfig = {
-  prefix = 'g',
-  d = { require('core.utils').toggle_diagnostics, 'Toggle diagnostics' },
+M.lsp = {
+  d = { vim.diagnostic.open_float, 'Diagnostic' },
   D = { vim.lsp.buf.definition, 'Definition' },
-  e = {
-    function()
-      vim.diagnostic.open_float(0, { scope = 'line' })
-    end,
-    'Diagnostic',
-  },
-  f = { vim.lsp.buf.formatting, 'Format' },
   ['['] = { vim.diagnostic.goto_prev, 'Previous diagnostic' },
   [']'] = { vim.diagnostic.goto_next, 'Next diagnostic' },
   i = { vim.lsp.buf.implementation, 'Implementaiton' },

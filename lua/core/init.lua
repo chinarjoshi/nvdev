@@ -1,6 +1,7 @@
 local opt = vim.opt
 local g = vim.g
 
+--- Options
 -- UI adjustments
 opt.laststatus = 0
 opt.showmode = false
@@ -47,7 +48,7 @@ end
 -- add binaries installed by mason.nvim to path
 vim.env.PATH = vim.env.PATH .. ':' .. vim.fn.stdpath 'data' .. '/mason/bin'
 
--- LSP config
+--- LSP
 g.language_servers = {
   'pyright',
   'clangd',
@@ -68,10 +69,10 @@ vim.diagnostic.config {
   underline = true,
 }
 
--------------------------------------- autocmds ------------------------------------------
+--- Autocommands
 local autocmd = vim.api.nvim_create_autocmd
 
--- dont list quickfix buffers
+-- Don't list quickfix buffers
 autocmd('FileType', {
   pattern = 'qf',
   callback = function()

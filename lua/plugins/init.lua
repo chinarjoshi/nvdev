@@ -219,9 +219,13 @@ require('lazy').setup({
 
   {
     'folke/which-key.nvim',
-    keys = ' ',
+    keys = { ' ', 'g' },
     config = function(_, opts)
-      require('which-key').setup(opts)
+      local which_key = require 'which-key'
+      local mappings = require 'core.mappings'
+      which_key.setup(opts)
+      which_key.register(mappings.general, { prefix = ' '} )
+      which_key.register(mappings.lsp, { prefix = 'g'} )
     end,
   },
 
