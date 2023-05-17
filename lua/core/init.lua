@@ -30,6 +30,7 @@ opt.ignorecase = true
 opt.splitbelow = true
 opt.splitright = true
 opt.formatoptions:remove { 'c', 'r', 'o' }
+g.mapleader = ' '
 
 -- Performance/IO
 opt.clipboard = 'unnamedplus'
@@ -38,23 +39,34 @@ opt.undofile = true
 opt.updatetime = 250
 opt.timeoutlen = 400
 
-g.mapleader = ' '
-g.language_servers = {
-  'pyright',
-  'clangd',
-  'rust_analyzer',
-  'jdtls',
-  'bashls',
-  'cmake',
-}
-
--- disable some default providers
+-- Disable default providers
 for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
   vim.g['loaded_' .. provider .. '_provider'] = 0
 end
 
 -- add binaries installed by mason.nvim to path
 vim.env.PATH = vim.env.PATH .. ':' .. vim.fn.stdpath 'data' .. '/mason/bin'
+
+-- LSP config
+g.language_servers = {
+  'pyright',
+  'clangd',
+  'rust_analyzer',
+  'lua_ls',
+  'jdtls',
+  'bashls',
+  'cmake',
+}
+
+for _, type in ipairs { 'Error', 'Warn', 'Hint', 'Info' } do
+  local hl = 'DiagnosticSign' .. type
+  vim.fn.sign_define(hl, { text = '', texthl = hl, numhl = hl })
+end
+
+vim.diagnostic.config {
+  virtual_text = false,
+  underline = true,
+}
 
 -------------------------------------- autocmds ------------------------------------------
 local autocmd = vim.api.nvim_create_autocmd

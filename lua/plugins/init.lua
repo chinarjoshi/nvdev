@@ -20,15 +20,7 @@ require('lazy').setup {
   },
 
   ------------------------------ LSP
-  {
-    'neovim/nvim-lspconfig',
-    init = function()
-      require('core.utils').lazy_load 'nvim-lspconfig'
-    end,
-    config = function()
-      require 'plugins.configs.lspconfig'
-    end,
-  },
+  { 'neovim/nvim-lspconfig' },
 
   {
     'rcarriga/nvim-dap-ui',
@@ -37,13 +29,23 @@ require('lazy').setup {
 
   {
     'williamboman/mason.nvim',
-    cmd = 'Mason',
+    config = function()
+      require('mason').setup()
+    end,
+    lazy = false,
+    priority = 70,
+  },
+
+  {
+    'williamboman/mason-lspconfig.nvim',
     opts = function()
-      return require 'plugins.configs.mason'
+      return require 'plugins.configs.mason_lspconfig'
     end,
     config = function(_, opts)
-      require('mason').setup(opts)
+      require('mason-lspconfig').setup { handlers = opts }
     end,
+    lazy = false,
+    priority = 60,
   },
 
   ------------------------------ Completion
@@ -120,6 +122,7 @@ require('lazy').setup {
       vim.cmd 'colorscheme material'
     end,
     lazy = false,
+    priority = 100,
   },
 
   {
@@ -160,9 +163,7 @@ require('lazy').setup {
   {
     'nvim-tree/nvim-tree.lua',
     cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
-    opts = function()
-      return require 'plugins.configs.nvimtree'
-    end,
+    opts = { actions = { open_file = { quit_on_open = true } } },
     config = function(_, opts)
       require('nvim-tree').setup(opts)
     end,
@@ -190,14 +191,6 @@ require('lazy').setup {
     },
     config = function()
       require('zen-mode').setup()
-    end,
-  },
-
-  {
-    'sunjon/shade.nvim',
-    opts = { overlay_opacity = 60 },
-    config = function(_, opts)
-      require('shade').setup(opts)
     end,
   },
 
