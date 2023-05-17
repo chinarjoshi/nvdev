@@ -38,7 +38,7 @@ require('lazy').setup({
     config = function(_, opts)
       require('mason-lspconfig').setup { handlers = opts }
     end,
-    lazy = false
+    lazy = false,
   },
 
   {
@@ -217,7 +217,7 @@ require('lazy').setup({
     'akinsho/toggleterm.nvim',
     version = '*',
     config = true,
-    cmd = 'ToggleTerm'
+    cmd = 'ToggleTerm',
   },
 
   {
@@ -227,8 +227,8 @@ require('lazy').setup({
       local which_key = require 'which-key'
       local mappings = require 'core.mappings'
       which_key.setup(opts)
-      which_key.register(mappings.general, { prefix = ' '} )
-      which_key.register(mappings.lsp, { prefix = 'g'} )
+      which_key.register(mappings.general, { prefix = ' ' })
+      which_key.register(mappings.lsp, { prefix = 'g' })
     end,
   },
 
@@ -247,4 +247,4 @@ require('lazy').setup({
       require('zen-mode').setup()
     end,
   },
-}, { defaults = { lazy = true } } )
+}, { defaults = { lazy = true } })

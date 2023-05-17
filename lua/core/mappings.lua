@@ -6,7 +6,12 @@ local gs = require 'gitsigns'
 M.general = {
   -- Hotkeys
   ['<space>'] = { ts.git_files, 'Project files' },
-  ['<tab>'] = { function() ts.diagnostics { bufnr=0 } end, 'File diagnostics' },
+  ['<tab>'] = {
+    function()
+      ts.diagnostics { bufnr = 0 }
+    end,
+    'File diagnostics',
+  },
   ['\\'] = { ts.diagnostics, 'Workspace diagnostics' },
   ['/'] = { ts.live_grep, 'Search' },
   [','] = { ts.buffers, 'Buffers' },
@@ -23,15 +28,15 @@ M.general = {
     name = 'Notes',
   },
   p = { require('lazy').home, 'Package sync' },
-  j = { require('treesj').toggle, 'Join/split list'},
+  j = { require('treesj').toggle, 'Join/split list' },
   g = {
     name = 'Git',
-    s = { gs.stage_hunk, 'Stage hunk'},
-    S = { gs.stage_buffer, 'Stage file'},
-    u = { gs.undo_stage_hunk, 'Undo stage hunk'},
+    s = { gs.stage_hunk, 'Stage hunk' },
+    S = { gs.stage_buffer, 'Stage file' },
+    u = { gs.undo_stage_hunk, 'Undo stage hunk' },
     p = { gs.preview_hunk, 'Preview change' },
-    r = { gs.reset_hunk, 'Reset hunk'},
-    R = { gs.reset_buffer, 'Reset file'},
+    r = { gs.reset_hunk, 'Reset hunk' },
+    R = { gs.reset_buffer, 'Reset file' },
     d = { gs.diffthis, 'Diff file' },
     t = { gs.toggle_deleted, 'Toggle deletions' },
     b = { gs.blame_line, 'Blame line' },
