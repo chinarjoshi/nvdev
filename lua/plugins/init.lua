@@ -36,7 +36,7 @@ require('lazy').setup({
       return require 'plugins.configs.mason_lspconfig'
     end,
     config = function(_, opts)
-      require('mason-lspconfig').setup { handlers = opts }
+      require('mason-lspconfig').setup(opts)
     end,
     lazy = false,
   },
