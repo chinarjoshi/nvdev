@@ -98,7 +98,7 @@ for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
 end
 
 function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
+  local opts = { buffer = 0 }
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
@@ -109,4 +109,4 @@ function _G.set_terminal_keymaps()
 end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'

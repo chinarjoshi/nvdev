@@ -199,6 +199,24 @@ require('lazy').setup({
 
   ------------------------------ Misc.
   {
+    'nvim-neorg/neorg',
+    build = ':Neorg sync-parsers',
+    opts = {
+      load = {
+        ['core.defaults'] = {},
+        ['core.concealer'] = {},
+        ['core.dirman'] = {
+          config = {
+            workspaces = {
+              notes = '~/notes',
+            },
+          },
+        },
+      },
+    },
+  },
+
+  {
     'lewis6991/gitsigns.nvim',
     ft = { 'gitcommit', 'diff' },
     init = require('core.utils').lazy_gitsigns,
