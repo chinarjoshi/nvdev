@@ -5,7 +5,7 @@ require('lazy').setup({
 
   {
     'nvim-treesitter/nvim-treesitter',
-    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    dependencies = 'nvim-treesitter/nvim-treesitter-textobjects',
     init = function()
       require('core.utils').lazy_load 'nvim-treesitter'
     end,
@@ -174,6 +174,16 @@ require('lazy').setup({
   },
 
   {
+    'nvim-neotest/neotest',
+    config = function()
+      require("neotest").setup {
+        require 'neotest-python',
+        require 'neotest-rust'
+      }
+    end
+  },
+
+  {
     'ggandor/leap.nvim',
     event = 'InsertEnter',
     config = function()
@@ -265,4 +275,4 @@ require('lazy').setup({
       require('zen-mode').setup()
     end,
   },
-}, { defaults = { lazy = true } })
+}, require 'plugins.configs.lazy_nvim')

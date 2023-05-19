@@ -6,5 +6,7 @@ return {
     use_languagetree = true,
   },
 
-  indent = { enable = true },
+  indent = {
+    enable = true,
+  },
 }
