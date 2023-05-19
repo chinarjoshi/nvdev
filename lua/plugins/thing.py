@@ -1,2 +1,0 @@
-# Quicksort on an array
-

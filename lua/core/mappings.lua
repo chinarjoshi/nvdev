@@ -28,13 +28,9 @@ M.general = {
   n = {
     name = 'Notes',
   },
+  c = { require("copilot.suggestion").toggle_auto_trigger, 'Toggle Copilot' },
   t = { nt.run.run, 'Run nearest test' },
-  T = {
-    function()
-      nt.run.run(vim.fn.expand '%')
-    end,
-    'Run test file',
-  },
+  T = { function() nt.run.run(vim.fn.expand '%') end, 'Run test file' },
   p = { require('lazy').home, 'Package sync' },
   j = { require('treesj').toggle, 'Join/split list' },
   g = {
@@ -50,6 +46,7 @@ M.general = {
     b = { gs.blame_line, 'Blame line' },
   },
   d = { require('dapui').toggle, 'Debug' },
+  D = { function() nt.run.run { strategy = 'dap' } end, 'Debug test' },
   z = { require('zen-mode').toggle, 'Zen mode' },
 }
 

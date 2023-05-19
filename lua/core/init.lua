@@ -33,6 +33,8 @@ opt.splitbelow = true
 opt.splitright = true
 opt.formatoptions:remove { 'c', 'r', 'o' }
 g.mapleader = ' '
+vim.cmd [[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif]]
 
 -- Performance/IO
 opt.clipboard = 'unnamedplus'
@@ -62,8 +64,9 @@ g.language_servers = {
 
 for _, type in ipairs { 'Error', 'Warn', 'Hint', 'Info' } do
   local hl = 'DiagnosticSign' .. type
-  vim.fn.sign_define(hl, { text = '', texthl = hl, numhl = hl })
+  vim.fn.sign_define(hl, { text = '', numhl = hl })
 end
+vim.fn.sign_define("DapBreakpoint", { text = "" })
 
 vim.diagnostic.config {
   virtual_text = false,

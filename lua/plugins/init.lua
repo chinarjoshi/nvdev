@@ -41,23 +41,73 @@ require('lazy').setup({
     lazy = false,
   },
 
+  ------------------------------ Debugging + Testing
   {
-    'rcarriga/nvim-dap-ui',
+    'mfussenegger/nvim-dap',
     dependencies = {
-      'mfussenegger/nvim-dap',
-      "theHamsta/nvim-dap-virtual-text",
-      'mfussenegger/nvim-dap-python',
-      "nvim-telescope/telescope-dap.nvim",
+      {
+        'rcarriga/nvim-dap-ui',
+        config = function()
+          local dapui = require('dapui')
+          local li = require('dap').listeners
+          dapui.setup()
+          li.after.event_initialized["dapui_config"] = dapui.open
+          li.before.event_terminated["dapui_config"] = dapui.close
+          li.before.event_exited["dapui_config"] = dapui.close
+        end
+      },
+
+      {
+        'theHamsta/nvim-dap-virtual-text',
+        config = function()
+          require('nvim-dap-virtual-text').setup()
+        end,
+      },
+
+      {
+        'mfussenegger/nvim-dap-python',
+        config = function()
+          require('dap-python').setup('/home/c/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
+        end,
+      },
+
+      {
+        'nvim-telescope/telescope-dap.nvim',
+        config = function()
+          require('telescope').load_extension 'dap'
+        end,
+      },
+
+      {
+        'Weissle/persistent-breakpoints.nvim',
+        lazy = false,
+        config = function()
+          local pb = require('persistent-breakpoints')
+          local pba = require('persistent-breakpoints.api')
+          local map = require('core.utils').map
+          pb.setup { load_breakpoints_event = { "BufReadPost" } }
+          map('<M-b>', pba.toggle_breakpoint)
+          map('<M-B>', pba.clear_all_breakpoints)
+        end
+      }
+    },
+    keys = { '<M-c>', '<M-b>' },
+    config = function()
+      require 'plugins.configs.dap'
+    end,
+  },
+
+  {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/neotest-python',
+      'rouge8/neotest-rust',
     },
     config = function()
-      require('dapui').setup()
-      local dap = require 'dap'
-      local map = require('core.utils').map
-      map('<M-b>', dap.toggle_breakpoint)
-      map('<M-c>', dap.continue)
-      map('<M-n>', dap.step_over)
-      map('<M-s>', dap.step_into)
-      map('<M-r>', dap.repl.open)
+      require('neotest').setup {
+        require 'neotest-python',
+        require 'neotest-rust',
+      }
     end,
   },
 
@@ -110,11 +160,8 @@ require('lazy').setup({
     event = 'InsertEnter',
     opts = {
       suggestion = {
-        keymap = {
-          accept = '<C-c>',
-          next = '<C-n>',
-          prev = '<C-p>',
-        },
+        auto_trigger = true,
+        keymap = { accept = '<C-c>' },
       },
     },
     config = function(_, opts)
@@ -185,20 +232,6 @@ require('lazy').setup({
     keys = { 'gcc', 'gbc' },
     config = function()
       require('Comment').setup()
-    end,
-  },
-
-  {
-    'nvim-neotest/neotest',
-    dependencies = {
-      'nvim-neotest/neotest-python',
-      'rouge8/neotest-rust',
-    },
-    config = function()
-      require('neotest').setup {
-        require 'neotest-python',
-        require 'neotest-rust',
-      }
     end,
   },
 
