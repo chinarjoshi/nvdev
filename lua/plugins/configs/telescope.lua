@@ -24,6 +24,6 @@ return {
     buffers = { theme = 'ivy' },
     grep_string = { theme = 'ivy' },
     live_grep = { theme = 'ivy' },
-    diagnostics = { theme = 'ivy' }
+    diagnostics = { theme = 'ivy' },
   },
 }

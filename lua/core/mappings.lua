@@ -2,6 +2,7 @@ local M = {}
 
 local ts = require 'telescope.builtin'
 local gs = require 'gitsigns'
+local nt = require 'neotest'
 
 M.general = {
   -- Hotkeys
@@ -27,6 +28,13 @@ M.general = {
   n = {
     name = 'Notes',
   },
+  t = { nt.run.run, 'Run nearest test' },
+  T = {
+    function()
+      nt.run.run(vim.fn.expand '%')
+    end,
+    'Run test file',
+  },
   p = { require('lazy').home, 'Package sync' },
   j = { require('treesj').toggle, 'Join/split list' },
   g = {
@@ -41,9 +49,7 @@ M.general = {
     t = { gs.toggle_deleted, 'Toggle deletions' },
     b = { gs.blame_line, 'Blame line' },
   },
-  d = {
-    name = 'Debugging',
-  },
+  d = { require('dapui').toggle, 'Debug' },
   z = { require('zen-mode').toggle, 'Zen mode' },
 }
 

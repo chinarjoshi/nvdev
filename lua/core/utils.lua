@@ -44,4 +44,8 @@ M.lazy_gitsigns = function()
   })
 end
 
+M.map = function(binding, command)
+  vim.keymap.set('n', binding, command)
+end
+
 return M

@@ -1,5 +1,6 @@
 local opt = vim.opt
 local g = vim.g
+local map = require('core.utils').map
 
 --- Options
 -- UI adjustments
@@ -91,13 +92,13 @@ autocmd('FileType', {
 })
 
 --- Hotkeys
-vim.keymap.set('n', '<ESC>', ':noh<CR>')
-vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+map('<ESC>', ':noh<CR>')
+map('K', vim.lsp.buf.hover)
 for _, letter in ipairs { 'h', 'j', 'k', 'l' } do
-  vim.keymap.set('n', '<C-' .. letter .. '>', '<C-w>' .. letter)
+  map('<C-' .. letter .. '>', '<C-w>' .. letter)
 end
 
-function _G.set_terminal_keymaps()
+local function set_terminal_keymaps()
   local opts = { buffer = 0 }
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
@@ -108,5 +109,7 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 end
 
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
+autocmd('TermOpen', {
+  pattern = 'term://*',
+  callback = set_terminal_keymaps,
+})

@@ -43,7 +43,22 @@ require('lazy').setup({
 
   {
     'rcarriga/nvim-dap-ui',
-    dependencies = 'mfussenegger/nvim-dap',
+    dependencies = {
+      'mfussenegger/nvim-dap',
+      "theHamsta/nvim-dap-virtual-text",
+      'mfussenegger/nvim-dap-python',
+      "nvim-telescope/telescope-dap.nvim",
+    },
+    config = function()
+      require('dapui').setup()
+      local dap = require 'dap'
+      local map = require('core.utils').map
+      map('<M-b>', dap.toggle_breakpoint)
+      map('<M-c>', dap.continue)
+      map('<M-n>', dap.step_over)
+      map('<M-s>', dap.step_into)
+      map('<M-r>', dap.repl.open)
+    end,
   },
 
   ------------------------------ Completion
@@ -92,7 +107,7 @@ require('lazy').setup({
 
   {
     'zbirenbaum/copilot.lua',
-    keys = '<C-n>',
+    event = 'InsertEnter',
     opts = {
       suggestion = {
         keymap = {
@@ -175,12 +190,16 @@ require('lazy').setup({
 
   {
     'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/neotest-python',
+      'rouge8/neotest-rust',
+    },
     config = function()
-      require("neotest").setup {
+      require('neotest').setup {
         require 'neotest-python',
-        require 'neotest-rust'
+        require 'neotest-rust',
       }
-    end
+    end,
   },
 
   {
