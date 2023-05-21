@@ -196,6 +196,15 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'karb94/neoscroll.nvim',
+    keys = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' },
+    opts = { mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' } },
+    config = function(_, opts)
+      require('neoscroll').setup(opts)
+    end,
+  },
+
   { 'nvim-tree/nvim-web-devicons' },
 
   { 'onsails/lspkind.nvim' },
@@ -244,12 +253,12 @@ require('lazy').setup({
   },
 
   {
-    'karb94/neoscroll.nvim',
-    keys = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' },
-    opts = { mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb' } },
-    config = function(_, opts)
-      require('neoscroll').setup(opts)
-    end,
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+        require("nvim-surround").setup()
+    end
   },
 
   {
