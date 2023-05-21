@@ -11,11 +11,14 @@ return {
     comments = { italic = true },
   },
   plugins = {
-    'indent-blankline',
+    'dap',
     'gitsigns',
+    'indent-blankline',
+    'neorg',
+    'nvim-cmp',
     'nvim-tree',
-    'telescope',
     'nvim-web-devicons',
+    'telescope',
   },
   disable = {
     colored_cursor = true,
