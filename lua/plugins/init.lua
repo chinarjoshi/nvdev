@@ -326,7 +326,7 @@ require('lazy').setup({
     dependencies = {
       {
         'folke/twilight.nvim',
-        opts = { dimming = { alpha = 0.5 } },
+        opts = { context = 15, dimming = { alpha = 0.5 } },
         config = function(_, opts)
           require('twilight').setup(opts)
         end,

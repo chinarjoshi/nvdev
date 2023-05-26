@@ -42,6 +42,7 @@ opt.mouse = 'a'
 opt.undofile = true
 opt.updatetime = 250
 opt.timeoutlen = 400
+opt.swapfile = false
 
 -- Disable default providers
 for _, provider in ipairs { 'node', 'perl', 'python3', 'ruby' } do
