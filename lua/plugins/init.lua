@@ -80,7 +80,6 @@ require('lazy').setup({
 
       {
         'Weissle/persistent-breakpoints.nvim',
-        lazy = false,
         config = function()
           local pb = require('persistent-breakpoints')
           local pba = require('persistent-breakpoints.api')
@@ -166,6 +165,7 @@ require('lazy').setup({
     },
     config = function(_, opts)
       require('copilot').setup(opts)
+      require("copilot.suggestion").toggle_auto_trigger()
     end,
   },
 
@@ -285,6 +285,9 @@ require('lazy').setup({
         },
       },
     },
+    config = function(_, opts)
+      require('neorg').setup(opts)
+    end
   },
 
   {
