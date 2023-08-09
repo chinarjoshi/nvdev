@@ -49,11 +49,8 @@ require('lazy').setup({
         'rcarriga/nvim-dap-ui',
         config = function()
           local dapui = require('dapui')
-          local li = require('dap').listeners
           dapui.setup()
-          li.after.event_initialized["dapui_config"] = dapui.open
-          li.before.event_terminated["dapui_config"] = dapui.close
-          li.before.event_exited["dapui_config"] = dapui.close
+          require('dap').listeners.after.event_initialized["dapui_config"] = dapui.open
         end
       },
 
@@ -77,18 +74,6 @@ require('lazy').setup({
           require('telescope').load_extension 'dap'
         end,
       },
-
-      {
-        'Weissle/persistent-breakpoints.nvim',
-        config = function()
-          local pb = require('persistent-breakpoints')
-          local pba = require('persistent-breakpoints.api')
-          local map = require('core.utils').map
-          pb.setup { load_breakpoints_event = { "BufReadPost" } }
-          map('<M-b>', pba.toggle_breakpoint)
-          map('<M-B>', pba.clear_all_breakpoints)
-        end
-      }
     },
     keys = { '<M-c>', '<M-b>' },
     config = function()
@@ -164,8 +149,8 @@ require('lazy').setup({
       },
     },
     config = function(_, opts)
-      require('copilot').setup(opts)
-      require("copilot.suggestion").toggle_auto_trigger()
+      -- require('copilot').setup(opts)
+      -- require("copilot.suggestion").toggle_auto_trigger()
     end,
   },
 
@@ -326,15 +311,6 @@ require('lazy').setup({
 
   {
     'folke/zen-mode.nvim',
-    dependencies = {
-      {
-        'folke/twilight.nvim',
-        opts = { context = 15, dimming = { alpha = 0.5 } },
-        config = function(_, opts)
-          require('twilight').setup(opts)
-        end,
-      },
-    },
     config = function()
       require('zen-mode').setup()
     end,

@@ -16,7 +16,7 @@ dap.configurations.cpp = {
     type = "codelldb",
     request = "launch",
     program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      return vim.env.DEBUG_EXECUTABLE
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
@@ -54,9 +54,11 @@ dap.configurations.sh = {
   }
 }
 
+map('<M-b>', dap.toggle_breakpoint)
 map('<M-c>', dap.continue)
 map('<M-n>', dap.step_over)
 map('<M-s>', dap.step_into)
 map('<M-o>', dap.step_out)
 map('<M-p>', dap.step_back)
 map('<M-r>', dap.repl.open)
+map('<M-l>', dap.run_last)
