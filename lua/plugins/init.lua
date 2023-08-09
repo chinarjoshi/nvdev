@@ -149,8 +149,8 @@ require('lazy').setup({
       },
     },
     config = function(_, opts)
-      -- require('copilot').setup(opts)
-      -- require("copilot.suggestion").toggle_auto_trigger()
+      require('copilot').setup(opts)
+      require("copilot.suggestion").toggle_auto_trigger()
     end,
   },
 
