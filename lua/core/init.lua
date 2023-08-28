@@ -33,8 +33,14 @@ opt.splitbelow = true
 opt.splitright = true
 opt.formatoptions:remove { 'c', 'r', 'o' }
 g.mapleader = ' '
-vim.cmd [[au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g'\"" | endif]]
+vim.api.nvim_create_autocmd({"BufReadPost"}, {
+    pattern = {"*"},
+    callback = function()
+        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+            vim.api.nvim_exec("normal! g'\"",false)
+        end
+    end
+})
 
 -- Performance/IO
 opt.clipboard = 'unnamedplus'
