@@ -48,9 +48,7 @@ require('lazy').setup({
       {
         'rcarriga/nvim-dap-ui',
         config = function()
-          local dapui = require('dapui')
-          dapui.setup()
-          require('dap').listeners.after.event_initialized["dapui_config"] = dapui.open
+          require 'plugins.configs.dapui'
         end
       },
 
