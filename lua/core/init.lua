@@ -61,12 +61,7 @@ vim.env.PATH = vim.env.PATH .. ':' .. vim.fn.stdpath 'data' .. '/mason/bin'
 --- LSP
 g.language_servers = {
   'pyright',
-  'clangd',
-  'rust_analyzer',
-  'lua_ls',
-  'jdtls',
   'bashls',
-  'cmake',
 }
 
 for _, type in ipairs { 'Error', 'Warn', 'Hint', 'Info' } do

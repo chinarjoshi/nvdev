@@ -175,7 +175,7 @@ require('lazy').setup({
       return require('plugins.configs.others').blankline
     end,
     config = function(_, opts)
-      require('indent_blankline').setup(opts)
+      require('ibl').setup(opts)
     end,
   },
 
