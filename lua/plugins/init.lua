@@ -138,18 +138,18 @@ require('lazy').setup({
   },
 
   {
-    'zbirenbaum/copilot.lua',
-    event = 'InsertEnter',
-    opts = {
-      suggestion = {
-        auto_trigger = true,
-        keymap = { accept = '<C-c>' },
-      },
-    },
-    config = function(_, opts)
-      require('copilot').setup(opts)
-      require("copilot.suggestion").toggle_auto_trigger()
-    end,
+    -- 'zbirenbaum/copilot.lua',
+    -- event = 'InsertEnter',
+    -- opts = {
+    --   suggestion = {
+    --     auto_trigger = true,
+    --     keymap = { accept = '<C-c>' },
+    --   },
+    -- },
+    -- config = function(_, opts)
+    --   require('copilot').setup(opts)
+    --   require("copilot.suggestion").toggle_auto_trigger()
+    -- end,
   },
 
   ------------------------------ UI
@@ -168,6 +168,7 @@ require('lazy').setup({
 
   {
     'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
     init = function()
       require('core.utils').lazy_load 'indent-blankline.nvim'
     end,
@@ -175,7 +176,7 @@ require('lazy').setup({
       return require('plugins.configs.others').blankline
     end,
     config = function(_, opts)
-      require('indent_blankline').setup(opts)
+      require('ibl').setup(opts)
     end,
   },
 
@@ -283,8 +284,8 @@ require('lazy').setup({
     config = function(_, opts)
       local gs = require 'gitsigns'
       gs.setup(opts)
-      vim.keymap.set('n', '}', gs.next_hunk)
-      vim.keymap.set('n', '{', gs.prev_hunk)
+      -- vim.keymap.set('n', '}', gs.next_hunk)
+      -- vim.keymap.set('n', '{', gs.prev_hunk)
     end,
   },
 

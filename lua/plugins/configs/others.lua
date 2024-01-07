@@ -1,9 +1,10 @@
 local M = {}
 
 M.blankline = {
-  buftype_exclude = { 'terminal' },
-  show_trailing_blankline_indent = false,
-  show_first_indent_level = false,
+  -- buftype_exclude = { 'terminal' },
+  -- show_trailing_blankline_indent = false,
+  -- show_first_indent_level = false,
+  scope = { show_start = false, show_end = false }
 }
 
 M.luasnip = function(opts)

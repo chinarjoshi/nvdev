@@ -28,7 +28,6 @@ M.general = {
   n = {
     name = 'Notes',
   },
-  c = { require("copilot.suggestion").toggle_auto_trigger, 'Toggle Copilot' },
   t = { nt.run.run, 'Run nearest test' },
   T = { function() nt.run.run(vim.fn.expand '%') end, 'Run test file' },
   p = { require('lazy').home, 'Package sync' },
