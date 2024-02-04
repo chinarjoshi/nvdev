@@ -42,6 +42,13 @@ vim.api.nvim_create_autocmd({"BufReadPost"}, {
     end
 })
 
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = {"*.md", "*.txt"},
+  callback = function()
+    require'cmp'.setup.buffer { enabled = false }
+  end
+})
+
 -- Performance/IO
 opt.clipboard = 'unnamedplus'
 opt.mouse = 'a'

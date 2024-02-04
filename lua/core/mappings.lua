@@ -45,7 +45,8 @@ M.general = {
     b = { gs.blame_line, 'Blame line' },
   },
   d = { require('dapui').toggle, 'Debug' },
-  D = { function() nt.run.run { strategy = 'dap' } end, 'Debug test' },
+  -- D = { function() nt.run.run { strategy = 'dap' } end, 'Debug test' },
+  D = { vim.diagnostic.disable, 'Debug' },
   z = { require('zen-mode').toggle, 'Zen mode' },
 }
 
